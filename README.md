@@ -8,3 +8,5 @@ First task in backlog: Setup project -> Install CocoaPod with Alamofire and set 
 
 Adriancys Villegas
 Agustin Russo
+Cristian Costa
+Cristian Sancricca
