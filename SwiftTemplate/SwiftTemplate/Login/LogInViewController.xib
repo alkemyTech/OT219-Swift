@@ -45,7 +45,7 @@
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Contraseña" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sg7-NN-rWQ">
                     <rect key="frame" x="20" y="425" width="374" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="1oX-se-an0"/>
+                        <constraint firstAttribute="height" constant="40" id="1oX-se-an0"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
@@ -93,6 +93,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NRY-xf-HMU" secondAttribute="trailing" constant="20" id="lgG-dR-UYk"/>
                 <constraint firstItem="NRY-xf-HMU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="mUq-Cx-xiR"/>
                 <constraint firstItem="sg7-NN-rWQ" firstAttribute="top" secondItem="NRY-xf-HMU" secondAttribute="bottom" constant="67" id="ngd-kK-f5M"/>
+                <constraint firstItem="8CN-hg-erT" firstAttribute="top" secondItem="NRY-xf-HMU" secondAttribute="bottom" constant="26" id="sFQ-V0-DOQ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iuZ-8I-XI2" secondAttribute="trailing" constant="20" id="zdd-V9-ePS"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="143.97321428571428"/>

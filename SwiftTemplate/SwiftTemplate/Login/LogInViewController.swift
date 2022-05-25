@@ -7,7 +7,7 @@
 
 import UIKit
 
-class logingViewController: UIViewController {
+class LogIngViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
