@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         
-        let loginViewController = logingViewController()
+        let loginViewController = LogInViewController()
         
         window?.rootViewController = loginViewController
         
