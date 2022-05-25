@@ -7,6 +7,12 @@
 
 import UIKit
 
+/*  Acceso a variable de entorno:
+if let baseURL = ProcessInfo.processInfo.environment["baseURL"] {
+ 
+}
+ */
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

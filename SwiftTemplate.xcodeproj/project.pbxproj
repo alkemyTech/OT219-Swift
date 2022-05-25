@@ -24,6 +24,8 @@
 		03398C6827DFDFCD001BC793 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		03398C6B27DFDFCD001BC793 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		03398C6D27DFDFCD001BC793 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54065947B66C7BED0004E9F4 /* Pods-SwiftTemplate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftTemplate.release.xcconfig"; path = "Target Support Files/Pods-SwiftTemplate/Pods-SwiftTemplate.release.xcconfig"; sourceTree = "<group>"; };
+		A44B2E4CE22C626FA79CD586 /* Pods-SwiftTemplate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftTemplate.debug.xcconfig"; path = "Target Support Files/Pods-SwiftTemplate/Pods-SwiftTemplate.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +44,8 @@
 			children = (
 				03398C5E27DFDFCC001BC793 /* SwiftTemplate */,
 				03398C5D27DFDFCC001BC793 /* Products */,
+				3DB6AFA112805A9E1C12E06A /* Pods */,
+				D09B5ACF9F2EC811C05BA0E5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +71,22 @@
 			path = SwiftTemplate;
 			sourceTree = "<group>";
 		};
+		3DB6AFA112805A9E1C12E06A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A44B2E4CE22C626FA79CD586 /* Pods-SwiftTemplate.debug.xcconfig */,
+				54065947B66C7BED0004E9F4 /* Pods-SwiftTemplate.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D09B5ACF9F2EC811C05BA0E5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,6 +94,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 03398C7027DFDFCD001BC793 /* Build configuration list for PBXNativeTarget "SwiftTemplate" */;
 			buildPhases = (
+				7C2DE07970FD02B3E7F7A7C5 /* [CP] Check Pods Manifest.lock */,
 				03398C5827DFDFCC001BC793 /* Sources */,
 				03398C5927DFDFCC001BC793 /* Frameworks */,
 				03398C5A27DFDFCC001BC793 /* Resources */,
@@ -132,6 +153,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7C2DE07970FD02B3E7F7A7C5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SwiftTemplate-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		03398C5827DFDFCC001BC793 /* Sources */ = {
@@ -284,6 +330,7 @@
 		};
 		03398C7127DFDFCD001BC793 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A44B2E4CE22C626FA79CD586 /* Pods-SwiftTemplate.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -311,6 +358,7 @@
 		};
 		03398C7227DFDFCD001BC793 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54065947B66C7BED0004E9F4 /* Pods-SwiftTemplate.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
