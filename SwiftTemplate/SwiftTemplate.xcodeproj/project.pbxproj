@@ -12,8 +12,8 @@
 		03398C6427DFDFCC001BC793 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03398C6327DFDFCC001BC793 /* ViewController.swift */; };
 		03398C6927DFDFCD001BC793 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03398C6827DFDFCD001BC793 /* Assets.xcassets */; };
 		03398C6C27DFDFCD001BC793 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03398C6A27DFDFCD001BC793 /* LaunchScreen.storyboard */; };
-		FB3F6116283E68C80045FF6C /* logingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3F6114283E68C80045FF6C /* logingViewController.swift */; };
-		FB3F6117283E68C80045FF6C /* logingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB3F6115283E68C80045FF6C /* logingViewController.xib */; };
+		FB3F6116283E68C80045FF6C /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3F6114283E68C80045FF6C /* LogInViewController.swift */; };
+		FB3F6117283E68C80045FF6C /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB3F6115283E68C80045FF6C /* LogInViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,8 +24,8 @@
 		03398C6827DFDFCD001BC793 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		03398C6B27DFDFCD001BC793 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		03398C6D27DFDFCD001BC793 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FB3F6114283E68C80045FF6C /* logingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logingViewController.swift; sourceTree = "<group>"; };
-		FB3F6115283E68C80045FF6C /* logingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = logingViewController.xib; sourceTree = "<group>"; };
+		FB3F6114283E68C80045FF6C /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		FB3F6115283E68C80045FF6C /* LogInViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogInViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,8 +72,8 @@
 		FB3F6107283DEAEF0045FF6C /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				FB3F6114283E68C80045FF6C /* logingViewController.swift */,
-				FB3F6115283E68C80045FF6C /* logingViewController.xib */,
+				FB3F6114283E68C80045FF6C /* LogInViewController.swift */,
+				FB3F6115283E68C80045FF6C /* LogInViewController.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -136,7 +136,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB3F6117283E68C80045FF6C /* logingViewController.xib in Resources */,
+				FB3F6117283E68C80045FF6C /* LogInViewController.xib in Resources */,
 				03398C6C27DFDFCD001BC793 /* LaunchScreen.storyboard in Resources */,
 				03398C6927DFDFCD001BC793 /* Assets.xcassets in Resources */,
 			);
@@ -149,7 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB3F6116283E68C80045FF6C /* logingViewController.swift in Sources */,
+				FB3F6116283E68C80045FF6C /* LogInViewController.swift in Sources */,
 				03398C6427DFDFCC001BC793 /* ViewController.swift in Sources */,
 				03398C6027DFDFCC001BC793 /* AppDelegate.swift in Sources */,
 				03398C6227DFDFCC001BC793 /* SceneDelegate.swift in Sources */,
