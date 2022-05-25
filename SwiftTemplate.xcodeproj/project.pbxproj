@@ -1,4 +1,3 @@
-// !$*UTF8*$!
 {
 	archiveVersion = 1;
 	classes = {
@@ -13,6 +12,8 @@
 		03398C6727DFDFCC001BC793 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03398C6527DFDFCC001BC793 /* Main.storyboard */; };
 		03398C6927DFDFCD001BC793 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03398C6827DFDFCD001BC793 /* Assets.xcassets */; };
 		03398C6C27DFDFCD001BC793 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03398C6A27DFDFCD001BC793 /* LaunchScreen.storyboard */; };
+		F66A1738283DCF6A0064DD56 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66A1735283DCF6A0064DD56 /* SignupViewController.swift */; };
+		F66A1739283DCF6A0064DD56 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66A1737283DCF6A0064DD56 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,8 @@
 				03398C5F27DFDFCC001BC793 /* AppDelegate.swift */,
 				03398C6127DFDFCC001BC793 /* SceneDelegate.swift */,
 				03398C6327DFDFCC001BC793 /* ViewController.swift */,
+				F66A1733283DCF6A0064DD56 /* Signup */,
+				F66A1736283DCF6A0064DD56 /* Utils */,
 				03398C6527DFDFCC001BC793 /* Main.storyboard */,
 				03398C6827DFDFCD001BC793 /* Assets.xcassets */,
 				03398C6A27DFDFCD001BC793 /* LaunchScreen.storyboard */,
@@ -184,8 +187,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F66A1739283DCF6A0064DD56 /* Extensions.swift in Sources */,
 				03398C6427DFDFCC001BC793 /* ViewController.swift in Sources */,
 				03398C6027DFDFCC001BC793 /* AppDelegate.swift in Sources */,
+				F66A1738283DCF6A0064DD56 /* SignupViewController.swift in Sources */,
 				03398C6227DFDFCC001BC793 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
