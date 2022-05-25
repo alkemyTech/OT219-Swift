@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "SomosMas_Logo.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
