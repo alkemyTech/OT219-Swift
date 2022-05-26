@@ -52,8 +52,13 @@
       </BuildableProductRunnable>
       <EnvironmentVariables>
          <EnvironmentVariable
+            key = "endpoint.Login"
+            value = "api/login"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
             key = "baseURL"
-            value = "http://ongapi.alkemy.org/"
+            value = "https://ongapi.alkemy.org/"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
