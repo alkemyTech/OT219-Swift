@@ -176,10 +176,26 @@ class SignupViewController: UIViewController {
 
 extension SignupViewController: SignUpViewModelDelegate {
     func userRegisterSuccess() {
-
+        //Se puede mejorar cuando hagamos el navigation
+        let vc = LogInViewController()
+        vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        let transition: CATransition = CATransition()
+        transition.duration = 0.4
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromLeft
+        
+        let alert = UIAlertController(title: "Usuario registrado de manera exitosa", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {(action: UIAlertAction!) in
+            self.view.window!.layer.add(transition, forKey: nil)
+            self.present(vc, animated: false, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
-    
-    func userRegisterError() {
 
+    func userRegisterError() {
+        let alert = UIAlertController(title: "Error", message: "No pudimos registrar el usuario, por favor revise nuevamente sus datos e intente nuevamente", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
