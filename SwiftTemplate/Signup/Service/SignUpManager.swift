@@ -9,11 +9,13 @@ import Foundation
 import Alamofire
 
 struct SignUpManager {
+    
     let url = ProcessInfo.processInfo.environment["baseURL"]
     
     func registerUser(user: NewUser, didSignUp: @escaping (UserRegisterData) -> (), didFail: @escaping () -> ()) {
         guard let parameters = user.dictionary else {return}
-        post(url: "\(url!)api/register", params: parameters, completion: { response in
+        guard let urlSafe = url else {return}
+        ServiceManagerSingleton.serviceManager.post(url: "\(urlSafe)api/register", params: parameters, completion: { response in
             switch response {
                 case .success(let data):
                     do {
@@ -32,12 +34,5 @@ struct SignUpManager {
                     didFail()
             }
         })
-    }
-    
-    func post(url: String, params: [String:Any] ,completion: @escaping (Result<Data?, AFError>) -> Void) {
-        print(url)
-        AF.request(url, method: .post, parameters: params).validate().response { response in
-            completion(response.result)
-        }
     }
 }

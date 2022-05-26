@@ -10,8 +10,9 @@ import UIKit
 class SignupViewController: UIViewController {
 
     //MARK: - Properties
-    private var viewModel = SignUpViewModel()
+    private var viewModel: SignUpViewModel?
     private var isKeyboardExpanded = false
+    var signUpManager = SignUpManager()
     
     private let scrollView: UIScrollView = {
         let view = UIScrollView()
@@ -117,10 +118,10 @@ class SignupViewController: UIViewController {
         setupView()
         setupObserverKeyboard()
         
-        viewModel.delegate = self
+        viewModel = SignUpViewModel(signUpManager: signUpManager, delegate: self)
         
         //Call this function when user press register button IBAction 
-        //viewModel.register(name: name, email: email, pass: pass)
+//        viewModel?.register(name: "String", email: "String", pass: "String")
     }
 
     //MARK: - Helpers
@@ -176,19 +177,9 @@ class SignupViewController: UIViewController {
 
 extension SignupViewController: SignUpViewModelDelegate {
     func userRegisterSuccess() {
-        //Se puede mejorar cuando hagamos el navigation
-        let vc = LogInViewController()
-        vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        let transition: CATransition = CATransition()
-        transition.duration = 0.4
-        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        transition.type = CATransitionType.push
-        transition.subtype = CATransitionSubtype.fromLeft
-        
         let alert = UIAlertController(title: "Usuario registrado de manera exitosa", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {(action: UIAlertAction!) in
-            self.view.window!.layer.add(transition, forKey: nil)
-            self.present(vc, animated: false, completion: nil)
+            _ = self.navigationController?.popViewController(animated: true)
         }))
         self.present(alert, animated: true, completion: nil)
     }
