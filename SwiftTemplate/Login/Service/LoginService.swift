@@ -15,12 +15,16 @@ struct LoginService {
     
     static let shared = LoginService()
     
-    let baseURL = ProcessInfo.processInfo.environment["baseURL"]!
-    let endpointLogin = ProcessInfo.processInfo.environment["endpoint.Login"]!
+    private let baseURL = ProcessInfo.processInfo.environment["baseURL"]!
+    private let endpointLogin = ProcessInfo.processInfo.environment["endpoint.Login"]!
     
-    let params = ["email": "cristian", "password": "cristian"]
     
-    func login(onComplete: @escaping (String) -> (), onError: @escaping (String) ->() ){
+    func login(user: LoginUser, onComplete: @escaping (String) -> (), onError: @escaping (String) ->() ){
+        	
+        guard let email = user.email else {return}
+        guard let password = user.password else {return}
+        
+        let params = ["email": email, "password": password]
         
         ApiManager.shared.loginUser(url: "\(baseURL)\(endpointLogin)", params: params) { response in
             switch response{

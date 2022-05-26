@@ -19,6 +19,8 @@
 		C59699B3D25BFED1E9EAC307 /* Pods_SwiftTemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD84004C3724297FA88D21C5 /* Pods_SwiftTemplate.framework */; };
 		F66A1738283DCF6A0064DD56 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		F66A1739283DCF6A0064DD56 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		F68C14E0283FC45300591D97 /* LoginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C14DF283FC45300591D97 /* LoginUser.swift */; };
+		F68C14E3283FC8E700591D97 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C14E2283FC8E700591D97 /* LoginViewModel.swift */; };
 		F6CD0798283F2EA3003906B0 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD0797283F2EA3003906B0 /* ApiManager.swift */; };
 		F6CD079D283F328C003906B0 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD079C283F328C003906B0 /* LoginService.swift */; };
 		F6CD07A0283F3F15003906B0 /* LoginUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD079F283F3F15003906B0 /* LoginUserResponse.swift */; };
@@ -37,6 +39,8 @@
 		03947946283ECCBE000E75C8 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		54065947B66C7BED0004E9F4 /* Pods-SwiftTemplate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftTemplate.release.xcconfig"; path = "Target Support Files/Pods-SwiftTemplate/Pods-SwiftTemplate.release.xcconfig"; sourceTree = "<group>"; };
 		A44B2E4CE22C626FA79CD586 /* Pods-SwiftTemplate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftTemplate.debug.xcconfig"; path = "Target Support Files/Pods-SwiftTemplate/Pods-SwiftTemplate.debug.xcconfig"; sourceTree = "<group>"; };
+		F68C14DF283FC45300591D97 /* LoginUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
+		F68C14E2283FC8E700591D97 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		F6CD0797283F2EA3003906B0 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		F6CD079C283F328C003906B0 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		F6CD079F283F3F15003906B0 /* LoginUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUserResponse.swift; sourceTree = "<group>"; };
@@ -109,10 +113,10 @@
 		0394793F283ECC47000E75C8 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				F68C14E1283FC8C900591D97 /* ViewModel */,
 				F6CD079E283F3F04003906B0 /* Model */,
 				F6CD079B283F3276003906B0 /* Service */,
 				F6CD079A283F323B003906B0 /* View */,
-				F6CD0799283F321E003906B0 /* Controller */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -142,6 +146,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F68C14E1283FC8C900591D97 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F68C14E2283FC8E700591D97 /* LoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		F6CD0795283F2DA2003906B0 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,18 +170,11 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		F6CD0799283F321E003906B0 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				03947941283ECC47000E75C8 /* LogInViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
 		F6CD079A283F323B003906B0 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				03947940283ECC47000E75C8 /* LogInViewController.xib */,
+				03947941283ECC47000E75C8 /* LogInViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -186,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				F6CD079F283F3F15003906B0 /* LoginUserResponse.swift */,
+				F68C14DF283FC45300591D97 /* LoginUser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -311,7 +317,9 @@
 				03398C6427DFDFCC001BC793 /* ViewController.swift in Sources */,
 				F6CD07A0283F3F15003906B0 /* LoginUserResponse.swift in Sources */,
 				03947947283ECCBE000E75C8 /* Extensions.swift in Sources */,
+				F68C14E0283FC45300591D97 /* LoginUser.swift in Sources */,
 				03947944283ECC47000E75C8 /* LogInViewController.swift in Sources */,
+				F68C14E3283FC8E700591D97 /* LoginViewModel.swift in Sources */,
 				03398C6027DFDFCC001BC793 /* AppDelegate.swift in Sources */,
 				F6CD079D283F328C003906B0 /* LoginService.swift in Sources */,
 				F66A1738283DCF6A0064DD56 /* (null) in Sources */,
