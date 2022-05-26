@@ -19,6 +19,9 @@
 		C59699B3D25BFED1E9EAC307 /* Pods_SwiftTemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD84004C3724297FA88D21C5 /* Pods_SwiftTemplate.framework */; };
 		F66A1738283DCF6A0064DD56 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		F66A1739283DCF6A0064DD56 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		F6CD0798283F2EA3003906B0 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD0797283F2EA3003906B0 /* ApiManager.swift */; };
+		F6CD079D283F328C003906B0 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD079C283F328C003906B0 /* LoginService.swift */; };
+		F6CD07A0283F3F15003906B0 /* LoginUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD079F283F3F15003906B0 /* LoginUserResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		03947946283ECCBE000E75C8 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		54065947B66C7BED0004E9F4 /* Pods-SwiftTemplate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftTemplate.release.xcconfig"; path = "Target Support Files/Pods-SwiftTemplate/Pods-SwiftTemplate.release.xcconfig"; sourceTree = "<group>"; };
 		A44B2E4CE22C626FA79CD586 /* Pods-SwiftTemplate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftTemplate.debug.xcconfig"; path = "Target Support Files/Pods-SwiftTemplate/Pods-SwiftTemplate.debug.xcconfig"; sourceTree = "<group>"; };
+		F6CD0797283F2EA3003906B0 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		F6CD079C283F328C003906B0 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		F6CD079F283F3F15003906B0 /* LoginUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUserResponse.swift; sourceTree = "<group>"; };
 		FD84004C3724297FA88D21C5 /* Pods_SwiftTemplate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftTemplate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -70,6 +76,7 @@
 		03398C5E27DFDFCC001BC793 /* SwiftTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				F6CD0795283F2DA2003906B0 /* Shared */,
 				03947945283ECCBE000E75C8 /* Utils */,
 				0394793F283ECC47000E75C8 /* Login */,
 				0394793C283ECC47000E75C8 /* Signup */,
@@ -102,8 +109,10 @@
 		0394793F283ECC47000E75C8 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				03947940283ECC47000E75C8 /* LogInViewController.xib */,
-				03947941283ECC47000E75C8 /* LogInViewController.swift */,
+				F6CD079E283F3F04003906B0 /* Model */,
+				F6CD079B283F3276003906B0 /* Service */,
+				F6CD079A283F323B003906B0 /* View */,
+				F6CD0799283F321E003906B0 /* Controller */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -133,6 +142,54 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F6CD0795283F2DA2003906B0 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				F6CD0796283F2DBC003906B0 /* Service */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		F6CD0796283F2DBC003906B0 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				F6CD0797283F2EA3003906B0 /* ApiManager.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		F6CD0799283F321E003906B0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				03947941283ECC47000E75C8 /* LogInViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F6CD079A283F323B003906B0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				03947940283ECC47000E75C8 /* LogInViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F6CD079B283F3276003906B0 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				F6CD079C283F328C003906B0 /* LoginService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		F6CD079E283F3F04003906B0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F6CD079F283F3F15003906B0 /* LoginUserResponse.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -144,6 +201,7 @@
 				03398C5827DFDFCC001BC793 /* Sources */,
 				03398C5927DFDFCC001BC793 /* Frameworks */,
 				03398C5A27DFDFCC001BC793 /* Resources */,
+				28AFD0C5289A80D614954337 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -201,6 +259,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		28AFD0C5289A80D614954337 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SwiftTemplate/Pods-SwiftTemplate-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SwiftTemplate/Pods-SwiftTemplate-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwiftTemplate/Pods-SwiftTemplate-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7C2DE07970FD02B3E7F7A7C5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -231,11 +306,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				03947942283ECC47000E75C8 /* SignupViewController.swift in Sources */,
+				F6CD0798283F2EA3003906B0 /* ApiManager.swift in Sources */,
 				F66A1739283DCF6A0064DD56 /* (null) in Sources */,
 				03398C6427DFDFCC001BC793 /* ViewController.swift in Sources */,
+				F6CD07A0283F3F15003906B0 /* LoginUserResponse.swift in Sources */,
 				03947947283ECCBE000E75C8 /* Extensions.swift in Sources */,
 				03947944283ECC47000E75C8 /* LogInViewController.swift in Sources */,
 				03398C6027DFDFCC001BC793 /* AppDelegate.swift in Sources */,
+				F6CD079D283F328C003906B0 /* LoginService.swift in Sources */,
 				F66A1738283DCF6A0064DD56 /* (null) in Sources */,
 				03398C6227DFDFCC001BC793 /* SceneDelegate.swift in Sources */,
 			);
