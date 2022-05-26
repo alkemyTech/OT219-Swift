@@ -14,22 +14,22 @@ struct UserRegisterData: Codable {
 }
 
 struct UserData: Codable {
-    let user: UserInfo
+    let user: User
     let token: String
 }
 
-struct UserInfo: Codable {
+struct User: Codable {
     let name, email, password: String
     let roleId: Int
     let updatedAt, createdAt: String
     let id: Int
 }
 
-struct UserRegisterError: Codable {
-    let message: String
-    let errors: Errors
-}
-
-struct Errors: Codable {
-    let email: [String]
-}
+//struct UserRegisterError: Codable {
+//    let message: String
+//    let errors: Errors
+//}
+//
+//struct Errors: Codable {
+//    let email: [String]
+//}

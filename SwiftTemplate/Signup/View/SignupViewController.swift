@@ -10,7 +10,7 @@ import UIKit
 class SignupViewController: UIViewController {
 
     //MARK: - Properties
-    
+    private var viewModel = SignUpViewModel()
     private var isKeyboardExpanded = false
     
     private let scrollView: UIScrollView = {
@@ -111,12 +111,16 @@ class SignupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .white
         setupGradientLayer()
         setupView()
         setupObserverKeyboard()
         
+        viewModel.delegate = self
+        
+        //Call this function when user press register button !
+        viewModel.register(name: "name", email: "emailxdddd", pass: "pass")
     }
 
     //MARK: - Helpers
@@ -163,10 +167,19 @@ class SignupViewController: UIViewController {
     @objc func keyboardAppear(notification: NSNotification){
         guard let keyboardFrameValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
         scrollView.contentInset.bottom = view.convert(keyboardFrameValue.cgRectValue, from: nil).size.height
-        
     }
     
     @objc func keyboardDisappear(){
         scrollView.contentInset.bottom = 0
+    }
+}
+
+extension SignupViewController: SignUpViewModelDelegate {
+    func userRegisterSuccess() {
+
+    }
+    
+    func userRegisterError() {
+
     }
 }
