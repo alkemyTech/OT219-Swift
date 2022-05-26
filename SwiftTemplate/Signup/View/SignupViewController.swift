@@ -119,8 +119,8 @@ class SignupViewController: UIViewController {
         
         viewModel.delegate = self
         
-        //Call this function when user press register button !
-        viewModel.register(name: "name", email: "emailxdddd", pass: "pass")
+        //Call this function when user press register button IBAction 
+        //viewModel.register(name: name, email: email, pass: pass)
     }
 
     //MARK: - Helpers
