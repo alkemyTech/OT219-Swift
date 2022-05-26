@@ -16,8 +16,7 @@ class SignUpViewModel {
     var signUpManager = SignUpManager()
     var delegate: SignUpViewModelDelegate?
     
-    init(signUpManager: SignUpManager, delegate: SignUpViewModelDelegate) {
-        self.signUpManager = signUpManager
+    init(delegate: SignUpViewModelDelegate) {
         self.delegate = delegate
     }
     

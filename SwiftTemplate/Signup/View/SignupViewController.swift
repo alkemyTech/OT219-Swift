@@ -12,7 +12,6 @@ class SignupViewController: UIViewController {
     //MARK: - Properties
     private var viewModel: SignUpViewModel?
     private var isKeyboardExpanded = false
-    var signUpManager = SignUpManager()
     
     private let scrollView: UIScrollView = {
         let view = UIScrollView()
@@ -118,7 +117,7 @@ class SignupViewController: UIViewController {
         setupView()
         setupObserverKeyboard()
         
-        viewModel = SignUpViewModel(signUpManager: signUpManager, delegate: self)
+        viewModel = SignUpViewModel(delegate: self)
         
         //Call this function when user press register button IBAction 
 //        viewModel?.register(name: "String", email: "String", pass: "String")
