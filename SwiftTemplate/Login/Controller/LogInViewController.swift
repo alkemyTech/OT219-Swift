@@ -12,7 +12,12 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        LoginService.shared.login { token in
+            print(token)
+        } onError: { error in
+            print(error)
+        }
+
     }
 
 
