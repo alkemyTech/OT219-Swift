@@ -17,6 +17,7 @@
 		03947944283ECC47000E75C8 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03947941283ECC47000E75C8 /* LogInViewController.swift */; };
 		03947947283ECCBE000E75C8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03947946283ECCBE000E75C8 /* Extensions.swift */; };
 		C59699B3D25BFED1E9EAC307 /* Pods_SwiftTemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD84004C3724297FA88D21C5 /* Pods_SwiftTemplate.framework */; };
+		F63605B6284110320078F12E /* Test_API_Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63605B5284110320078F12E /* Test_API_Login.swift */; };
 		F66A1738283DCF6A0064DD56 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		F66A1739283DCF6A0064DD56 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		F68C14E0283FC45300591D97 /* LoginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C14DF283FC45300591D97 /* LoginUser.swift */; };
@@ -25,6 +26,16 @@
 		F6CD079D283F328C003906B0 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD079C283F328C003906B0 /* LoginService.swift */; };
 		F6CD07A0283F3F15003906B0 /* LoginUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD079F283F3F15003906B0 /* LoginUserResponse.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F63605B7284110320078F12E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 03398C5427DFDFCC001BC793 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 03398C5B27DFDFCC001BC793;
+			remoteInfo = SwiftTemplate;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		03398C5C27DFDFCC001BC793 /* SwiftTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,6 +50,8 @@
 		03947946283ECCBE000E75C8 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		54065947B66C7BED0004E9F4 /* Pods-SwiftTemplate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftTemplate.release.xcconfig"; path = "Target Support Files/Pods-SwiftTemplate/Pods-SwiftTemplate.release.xcconfig"; sourceTree = "<group>"; };
 		A44B2E4CE22C626FA79CD586 /* Pods-SwiftTemplate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftTemplate.debug.xcconfig"; path = "Target Support Files/Pods-SwiftTemplate/Pods-SwiftTemplate.debug.xcconfig"; sourceTree = "<group>"; };
+		F63605B3284110320078F12E /* Test_API_Login.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Test_API_Login.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F63605B5284110320078F12E /* Test_API_Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_API_Login.swift; sourceTree = "<group>"; };
 		F68C14DF283FC45300591D97 /* LoginUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
 		F68C14E2283FC8E700591D97 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		F6CD0797283F2EA3003906B0 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
@@ -56,6 +69,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F63605B0284110320078F12E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -63,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				03398C5E27DFDFCC001BC793 /* SwiftTemplate */,
+				F63605B4284110320078F12E /* Test_API_Login */,
 				03398C5D27DFDFCC001BC793 /* Products */,
 				3DB6AFA112805A9E1C12E06A /* Pods */,
 				D09B5ACF9F2EC811C05BA0E5 /* Frameworks */,
@@ -73,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				03398C5C27DFDFCC001BC793 /* SwiftTemplate.app */,
+				F63605B3284110320078F12E /* Test_API_Login.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -144,6 +166,14 @@
 				FD84004C3724297FA88D21C5 /* Pods_SwiftTemplate.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F63605B4284110320078F12E /* Test_API_Login */ = {
+			isa = PBXGroup;
+			children = (
+				F63605B5284110320078F12E /* Test_API_Login.swift */,
+			);
+			path = Test_API_Login;
 			sourceTree = "<group>";
 		};
 		F68C14E1283FC8C900591D97 /* ViewModel */ = {
@@ -218,6 +248,24 @@
 			productReference = 03398C5C27DFDFCC001BC793 /* SwiftTemplate.app */;
 			productType = "com.apple.product-type.application";
 		};
+		F63605B2284110320078F12E /* Test_API_Login */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F63605BB284110320078F12E /* Build configuration list for PBXNativeTarget "Test_API_Login" */;
+			buildPhases = (
+				F63605AF284110320078F12E /* Sources */,
+				F63605B0284110320078F12E /* Frameworks */,
+				F63605B1284110320078F12E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F63605B8284110320078F12E /* PBXTargetDependency */,
+			);
+			name = Test_API_Login;
+			productName = Test_API_Login;
+			productReference = F63605B3284110320078F12E /* Test_API_Login.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -225,11 +273,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1320;
+				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
 					03398C5B27DFDFCC001BC793 = {
 						CreatedOnToolsVersion = 13.2.1;
+					};
+					F63605B2284110320078F12E = {
+						CreatedOnToolsVersion = 13.3.1;
+						TestTargetID = 03398C5B27DFDFCC001BC793;
 					};
 				};
 			};
@@ -247,6 +299,7 @@
 			projectRoot = "";
 			targets = (
 				03398C5B27DFDFCC001BC793 /* SwiftTemplate */,
+				F63605B2284110320078F12E /* Test_API_Login */,
 			);
 		};
 /* End PBXProject section */
@@ -259,6 +312,13 @@
 				03398C6C27DFDFCD001BC793 /* LaunchScreen.storyboard in Resources */,
 				03398C6927DFDFCD001BC793 /* Assets.xcassets in Resources */,
 				03947943283ECC47000E75C8 /* LogInViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F63605B1284110320078F12E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,7 +387,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F63605AF284110320078F12E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F63605B6284110320078F12E /* Test_API_Login.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F63605B8284110320078F12E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 03398C5B27DFDFCC001BC793 /* SwiftTemplate */;
+			targetProxy = F63605B7284110320078F12E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		03398C6A27DFDFCD001BC793 /* LaunchScreen.storyboard */ = {
@@ -510,6 +586,44 @@
 			};
 			name = Release;
 		};
+		F63605B9284110320078F12E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N5B5236N46;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sancricca.Test-API-Login";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftTemplate.app/SwiftTemplate";
+			};
+			name = Debug;
+		};
+		F63605BA284110320078F12E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N5B5236N46;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sancricca.Test-API-Login";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftTemplate.app/SwiftTemplate";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -527,6 +641,15 @@
 			buildConfigurations = (
 				03398C7127DFDFCD001BC793 /* Debug */,
 				03398C7227DFDFCD001BC793 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F63605BB284110320078F12E /* Build configuration list for PBXNativeTarget "Test_API_Login" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F63605B9284110320078F12E /* Debug */,
+				F63605BA284110320078F12E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
