@@ -11,8 +11,18 @@ import XCTest
 
 class Test_API_Login: XCTestCase {
 
+    var service: LoginService!
+    
+    override func setUp() {
+        service = LoginService()
+    }
+    
+    override func tearDown() {
+        service = nil
+    }
+    
     func test_Login_With_Valid_User(){
-        let service = LoginService()
+        //let service = LoginService()
         
         let expectation = XCTestExpectation(description: "Should return a valid token")
         
