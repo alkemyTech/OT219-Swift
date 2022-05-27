@@ -14,6 +14,7 @@
 		092A4731283D4294003E4B66 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092A4730283D4294003E4B66 /* SignUpViewModel.swift */; };
 		092A4734283D5001003E4B66 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092A4732283D5001003E4B66 /* ViewController.swift */; };
 		092A4735283D5001003E4B66 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 092A4733283D5001003E4B66 /* ViewController.xib */; };
+		092A474C283E8B21003E4B66 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092A474B283E8B21003E4B66 /* UserSession.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		092A4730283D4294003E4B66 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		092A4732283D5001003E4B66 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		092A4733283D5001003E4B66 /* ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		092A474B283E8B21003E4B66 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 		092A472D283D422F003E4B66 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
+				092A474A283E8AF7003E4B66 /* Model */,
 				092A472F283D4249003E4B66 /* View */,
 				092A472E283D423A003E4B66 /* ViewModel */,
 			);
@@ -100,6 +103,14 @@
 				092A4733283D5001003E4B66 /* ViewController.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		092A474A283E8AF7003E4B66 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				092A474B283E8B21003E4B66 /* UserSession.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,6 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03398C6027DFDFCC001BC793 /* AppDelegate.swift in Sources */,
+				092A474C283E8B21003E4B66 /* UserSession.swift in Sources */,
 				092A4731283D4294003E4B66 /* SignUpViewModel.swift in Sources */,
 				092A4734283D5001003E4B66 /* ViewController.swift in Sources */,
 				03398C6227DFDFCC001BC793 /* SceneDelegate.swift in Sources */,
