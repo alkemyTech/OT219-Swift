@@ -11,13 +11,12 @@ class LogInViewController: UIViewController {
     
     //MARK: - Properties
     
-    private var service = LoginService()
     private var viewModel: LoginViewModel?
 
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel = LoginViewModel(service: service, delegate: self)
+        self.viewModel = LoginViewModel(delegate: self)
 
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             self?.viewModel?.checkLogin()

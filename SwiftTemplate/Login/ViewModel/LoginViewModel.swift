@@ -14,11 +14,9 @@ protocol LoginViewModelDelegate{
 
 class LoginViewModel{
     	
-    private var service: LoginService
     private var delegate: LoginViewModelDelegate?
     
-    init(service: LoginService, delegate: LoginViewModelDelegate){
-        self.service = service
+    init(delegate: LoginViewModelDelegate){
         self.delegate = delegate
     }
     
@@ -27,7 +25,7 @@ class LoginViewModel{
     
     func checkLogin(){
         let user = LoginUser(email: email, password: password)
-        service.login(user: user) { [weak self] token in
+        LoginService.shared.login(user: user) { [weak self] token in
             let userDefaults = UserDefaults.standard
             userDefaults.set(token, forKey: "token")
             self?.delegate?.didSuccessUserLogin()
