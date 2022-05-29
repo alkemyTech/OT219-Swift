@@ -53,7 +53,7 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "baseURL"
-            value = "http://ongapi.alkemy.org/"
+            value = "https://ongapi.alkemy.org/"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
