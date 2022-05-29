@@ -7,18 +7,14 @@
 
 import Foundation
 
-protocol SignUpViewModelDelegate {
+protocol SignUpViewModelDelegate: AnyObject {
     func userRegisterSuccess()
     func userRegisterError()
 }
 
 class SignUpViewModel {
     var signUpManager = SignUpManager()
-    var delegate: SignUpViewModelDelegate?
-    
-    init(delegate: SignUpViewModelDelegate) {
-        self.delegate = delegate
-    }
+    weak var delegate: SignUpViewModelDelegate?
     
     func register(name: String, email: String, pass: String) {
         let user = NewUser(name: name, email: email, password: pass)

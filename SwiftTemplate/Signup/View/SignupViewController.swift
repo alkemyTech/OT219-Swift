@@ -117,10 +117,14 @@ class SignupViewController: UIViewController {
         setupView()
         setupObserverKeyboard()
         
-        viewModel = SignUpViewModel(delegate: self)
+        lazy var viewModel: SignUpViewModel = {
+            let signUpViewModel = SignUpViewModel()
+            signUpViewModel.delegate = self
+            return signUpViewModel
+        }()
         
         //Call this function when user press register button IBAction 
-//        viewModel?.register(name: "String", email: "String", pass: "String")
+//        viewModel.register(name: "String", email: "String", pass: "String")
     }
 
     //MARK: - Helpers
