@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F63605B2284110320078F12E"
+               BlueprintIdentifier = "F6EDEF142845225B00BB49B9"
                BuildableName = "Test_API_Login.xctest"
                BlueprintName = "Test_API_Login"
                ReferencedContainer = "container:SwiftTemplate.xcodeproj">

@@ -15,12 +15,12 @@ struct LoginUserResponse: Codable {
 
 
 struct LoginData: Codable {
-    let user: User
+    let user: UserLogin
     let token: String
 }
 
 
-struct User: Codable {
+struct UserLogin: Codable {
     let id: Int
     let name, email: String
 }

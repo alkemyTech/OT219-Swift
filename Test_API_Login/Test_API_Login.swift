@@ -5,7 +5,6 @@
 //  Created by Cristian Sancricca on 27/05/2022.
 //
 
-
 import XCTest
 @testable import SwiftTemplate
 
