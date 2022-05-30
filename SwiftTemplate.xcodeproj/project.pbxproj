@@ -22,6 +22,8 @@
 		A6470E527C25B4694F07B987 /* Pods_SwiftTemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19DC9E1E40C36079E44F490A /* Pods_SwiftTemplate.framework */; };
 		F66A1738283DCF6A0064DD56 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		F66A1739283DCF6A0064DD56 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		FB182CA2284193A2000DC212 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB182CA0284193A2000DC212 /* LogInViewController.swift */; };
+		FB182CA3284193A2000DC212 /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB182CA1284193A2000DC212 /* LogInViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */

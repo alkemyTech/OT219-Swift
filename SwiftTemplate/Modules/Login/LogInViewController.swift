@@ -1,8 +1,8 @@
 //
-//  logingViewController.swift
+//  LogInViewController.swift
 //  SwiftTemplate
 //
-//  Created by Alejandro Martinez on 25/05/22.
+//  Created by Alejandro Martinez on 27/05/22.
 //
 
 import UIKit
@@ -11,19 +11,24 @@ class LogInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        title = "LogIn"
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func navigateToSignUp(_ sender: Any) {
+        let signUpvc = SignupViewController()
+        self.navigationController?.pushViewController(signUpvc,animated:true)
     }
-    */
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+    }
+   
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
+  
 }
