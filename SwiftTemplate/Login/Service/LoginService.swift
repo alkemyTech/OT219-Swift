@@ -9,10 +9,6 @@ import Foundation
 
 struct LoginService {
     
-    enum LoginError: String{
-        case genericError = "The email address or password you entered is invalid"
-    }
-    
     static let shared = LoginService()
     
     private let baseURL = ProcessInfo.processInfo.environment["baseURL"]!
@@ -23,6 +19,7 @@ struct LoginService {
         	
         guard let email = user.email else {return}
         guard let password = user.password else {return}
+
         
         let params = ["email": email, "password": password]
         
@@ -36,13 +33,13 @@ struct LoginService {
                         if response.success {
                             onComplete(response.data.token)
                         }else{
-                            onError(response.message)
+                            onError(ApiError.loginError.errorDescription!)
                         }
                     } else {
-                        onError(LoginError.genericError.rawValue)
+                        onError(ApiError.loginError.errorDescription!)
                     }
                 }catch{
-                    onError(LoginError.genericError.rawValue)
+                    onError(ApiError.loginError.errorDescription!)
                 }
             case .failure(let error):
                 onError(error.localizedDescription)
