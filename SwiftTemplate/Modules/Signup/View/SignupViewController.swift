@@ -10,7 +10,7 @@ import UIKit
 class SignupViewController: UIViewController {
 
     //MARK: - Properties
-    
+    private var viewModel: SignUpViewModel?
     private var isKeyboardExpanded = false
     
     private let scrollView: UIScrollView = {
@@ -111,12 +111,20 @@ class SignupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .white
         setupGradientLayer()
         setupView()
         setupObserverKeyboard()
         
+        lazy var viewModel: SignUpViewModel = {
+            let signUpViewModel = SignUpViewModel()
+            signUpViewModel.delegate = self
+            return signUpViewModel
+        }()
+        
+        //Call this function when user press register button IBAction 
+//        viewModel.register(name: "String", email: "String", pass: "String")
     }
 
     //MARK: - Helpers
@@ -163,10 +171,25 @@ class SignupViewController: UIViewController {
     @objc func keyboardAppear(notification: NSNotification){
         guard let keyboardFrameValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
         scrollView.contentInset.bottom = view.convert(keyboardFrameValue.cgRectValue, from: nil).size.height
-        
     }
     
     @objc func keyboardDisappear(){
         scrollView.contentInset.bottom = 0
+    }
+}
+
+extension SignupViewController: SignUpViewModelDelegate {
+    func userRegisterSuccess() {
+        let alert = UIAlertController(title: "Usuario registrado de manera exitosa", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {(action: UIAlertAction!) in
+            _ = self.navigationController?.popViewController(animated: true)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func userRegisterError() {
+        let alert = UIAlertController(title: "Error", message: "No pudimos registrar el usuario, por favor revise nuevamente sus datos e intente nuevamente", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
