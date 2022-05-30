@@ -219,7 +219,7 @@
 				F6EDEF312845236C00BB49B9 /* Service */,
 			);
 			name = Login;
-			path = SwiftTemplate/Login;
+			path = SwiftTemplate/Modules/Login;
 			sourceTree = SOURCE_ROOT;
 		};
 		F6EDEF212845236C00BB49B9 /* ViewModel */ = {
