@@ -11,16 +11,12 @@ class LogInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         title = "LogIn"
-     
     }
 
-
-    @IBAction func button(_ sender: Any) {
-        let SignUpvc = SignupViewController()
-        self.navigationController?.pushViewController(SignUpvc,animated:true)
-        
+    @IBAction func navigateToLogin(_ sender: Any) {
+        let signUpvc = SignupViewController()
+        self.navigationController?.pushViewController(signUpvc,animated:true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
