@@ -11,20 +11,30 @@ class LogInViewController: UIViewController {
     
     //MARK: - Properties
     
-    private var viewModel: LoginViewModel?
+    lazy var viewModel: LoginViewModel = {
+        let loginViewModel = LoginViewModel()
+        loginViewModel.delegate = self
+        return loginViewModel
+    }()
 
     //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel = LoginViewModel(delegate: self)
 
+        checkIfLogin()
+    }
+    
+    private func checkIfLogin(){
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            self?.viewModel?.checkLogin()
+            self?.viewModel.checkLogin()
         }
-
     }
 
 }
+
+
+//MARK: - LoginViewModelDelegate
 
 extension LogInViewController: LoginViewModelDelegate{
     func didSuccessUserLogin() {

@@ -7,18 +7,14 @@
 
 import Foundation
 
-protocol LoginViewModelDelegate{
+protocol LoginViewModelDelegate: AnyObject{
     func didSuccessUserLogin()
     func didFailUserLogin(error: String)
 }
 
 class LoginViewModel{
     	
-    private var delegate: LoginViewModelDelegate?
-    
-    init(delegate: LoginViewModelDelegate){
-        self.delegate = delegate
-    }
+    weak var delegate: LoginViewModelDelegate?
     
     private var email = "cristian"
     private var password = "cristian"
