@@ -14,7 +14,7 @@ class LogInViewController: UIViewController {
         title = "LogIn"
     }
 
-    @IBAction func navigateToLogin(_ sender: Any) {
+    @IBAction func navigateToSignUp(_ sender: Any) {
         let signUpvc = SignupViewController()
         self.navigationController?.pushViewController(signUpvc,animated:true)
     }

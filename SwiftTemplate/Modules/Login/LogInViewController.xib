@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,10 +19,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LOGO-SOMOS MAS" translatesAutoresizingMaskIntoConstraints="NO" id="qEb-e2-i8Q">
-                    <rect key="frame" x="87" y="205" width="240" height="200"/>
+                    <rect key="frame" x="87" y="249" width="240" height="200"/>
                 </imageView>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xce-Nf-Gl0">
-                    <rect key="frame" x="20" y="464" width="374" height="40"/>
+                    <rect key="frame" x="20" y="508" width="374" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="ixG-uq-Dux"/>
                     </constraints>
@@ -28,7 +30,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Constraseña" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NV7-91-lpB">
-                    <rect key="frame" x="20" y="525" width="374" height="40"/>
+                    <rect key="frame" x="20" y="569" width="374" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="AB1-zN-0qZ"/>
                     </constraints>
@@ -36,7 +38,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gr-Vx-cJw">
-                    <rect key="frame" x="20" y="596" width="374" height="44"/>
+                    <rect key="frame" x="20" y="640" width="374" height="44"/>
                     <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="LrJ-Gi-YcM"/>
@@ -46,13 +48,13 @@
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" title="Login"/>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZV7-cg-8D9" customClass="ButtonSignUp">
-                    <rect key="frame" x="20" y="648" width="374" height="31"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZV7-cg-8D9">
+                    <rect key="frame" x="20" y="692" width="374" height="31"/>
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="No tienes cuenta? Registrate!"/>
                     <connections>
-                        <action selector="button:" destination="-1" eventType="touchUpInside" id="15f-ds-HiM"/>
+                        <action selector="navigateToSignUp:" destination="-1" eventType="touchUpInside" id="EVI-DE-2xE"/>
                     </connections>
                 </button>
             </subviews>
