@@ -11,23 +11,22 @@ import XCTest
 
 class Test_API_Login: XCTestCase {
 
-    var service: LoginService!
+    var sut: LoginService!
     
     override func setUp() {
-        service = LoginService()
+        sut = LoginService()
     }
     
     override func tearDown() {
-        service = nil
+        sut = nil
     }
     
-    func test_Login_With_Valid_User(){
-        //let service = LoginService()
+    func test_LoginService_WithValidUser_ShouldReturnAValidToken(){
         
         let expectation = XCTestExpectation(description: "Should return a valid token")
         
         let user = LoginUser(email: "cristian", password: "cristian")
-        service.login(user: user) { userToken in
+        sut.login(user: user) { userToken in
             XCTAssertNotNil(userToken)
             expectation.fulfill()
         } onError: { error in
@@ -38,13 +37,12 @@ class Test_API_Login: XCTestCase {
         wait(for: [expectation], timeout: 5)
     }
     
-    func test_Login_With_Invalid_User(){
-        let service = LoginService()
+    func test_LoginService_WithInvalidUser_ShouldReturnAError(){
         
         let expectation = XCTestExpectation(description: "Should return a error")
         
         let user = LoginUser(email: "cris", password: "cris")
-        service.login(user: user) { userToken in
+        sut.login(user: user) { userToken in
             XCTAssertNil(userToken)
             expectation.fulfill()
         } onError: { error in
