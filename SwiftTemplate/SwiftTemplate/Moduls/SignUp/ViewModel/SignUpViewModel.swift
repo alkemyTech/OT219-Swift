@@ -6,16 +6,15 @@
 //
 
 import Foundation
-import UIKit
 
 class SignUpViewModel{
     
     private var delegate : ViewControllerDelegate?
     
-    private var name: Bool = false
-    private var email: Bool = false
-    private var password : Bool = false
-    private var confPassword : Bool = false
+    private var nameValidation: Bool = false
+    private var emailValidation: Bool = false
+    private var passwordValidation : Bool = false
+    private var confPasswordValidation : Bool = false
     
     init(delegate : ViewControllerDelegate){
         self.delegate = delegate
@@ -28,7 +27,7 @@ class SignUpViewModel{
 //MARK: - FuntionsToActivateRegister
 extension SignUpViewModel{
     func showButtonRegister(){
-        if name && email && password && confPassword{
+        if nameValidation && emailValidation && passwordValidation && confPasswordValidation{
             self.delegate?.activateRegister()
         }
     }
@@ -36,21 +35,21 @@ extension SignUpViewModel{
 
 //MARK: - ValidateData
 extension SignUpViewModel{
-    
+
     //MARK: - ValidationName
     func validateName(value: String?){
         if let nameValue = value{
             validationNameCharacters(value: nameValue)
             if nameValue.count < 3{
                 _ = "The name must have more that 2 characters"
-                name = false
+                nameValidation = false
             }else{
-                name = true
+                nameValidation = true
             }
         }
         showButtonRegister()
     }
-    
+
     func validationNameCharacters(value: String){
         let decimalCharters = CharacterSet.decimalDigits
         let decimalRange = value.rangeOfCharacter(from: decimalCharters)
@@ -59,7 +58,7 @@ extension SignUpViewModel{
             self.delegate?.messageError(message: message)
         }
     }
-    
+
     //MARK: - Validation Email
     func validateEmail(value: String?){
         if let emailValue = value{
@@ -67,68 +66,68 @@ extension SignUpViewModel{
             let predicate = NSPredicate(format: "SELF MATCHES %@",regularExpresion)
             if !predicate.evaluate(with: emailValue){
                 validateEmailCount(value: emailValue)
-                email = false
+                emailValidation = false
             } else{
-                email = true
+                emailValidation = true
             }
         }
         showButtonRegister()
     }
-    
+
     func validateEmailCount(value: String){
         if value.count > 30{
             let message = "Please type an email address. example@gmail.com"
             self.delegate?.messageError(message: message)
         }
     }
-    
+
     //MARK: - Validate Password
     func validatePasswordA(value: String?){
         if let passwordValue = value{
             if passwordValue.count < 6{
-                password = false
+                passwordValidation = false
             }else{
                 if contentDigit(value: passwordValue) &&
                     contentLowerCase(value: passwordValue) &&
                     contentUpperCase(value: passwordValue) {
-                    password = true
+                    passwordValidation = true
                 }else{
-                    password = false
+                    passwordValidation = false
                 }
             }
         }
         showButtonRegister()
     }
-    
+
     func contentDigit(value: String) -> Bool{
         let regularExpresion = ".*[0-9]+.*"
         let predicate = NSPredicate(format: "SELF MATCHES %@",regularExpresion)
         return predicate.evaluate(with: value)
     }
-    
+
     func contentLowerCase(value: String) -> Bool{
         let regularExpresion = ".*[a-z]+.*"
         let predicate = NSPredicate(format: "SELF MATCHES %@",regularExpresion)
         return predicate.evaluate(with: value)
     }
-    
+
     func contentUpperCase(value: String) -> Bool{
         let regularExpresion = ".*[A-Z]+.*"
         let predicate = NSPredicate(format: "SELF MATCHES %@",regularExpresion)
         return predicate.evaluate(with: value)
     }
-    
+
     func validateSamePassword(valueA: String?, valueB: String?){
         if let passA = valueA, let passB = valueB{
             if passA == passB{
-                confPassword = true
+                confPasswordValidation = true
             }else{
                 self.delegate?.messagePassword(message: "Passwords are not the same")
             }
         }
         showButtonRegister()
     }
-    
+
     
 }
 
