@@ -77,6 +77,7 @@ extension ViewController: ViewControllerDelegate{
     }
     
     func activateRegister() {
+        errorPasswordSame.isHidden = true
         buttonOutlet.isEnabled = true
         buttonOutlet.backgroundColor = .green
     }

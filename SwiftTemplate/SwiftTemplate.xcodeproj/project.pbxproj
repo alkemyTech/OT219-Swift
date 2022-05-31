@@ -14,7 +14,6 @@
 		092A4731283D4294003E4B66 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092A4730283D4294003E4B66 /* SignUpViewModel.swift */; };
 		092A4734283D5001003E4B66 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092A4732283D5001003E4B66 /* ViewController.swift */; };
 		092A4735283D5001003E4B66 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 092A4733283D5001003E4B66 /* ViewController.xib */; };
-		098ACFA6284588CF0057CEF4 /* ValidationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ACFA5284588CF0057CEF4 /* ValidationData.swift */; };
 		09A9E30E284122E2000A3525 /* SwiftTemplateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A9E30D284122E2000A3525 /* SwiftTemplateTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +37,6 @@
 		092A4730283D4294003E4B66 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		092A4732283D5001003E4B66 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		092A4733283D5001003E4B66 /* ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
-		098ACFA5284588CF0057CEF4 /* ValidationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationData.swift; sourceTree = "<group>"; };
 		09A9E30B284122E2000A3525 /* SwiftTemplateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftTemplateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		09A9E30D284122E2000A3525 /* SwiftTemplateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTemplateTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,7 +111,6 @@
 			isa = PBXGroup;
 			children = (
 				092A4730283D4294003E4B66 /* SignUpViewModel.swift */,
-				098ACFA5284588CF0057CEF4 /* ValidationData.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -236,7 +233,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				098ACFA6284588CF0057CEF4 /* ValidationData.swift in Sources */,
 				03398C6027DFDFCC001BC793 /* AppDelegate.swift in Sources */,
 				092A4731283D4294003E4B66 /* SignUpViewModel.swift in Sources */,
 				092A4734283D5001003E4B66 /* ViewController.swift in Sources */,
