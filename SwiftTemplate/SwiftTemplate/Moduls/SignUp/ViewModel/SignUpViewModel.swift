@@ -9,16 +9,10 @@ import Foundation
 
 class SignUpViewModel{
     
-    private var delegate : ViewControllerDelegate?
-    
     private var nameValidation: Bool = false
     private var emailValidation: Bool = false
     private var passwordValidation : Bool = false
     private var confPasswordValidation : Bool = false
-    
-    init(delegate : ViewControllerDelegate){
-        self.delegate = delegate
-    }
     
     func login(email:String, password:String){
         
@@ -28,7 +22,7 @@ class SignUpViewModel{
 extension SignUpViewModel{
     func showButtonRegister(){
         if nameValidation && emailValidation && passwordValidation && confPasswordValidation{
-            self.delegate?.activateRegister()
+//            activate Button
         }
     }
 }
@@ -55,7 +49,6 @@ extension SignUpViewModel{
         let decimalRange = value.rangeOfCharacter(from: decimalCharters)
         if decimalRange != nil{
             let message = "Plase don't used number un your name"
-            self.delegate?.messageError(message: message)
         }
     }
 
@@ -77,7 +70,6 @@ extension SignUpViewModel{
     func validateEmailCount(value: String){
         if value.count > 30{
             let message = "Please type an email address. example@gmail.com"
-            self.delegate?.messageError(message: message)
         }
     }
 
@@ -122,7 +114,7 @@ extension SignUpViewModel{
             if passA == passB{
                 confPasswordValidation = true
             }else{
-                self.delegate?.messagePassword(message: "Passwords are not the same")
+                let message = "Passwords are not the same"
             }
         }
         showButtonRegister()
