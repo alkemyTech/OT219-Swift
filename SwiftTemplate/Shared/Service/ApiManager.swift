@@ -14,9 +14,15 @@ struct ApiManager{
     
     private init(){}
     
-    func loginUser(url: String, params: [String:Any] ,completion: @escaping (Result<Data?, AFError>) -> ()){
+    func post(url: String, params: [String:Any] ,completion: @escaping (Result<Data?, AFError>) -> ()){
         
         AF.request(url, method: .post, parameters: params).response { response in
+            completion(response.result)
+        }
+    }
+    
+    func get(url: String, completion: @escaping (Result<Data?, AFError>) -> () ){
+        AF.request(url).response { response in
             completion(response.result)
         }
     }

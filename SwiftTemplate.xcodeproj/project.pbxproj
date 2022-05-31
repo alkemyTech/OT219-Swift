@@ -20,6 +20,8 @@
 		A6470E527C25B4694F07B987 /* Pods_SwiftTemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19DC9E1E40C36079E44F490A /* Pods_SwiftTemplate.framework */; };
 		F66A1738283DCF6A0064DD56 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		F66A1739283DCF6A0064DD56 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		F6C342C22845BF2D005F877F /* NewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C342C12845BF2D005F877F /* NewsResponse.swift */; };
+		F6C342C42845C18E005F877F /* NewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C342C32845C18E005F877F /* NewsService.swift */; };
 		F6EDEF1F2845227100BB49B9 /* Test_API_Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EDEF1E2845227100BB49B9 /* Test_API_Login.swift */; };
 		F6EDEF332845236C00BB49B9 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EDEF222845236C00BB49B9 /* LoginViewModel.swift */; };
 		F6EDEF342845236C00BB49B9 /* LoginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EDEF242845236C00BB49B9 /* LoginUser.swift */; };
@@ -57,6 +59,8 @@
 		4054DFAA283FEE8F00E781B6 /* ServiceManagerSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManagerSingleton.swift; sourceTree = "<group>"; };
 		54065947B66C7BED0004E9F4 /* Pods-SwiftTemplate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftTemplate.release.xcconfig"; path = "Target Support Files/Pods-SwiftTemplate/Pods-SwiftTemplate.release.xcconfig"; sourceTree = "<group>"; };
 		A44B2E4CE22C626FA79CD586 /* Pods-SwiftTemplate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftTemplate.debug.xcconfig"; path = "Target Support Files/Pods-SwiftTemplate/Pods-SwiftTemplate.debug.xcconfig"; sourceTree = "<group>"; };
+		F6C342C12845BF2D005F877F /* NewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsResponse.swift; sourceTree = "<group>"; };
+		F6C342C32845C18E005F877F /* NewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsService.swift; sourceTree = "<group>"; };
 		F6EDEF152845225B00BB49B9 /* Test_API_Login.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Test_API_Login.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6EDEF1E2845227100BB49B9 /* Test_API_Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Test_API_Login.swift; sourceTree = "<group>"; };
 		F6EDEF222845236C00BB49B9 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -153,6 +157,7 @@
 		03C194392844E2F300D0D6CE /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				F6C342BC2845BE72005F877F /* Home */,
 				F6EDEF202845236C00BB49B9 /* Login */,
 				0394793C283ECC47000E75C8 /* Signup */,
 			);
@@ -200,6 +205,47 @@
 				19DC9E1E40C36079E44F490A /* Pods_SwiftTemplate.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F6C342BC2845BE72005F877F /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				F6C342BE2845BE86005F877F /* Model */,
+				F6C342BF2845BE8D005F877F /* View */,
+				F6C342BD2845BE7F005F877F /* VIewModel */,
+				F6C342C02845BE96005F877F /* Service */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		F6C342BD2845BE7F005F877F /* VIewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VIewModel;
+			sourceTree = "<group>";
+		};
+		F6C342BE2845BE86005F877F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F6C342C12845BF2D005F877F /* NewsResponse.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F6C342BF2845BE8D005F877F /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F6C342C02845BE96005F877F /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				F6C342C32845C18E005F877F /* NewsService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		F6EDEF162845225B00BB49B9 /* Test_API_Login */ = {
@@ -425,6 +471,8 @@
 				4054DFAB283FEE9000E781B6 /* ServiceManagerSingleton.swift in Sources */,
 				4054DF83283EDE8300E781B6 /* NewUser.swift in Sources */,
 				F6EDEF402845236C00BB49B9 /* LoginService.swift in Sources */,
+				F6C342C22845BF2D005F877F /* NewsResponse.swift in Sources */,
+				F6C342C42845C18E005F877F /* NewsService.swift in Sources */,
 				4054DF81283EDE6F00E781B6 /* UserRegisterData.swift in Sources */,
 				F6EDEF462845252100BB49B9 /* ApiManager.swift in Sources */,
 				F6EDEF3F2845236C00BB49B9 /* LogInViewController.swift in Sources */,

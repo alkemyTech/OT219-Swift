@@ -23,6 +23,18 @@ class LogInViewController: UIViewController {
         super.viewDidLoad()
 
         checkIfLogin()
+        
+        
+        //test
+        DispatchQueue.main.async {
+            NewsService.shared.getNews { news in
+                print(news)
+            } onError: { error in
+                print("hubo un error\(error)")
+            }
+
+        }
+
     }
     
     private func checkIfLogin(){
