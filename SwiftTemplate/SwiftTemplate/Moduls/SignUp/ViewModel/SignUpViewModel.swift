@@ -119,7 +119,5 @@ extension SignUpViewModel{
         }
         showButtonRegister()
     }
-
-    
 }
 
