@@ -15,7 +15,7 @@ struct NewsService {
     private let endpointNews = ProcessInfo.processInfo.environment["endpoint.News"]!
     
     
-    func getNews(onComplete: @escaping ([News]) -> (), onError: @escaping (String) -> ()){
+    func fetchNews(onComplete: @escaping ([News]) -> (), onError: @escaping (String) -> ()){
         ApiManager.shared.get(url: "\(baseURL)\(endpointNews)") { response in
             switch response{
             case .success(let data):
