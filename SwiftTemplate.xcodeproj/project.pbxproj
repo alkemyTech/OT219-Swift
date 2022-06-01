@@ -12,6 +12,8 @@
 		03398C6927DFDFCD001BC793 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03398C6827DFDFCD001BC793 /* Assets.xcassets */; };
 		03947942283ECC47000E75C8 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0394793E283ECC47000E75C8 /* SignupViewController.swift */; };
 		03947947283ECCBE000E75C8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03947946283ECCBE000E75C8 /* Extensions.swift */; };
+		0959EFB92847A1FA003FAEF0 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0959EFB82847A1FA003FAEF0 /* WelcomeViewController.swift */; };
+		0959EFBB2847A6FC003FAEF0 /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0959EFBA2847A6FC003FAEF0 /* CollectionTableViewCell.swift */; };
 		4054DF81283EDE6F00E781B6 /* UserRegisterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DF80283EDE6F00E781B6 /* UserRegisterData.swift */; };
 		4054DF83283EDE8300E781B6 /* NewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DF82283EDE8300E781B6 /* NewUser.swift */; };
 		4054DF85283EDF0C00E781B6 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DF84283EDF0C00E781B6 /* SignUpViewModel.swift */; };
@@ -49,6 +51,8 @@
 		03398C6D27DFDFCD001BC793 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0394793E283ECC47000E75C8 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		03947946283ECCBE000E75C8 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		0959EFB82847A1FA003FAEF0 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		0959EFBA2847A6FC003FAEF0 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
 		19DC9E1E40C36079E44F490A /* Pods_SwiftTemplate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftTemplate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4054DF80283EDE6F00E781B6 /* UserRegisterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterData.swift; sourceTree = "<group>"; };
 		4054DF82283EDE8300E781B6 /* NewUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUser.swift; sourceTree = "<group>"; };
@@ -153,10 +157,36 @@
 		03C194392844E2F300D0D6CE /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				0959EFAD2847085F003FAEF0 /* Welcome */,
 				F6EDEF202845236C00BB49B9 /* Login */,
 				0394793C283ECC47000E75C8 /* Signup */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		0959EFAD2847085F003FAEF0 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				0959EFB22847129B003FAEF0 /* View */,
+				0959EFB3284712AB003FAEF0 /* ViewModel */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		0959EFB22847129B003FAEF0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0959EFB82847A1FA003FAEF0 /* WelcomeViewController.swift */,
+				0959EFBA2847A6FC003FAEF0 /* CollectionTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0959EFB3284712AB003FAEF0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		3DB6AFA112805A9E1C12E06A /* Pods */ = {
@@ -431,9 +461,11 @@
 				03398C6027DFDFCC001BC793 /* AppDelegate.swift in Sources */,
 				F6EDEF332845236C00BB49B9 /* LoginViewModel.swift in Sources */,
 				F6EDEF342845236C00BB49B9 /* LoginUser.swift in Sources */,
+				0959EFBB2847A6FC003FAEF0 /* CollectionTableViewCell.swift in Sources */,
 				F66A1738283DCF6A0064DD56 /* (null) in Sources */,
 				4054DF85283EDF0C00E781B6 /* SignUpViewModel.swift in Sources */,
 				03398C6227DFDFCC001BC793 /* SceneDelegate.swift in Sources */,
+				0959EFB92847A1FA003FAEF0 /* WelcomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
