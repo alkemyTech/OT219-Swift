@@ -58,7 +58,7 @@ class HomeViewModel {
     }
     
     @objc func moveNextIndex(){
-        if currentCellIndex < 4 {
+        if currentCellIndex < 3 {
             currentCellIndex += 1
         }else {
             currentCellIndex = 0

@@ -20,9 +20,13 @@ class SeeMoreCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
         
-        contentView.addSubview(frontImageView)
+        contentView.backgroundColor = .white
+        addSubview(frontImageView)
+        
+        frontImageView.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 8)
+        frontImageView.setHeight(200)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -31,7 +35,7 @@ class SeeMoreCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        frontImageView.frame = contentView.bounds
+       // frontImageView.frame = contentView.bounds
     }
     
 }
