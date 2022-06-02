@@ -69,7 +69,7 @@
 		F66387F82846AE8F00E078BF /* NewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCollectionViewCell.swift; sourceTree = "<group>"; };
 		F6C342C12845BF2D005F877F /* NewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsResponse.swift; sourceTree = "<group>"; };
 		F6C342C32845C18E005F877F /* NewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsService.swift; sourceTree = "<group>"; };
-		F6EDEF152845225B00BB49B9 /* Test_API_Login.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Test_API_Login.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6EDEF152845225B00BB49B9 /* Test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Test.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6EDEF1E2845227100BB49B9 /* Test_API_Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Test_API_Login.swift; sourceTree = "<group>"; };
 		F6EDEF222845236C00BB49B9 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		F6EDEF242845236C00BB49B9 /* LoginUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
@@ -104,7 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				03398C5E27DFDFCC001BC793 /* SwiftTemplate */,
-				F6EDEF162845225B00BB49B9 /* Test_API_Login */,
+				F6EDEF162845225B00BB49B9 /* Test */,
 				03398C5D27DFDFCC001BC793 /* Products */,
 				3DB6AFA112805A9E1C12E06A /* Pods */,
 				D09B5ACF9F2EC811C05BA0E5 /* Frameworks */,
@@ -115,7 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				03398C5C27DFDFCC001BC793 /* SwiftTemplate.app */,
-				F6EDEF152845225B00BB49B9 /* Test_API_Login.xctest */,
+				F6EDEF152845225B00BB49B9 /* Test.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -268,12 +268,12 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		F6EDEF162845225B00BB49B9 /* Test_API_Login */ = {
+		F6EDEF162845225B00BB49B9 /* Test */ = {
 			isa = PBXGroup;
 			children = (
 				F6EDEF1E2845227100BB49B9 /* Test_API_Login.swift */,
 			);
-			path = Test_API_Login;
+			path = Test;
 			sourceTree = "<group>";
 		};
 		F6EDEF202845236C00BB49B9 /* Login */ = {
@@ -360,9 +360,9 @@
 			productReference = 03398C5C27DFDFCC001BC793 /* SwiftTemplate.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F6EDEF142845225B00BB49B9 /* Test_API_Login */ = {
+		F6EDEF142845225B00BB49B9 /* Test */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F6EDEF1B2845225B00BB49B9 /* Build configuration list for PBXNativeTarget "Test_API_Login" */;
+			buildConfigurationList = F6EDEF1B2845225B00BB49B9 /* Build configuration list for PBXNativeTarget "Test" */;
 			buildPhases = (
 				F6EDEF112845225B00BB49B9 /* Sources */,
 				F6EDEF122845225B00BB49B9 /* Frameworks */,
@@ -373,9 +373,9 @@
 			dependencies = (
 				F6EDEF1A2845225B00BB49B9 /* PBXTargetDependency */,
 			);
-			name = Test_API_Login;
+			name = Test;
 			productName = Test_API_Login;
-			productReference = F6EDEF152845225B00BB49B9 /* Test_API_Login.xctest */;
+			productReference = F6EDEF152845225B00BB49B9 /* Test.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -411,7 +411,7 @@
 			projectRoot = "";
 			targets = (
 				03398C5B27DFDFCC001BC793 /* SwiftTemplate */,
-				F6EDEF142845225B00BB49B9 /* Test_API_Login */,
+				F6EDEF142845225B00BB49B9 /* Test */,
 			);
 		};
 /* End PBXProject section */
@@ -759,7 +759,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F6EDEF1B2845225B00BB49B9 /* Build configuration list for PBXNativeTarget "Test_API_Login" */ = {
+		F6EDEF1B2845225B00BB49B9 /* Build configuration list for PBXNativeTarget "Test" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F6EDEF1C2845225B00BB49B9 /* Debug */,

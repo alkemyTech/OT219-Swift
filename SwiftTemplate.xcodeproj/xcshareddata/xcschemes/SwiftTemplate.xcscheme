@@ -34,7 +34,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F6EDEF142845225B00BB49B9"
                BuildableName = "Test_API_Login.xctest"
-               BlueprintName = "Test_API_Login"
+               BlueprintName = "Test"
                ReferencedContainer = "container:SwiftTemplate.xcodeproj">
             </BuildableReference>
          </TestableReference>
