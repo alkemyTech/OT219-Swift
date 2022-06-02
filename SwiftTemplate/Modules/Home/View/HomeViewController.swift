@@ -8,6 +8,8 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+
+    
     
     //MARK: - Properties
     
@@ -17,6 +19,7 @@ class HomeViewController: UIViewController {
     lazy var viewModel: HomeViewModel = {
         let homeViewModel = HomeViewModel()
         homeViewModel.delegate = self
+        homeViewModel.delegateTimer = self
         return homeViewModel
     }()
     
@@ -55,23 +58,10 @@ class HomeViewController: UIViewController {
         
         
         viewModel.getNewsData()
+        viewModel.startTimer()
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        startTimer()
-    }
-
-    func startTimer(){
-        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveNextIndex), userInfo: nil, repeats: true)
-    }
-    
-    @objc func moveNextIndex(){
-        if currentCellIndex < 4 {
-            currentCellIndex += 1
-        }else {
-            currentCellIndex = 0
-        }
-        collectionView.scrollToItem(at: IndexPath(item: currentCellIndex, section: 0), at: .centeredHorizontally, animated: true)
     }
 }
 
@@ -117,7 +107,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 //MARK: - Delegate
 
-extension HomeViewController: HomeViewModelDelegate {
+extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
     
     func didGetNewsData() {
         DispatchQueue.main.async { [weak self] in
@@ -128,6 +118,12 @@ extension HomeViewController: HomeViewModelDelegate {
     func didFailGettingNewsData() {
         DispatchQueue.main.async { [weak self] in
             self?.collectionView.isHidden = true
+        }
+    }
+    
+    func updateImageView(at index: Int) {
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: true)
         }
     }
 }
