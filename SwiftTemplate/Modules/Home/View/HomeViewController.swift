@@ -1,96 +1,134 @@
 //
-//  HomeViewController.swift
+//  PruebaViewController.swift
 //  SwiftTemplate
 //
-//  Created by Cristian Sancricca on 31/05/2022.
+//  Created by Cristian Sancricca on 01/06/2022.
 //
 
 import UIKit
 
-class HomeViewController: UIViewController{
+class HomeViewController: UIViewController {
     
     //MARK: - Properties
-
+    
+    private var timer : Timer?
+    private var currentCellIndex = 0
+    
     lazy var viewModel: HomeViewModel = {
         let homeViewModel = HomeViewModel()
         homeViewModel.delegate = self
         return homeViewModel
     }()
     
-    private let newsFeedTable: UITableView = {
-        let table = UITableView(frame: .zero, style: .grouped)
-        table.register(CollectionTableViewCell.self, forCellReuseIdentifier: CollectionTableViewCell.idenfifier)
-        return table
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: view.frame.width, height: 250)
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero	, collectionViewLayout: layout)
+        collectionView.register(NewsCollectionViewCell.self, forCellWithReuseIdentifier: NewsCollectionViewCell.identifier)
+        collectionView.register(SeeMoreCollectionViewCell.self, forCellWithReuseIdentifier: SeeMoreCollectionViewCell.identifier)
+        collectionView.showsHorizontalScrollIndicator = false
+        return collectionView
+    }()
+    
+    private var newsHeader: UILabel = {
+        let label = UILabel()
+        label.text = "News"
+        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.textColor = .gray
+        return label
     }()
     
     //MARK: - Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        setupTable()
+
+        view.backgroundColor = .systemBackground
+        view.addSubview(collectionView)
+        view.addSubview(newsHeader)
+        
+        newsHeader.anchor(top: view.safeAreaLayoutGuide.topAnchor)
+        
+        collectionView.anchor(top: newsHeader.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 12)
+        collectionView.setHeight(250)
+        
+        
+        viewModel.getNewsData()
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        startTimer()
+    }
+
+    func startTimer(){
+        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveNextIndex), userInfo: nil, repeats: true)
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        newsFeedTable.frame = view.bounds
-    }
-    
-    private func setupTable(){
-        newsFeedTable.delegate = self
-        newsFeedTable.dataSource = self
-    }
-    
-    private func setupView(){
-        view.addSubview(newsFeedTable)
+    @objc func moveNextIndex(){
+        if currentCellIndex < 4 {
+            currentCellIndex += 1
+        }else {
+            currentCellIndex = 0
+        }
+        collectionView.scrollToItem(at: IndexPath(item: currentCellIndex, section: 0), at: .centeredHorizontally, animated: true)
     }
 }
 
-//MARK: - TableViewDelegate & DataSource
+//MARK: - CollectionView Delegate, DataSource
 
-extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionTableViewCell.idenfifier, for: indexPath) as? CollectionTableViewCell else {
-           return UITableViewCell()
-       }
-        
-       return cell
-
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 250)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 250
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print(indexPath.row)
+        if indexPath.row == 4{
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SeeMoreCollectionViewCell.identifier, for: indexPath) as? SeeMoreCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            return cell
+        }else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCollectionViewCell.identifier, for: indexPath) as? NewsCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            let new = viewModel.getNews(at: indexPath.row)
+            cell.configureCell(with: new)
+            return cell
+            
+        }
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return min(viewModel.getNewsCount(), 5)
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return viewModel.getSectionTitle(at: section)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
     }
     
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        guard let header = view as? UITableViewHeaderFooterView else {return}
-        header.textLabel?.font = .systemFont(ofSize: 20, weight: .semibold)
-        
-    }
     
 }
 
-//MARK: - News delegate
+//MARK: - Delegate
 
 extension HomeViewController: HomeViewModelDelegate {
     
     func didGetNewsData() {
-        
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.reloadData()
+        }
     }
     
-    func didFailGettingNewsData(error: String) {
-        
+    func didFailGettingNewsData() {
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.isHidden = true
+        }
     }
 }
+

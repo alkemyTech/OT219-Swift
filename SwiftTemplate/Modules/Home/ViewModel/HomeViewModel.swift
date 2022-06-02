@@ -9,7 +9,7 @@ import Foundation
 
 protocol HomeViewModelDelegate: AnyObject {
     func didGetNewsData()
-    func didFailGettingNewsData(error: String)
+    func didFailGettingNewsData()
 }
 
 class HomeViewModel {
@@ -24,9 +24,10 @@ class HomeViewModel {
         DispatchQueue.global().async {
             NewsService.shared.fetchNews { [weak self] news in
                 self?.news = news
-                self?.delegate?.didGetNewsData()
+                self?.getNewsCount() == 0 ? self?.delegate?.didFailGettingNewsData() : self?.delegate?.didGetNewsData()
+                //self?.delegate?.didGetNewsData()
             } onError: { [weak self] error in
-                self?.delegate?.didFailGettingNewsData(error: error)
+                self?.delegate?.didFailGettingNewsData()
             }
         }
     }
