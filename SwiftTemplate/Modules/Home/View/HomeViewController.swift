@@ -13,9 +13,6 @@ class HomeViewController: UIViewController {
     
     //MARK: - Properties
     
-    private var timer : Timer?
-    private var currentCellIndex = 0
-    
     lazy var viewModel: HomeViewModel = {
         let homeViewModel = HomeViewModel()
         homeViewModel.delegate = self
@@ -77,7 +74,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print(indexPath.row)
         if indexPath.row == 4{
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SeeMoreCollectionViewCell.identifier, for: indexPath) as? SeeMoreCollectionViewCell else {
                 return UICollectionViewCell()
