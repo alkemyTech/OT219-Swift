@@ -37,22 +37,6 @@ class NewsCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private var serParteButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.tintColor = UIColor.white
-        button.setTitle("¡Quiero ser parte!", for: .normal)
-        button.backgroundColor = UIColor(named: "ButtonColor")
-        button.setDimensions(height: 50, width: 200)
-        button.titleLabel?.font = .systemFont(ofSize: 20)
-        button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
-        button.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        button.layer.shadowOpacity = 1.0
-        button.layer.shadowRadius = 0.0
-        button.layer.masksToBounds = false
-        button.layer.cornerRadius = 10.0
-        return button
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -67,9 +51,6 @@ class NewsCollectionViewCell: UICollectionViewCell {
         
         addSubview(descriptionLabel)
         descriptionLabel.anchor(top: nameLabel.bottomAnchor, left: leftAnchor,right: rightAnchor, paddingTop: 12, paddingLeft: 12, paddingRight: 12)
-        
-        addSubview(serParteButton)
-        serParteButton.anchor(top: descriptionLabel.bottomAnchor, left: leftAnchor, paddingTop: 12, paddingLeft: 12)
     }
     
     required init?(coder: NSCoder) {
@@ -78,8 +59,11 @@ class NewsCollectionViewCell: UICollectionViewCell {
     
     public func configureCell(with model:News){
         guard let urlString = URL(string: "\(model.image ?? "")") else {return}
-        self.frontImageView.load(url: urlString)
-        nameLabel.text = model.name
-        descriptionLabel.text = model.content
+        DispatchQueue.main.async { [weak self] in
+            self?.frontImageView.load(url: urlString)
+            self?.nameLabel.text = model.name
+            self?.descriptionLabel.text = model.content
+        }
+        
     }
 }

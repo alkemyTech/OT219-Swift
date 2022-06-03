@@ -24,7 +24,7 @@ class HomeViewModel {
     
     private var sectionsTitles = ["News"]
     
-    private var news = [News]()
+    var news = [News]()
     
     private var timer : Timer?
     

@@ -31,6 +31,7 @@ class Test_Home_ViewModel: XCTestCase {
         wait(for: [expectation], timeout: 5)
         
         XCTAssertNotNil(sut.getNewsCount)
+        XCTAssertNotNil(sut.news)
     }
 
 }

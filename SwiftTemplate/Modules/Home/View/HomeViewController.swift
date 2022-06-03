@@ -8,8 +8,6 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-
-    
     
     //MARK: - Properties
     
@@ -20,9 +18,8 @@ class HomeViewController: UIViewController {
         return homeViewModel
     }()
     
-    private lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        //layout.itemSize = CGSize(width: view.frame.width, height: 500)
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero	, collectionViewLayout: layout)
         collectionView.register(NewsCollectionViewCell.self, forCellWithReuseIdentifier: NewsCollectionViewCell.identifier)
@@ -47,6 +44,22 @@ class HomeViewController: UIViewController {
         return imageView
     }()
     
+    private var serParteButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = UIColor.white
+        button.setTitle("¡Quiero ser parte!", for: .normal)
+        button.backgroundColor = UIColor(named: "ButtonColor")
+        button.setDimensions(height: 50, width: 200)
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
+        button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        button.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        button.layer.shadowOpacity = 1.0
+        button.layer.shadowRadius = 0.0
+        button.layer.masksToBounds = false
+        button.layer.cornerRadius = 10.0
+        return button
+    }()
+    
     //MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -57,6 +70,7 @@ class HomeViewController: UIViewController {
         view.addSubview(logoImage)
         view.addSubview(collectionView)
         view.addSubview(newsHeader)
+        view.addSubview(serParteButton)
         
         
         logoImage.anchor(top: view.safeAreaLayoutGuide.topAnchor)
@@ -67,7 +81,9 @@ class HomeViewController: UIViewController {
         newsHeader.centerX(inView: view)
         
         collectionView.anchor(top: newsHeader.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 12)
-        collectionView.setHeight(600)
+        collectionView.setHeight(400)
+        
+        serParteButton.anchor(top: collectionView.bottomAnchor, left: view.leftAnchor, paddingTop: 12, paddingLeft: 12)
         
         
         viewModel.getNewsData()
@@ -86,7 +102,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 600)
+        return CGSize(width: view.frame.width, height: 400)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
