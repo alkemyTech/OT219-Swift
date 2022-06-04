@@ -52,7 +52,26 @@ class ContainerController: UIViewController {
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseOut) {
                 self.centerController.view.frame.origin.x = 0
             } completion: { (_) in
+                guard let menuOption = menuOption else {return}
+                self.didSelectMenuOption(menuOption: menuOption)
             }
+        }
+    }
+    
+    func didSelectMenuOption(menuOption: MenuOption) {
+        switch menuOption {
+        case .Inicio:
+            print("Inicio")
+        case .Nosotros:
+            print("Nosotros")
+        case .Novedades:
+            print("Novedades")
+        case .Testimonios:
+            print("Testimonios")
+        case .Contacto:
+            print("Contacto")
+        case .Contribuye:
+            print("Contribuye")
         }
     }
 }
