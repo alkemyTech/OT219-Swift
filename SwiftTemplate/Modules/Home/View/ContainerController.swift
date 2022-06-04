@@ -41,7 +41,7 @@ class ContainerController: UIViewController {
         }
     }
     
-    func animatePanel(shouldExpand: Bool) {
+    func animatePanel(shouldExpand: Bool, menuOption: MenuOption?) {
         if shouldExpand {
             //show menu
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
@@ -58,11 +58,11 @@ class ContainerController: UIViewController {
 }
 
 extension ContainerController: HomeViewControllerDelegate {
-    func handleMenuToggle() {
+    func handleMenuToggle(forMenuOption menuOption: MenuOption?) {
         if !isExpanded {
             configureMenuController()
         }
         isExpanded.toggle()
-        animatePanel(shouldExpand: isExpanded)
+        animatePanel(shouldExpand: isExpanded, menuOption: menuOption)
     }
 }

@@ -20,7 +20,7 @@ class HomeViewController: UIViewController {
     
     //MARK: - Handlers
     @objc func handleMenuToggle() {
-        delegate?.handleMenuToggle()
+        delegate?.handleMenuToggle(forMenuOption: nil)
     }
     
     func configureNavigationBar() {
@@ -32,5 +32,5 @@ class HomeViewController: UIViewController {
 }
 
 protocol HomeViewControllerDelegate {
-    func handleMenuToggle()
+        func handleMenuToggle(forMenuOption menuOption: MenuOption?)
 }
