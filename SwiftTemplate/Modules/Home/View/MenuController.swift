@@ -19,6 +19,14 @@ class MenuController: UIViewController {
         return view
     }()
     
+    private let logoImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "LOGO-SOMOS MAS")
+        image.contentMode = .scaleAspectFill
+        return image
+    }()
+    
+    
     var tableView: UITableView!
     var delegate: HomeViewControllerDelegate?
     
@@ -34,5 +42,10 @@ class MenuController: UIViewController {
         //set menuView
         view.addSubview(menuView)
         menuView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
+        menuView.addSubview(logoImage)
+        //set logoImage
+        logoImage.centerX(inView: menuView)
+        logoImage.setDimensions(height: 100, width: 150)
+        logoImage.anchor(top: menuView.safeAreaLayoutGuide.topAnchor, paddingTop: -20)
     }
 }
