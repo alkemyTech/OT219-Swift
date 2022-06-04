@@ -25,4 +25,12 @@ enum MenuOption: Int, CustomStringConvertible {
             case .Contribuye: return "Contribuye"
         }
     }
+    
+    static let countCases: Int = {
+        var i = 0
+        while (MenuOption(rawValue: i) != nil) {
+            i+=1
+        }
+        return i
+    }()
 }

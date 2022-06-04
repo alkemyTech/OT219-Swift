@@ -7,15 +7,19 @@
 
 import UIKit
 
-private let reuseIdentifier = "MenuOptionCell"
 
 class MenuController: UIViewController {
     //MARK: - Properties
+    
+    private let reuseIdentifier = "MenuOptionCell"
+    
+    var tableView: UITableView!
+    var delegate: HomeViewControllerDelegate?
 
     lazy var menuView: UIView = {
         let view = UIView()
         view.backgroundColor = .lightGray
-        self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width-150, height: self.view.frame.height)
+        self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width - 150, height: self.view.frame.height)
         return view
     }()
     
@@ -25,9 +29,6 @@ class MenuController: UIViewController {
         image.contentMode = .scaleAspectFill
         return image
     }()
-
-    var tableView: UITableView!
-    var delegate: HomeViewControllerDelegate?
     
     //MARK: - Init
     override func viewDidLoad() {
@@ -65,7 +66,7 @@ class MenuController: UIViewController {
 
 extension MenuController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return MenuOption.countCases
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

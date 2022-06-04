@@ -7,9 +7,13 @@
 
 import UIKit
 
+protocol HomeViewControllerDelegate: AnyObject {
+    func handleMenuToggle(forMenuOption menuOption: MenuOption?)
+}
+
 class HomeViewController: UIViewController {
     //MARK: - Properties
-    var delegate: HomeViewControllerDelegate?
+    weak var delegate: HomeViewControllerDelegate?
     
     //MARK: - Init
     override func viewDidLoad() {
@@ -31,6 +35,5 @@ class HomeViewController: UIViewController {
     }
 }
 
-protocol HomeViewControllerDelegate {
-        func handleMenuToggle(forMenuOption menuOption: MenuOption?)
-}
+
+
