@@ -73,17 +73,17 @@ class ContainerController: UIViewController {
     func didSelectMenuOption(menuOption: MenuOption) {
         switch menuOption {
         case .Inicio:
-            print("Inicio")
+            showToast(message: "Inicio", font: UIFont.systemFont(ofSize: 20))
         case .Nosotros:
-            print("Nosotros")
+            showToast(message: "Nosotros", font: UIFont.systemFont(ofSize: 20))
         case .Novedades:
-            print("Novedades")
+            showToast(message: "Novedades", font: UIFont.systemFont(ofSize: 20))
         case .Testimonios:
-            print("Testimonios")
+            showToast(message: "Testimonios", font: UIFont.systemFont(ofSize: 20))
         case .Contacto:
-            print("Contacto")
+            showToast(message: "Contacto", font: UIFont.systemFont(ofSize: 20))
         case .Contribuye:
-            print("Contribuye")
+            showToast(message: "Contribuye", font: UIFont.systemFont(ofSize: 20))
         }
     }
     
@@ -91,6 +91,24 @@ class ContainerController: UIViewController {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options:.curveEaseInOut, animations: {
             self.setNeedsStatusBarAppearanceUpdate()
         }, completion: nil)
+    }
+    
+    func showToast(message : String, font: UIFont) {
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 90, y: self.view.frame.size.height-100, width: 180, height: 42))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        toastLabel.textColor = UIColor.white
+        toastLabel.font = font
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        toastLabel.textAlignment = .center;
+        UIView.animate(withDuration: 2.0, delay: 0, options: .curveEaseInOut, animations: {
+             toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
     }
 }
 
