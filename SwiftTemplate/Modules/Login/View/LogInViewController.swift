@@ -53,18 +53,14 @@ class LogInViewController: UIViewController {
 //MARK: - LoginViewModelDelegate
 
 extension LogInViewController: LoginViewModelDelegate{
-    func showErrorLogin(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Aceptar", style: .cancel))
-        present(alert, animated: true)
-    }
-    
     func didSuccessUserLogin() {
         print("logueado")
     }
     
     func didFailUserLogin(error: String) {
-        print(error)
+        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: .cancel))
+        present(alert, animated: true)
     }
     
     

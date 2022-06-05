@@ -10,7 +10,6 @@ import Foundation
 protocol LoginViewModelDelegate: AnyObject{
     func didSuccessUserLogin()
     func didFailUserLogin(error: String)
-    func showErrorLogin(message: String)
 }
 
 class LoginViewModel{
@@ -28,7 +27,6 @@ class LoginViewModel{
             self?.delegate?.didSuccessUserLogin()
         } onError: { [weak self] error in
             self?.delegate?.didFailUserLogin(error: error)
-            self?.delegate?.showErrorLogin(message: error)
         }
 
     }
