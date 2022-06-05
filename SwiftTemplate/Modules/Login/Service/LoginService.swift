@@ -23,7 +23,7 @@ struct LoginService {
         
         let params = ["email": email, "password": password]
         
-        ApiManager.shared.loginUser(url: "\(baseURL)\(endpointLogin)", params: params) { response in
+        ApiManager.shared.post(url: "\(baseURL)\(endpointLogin)", params: params) { response in
             switch response{
             case .success(let data):
                 do{

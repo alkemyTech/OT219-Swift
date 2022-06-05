@@ -18,8 +18,15 @@
 		4054DF89283EE18F00E781B6 /* SignUpManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DF88283EE18F00E781B6 /* SignUpManager.swift */; };
 		4054DFAB283FEE9000E781B6 /* ServiceManagerSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DFAA283FEE8F00E781B6 /* ServiceManagerSingleton.swift */; };
 		A6470E527C25B4694F07B987 /* Pods_SwiftTemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19DC9E1E40C36079E44F490A /* Pods_SwiftTemplate.framework */; };
+		F649B7922847CF5700541235 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F649B7912847CF5700541235 /* HomeViewController.swift */; };
+		F649B7962847FF4700541235 /* SeeMoreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F649B7952847FF4700541235 /* SeeMoreCollectionViewCell.swift */; };
+		F649B798284860D100541235 /* Test_Home_ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F649B797284860D100541235 /* Test_Home_ViewModel.swift */; };
+		F66387F22846791000E078BF /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66387F12846791000E078BF /* HomeViewModel.swift */; };
+		F66387F92846AE8F00E078BF /* NewsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66387F82846AE8F00E078BF /* NewsCollectionViewCell.swift */; };
 		F66A1738283DCF6A0064DD56 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		F66A1739283DCF6A0064DD56 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		F6C342C22845BF2D005F877F /* NewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C342C12845BF2D005F877F /* NewsResponse.swift */; };
+		F6C342C42845C18E005F877F /* NewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C342C32845C18E005F877F /* NewsService.swift */; };
 		F6EDEF1F2845227100BB49B9 /* Test_API_Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EDEF1E2845227100BB49B9 /* Test_API_Login.swift */; };
 		F6EDEF332845236C00BB49B9 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EDEF222845236C00BB49B9 /* LoginViewModel.swift */; };
 		F6EDEF342845236C00BB49B9 /* LoginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EDEF242845236C00BB49B9 /* LoginUser.swift */; };
@@ -57,7 +64,14 @@
 		4054DFAA283FEE8F00E781B6 /* ServiceManagerSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManagerSingleton.swift; sourceTree = "<group>"; };
 		54065947B66C7BED0004E9F4 /* Pods-SwiftTemplate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftTemplate.release.xcconfig"; path = "Target Support Files/Pods-SwiftTemplate/Pods-SwiftTemplate.release.xcconfig"; sourceTree = "<group>"; };
 		A44B2E4CE22C626FA79CD586 /* Pods-SwiftTemplate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftTemplate.debug.xcconfig"; path = "Target Support Files/Pods-SwiftTemplate/Pods-SwiftTemplate.debug.xcconfig"; sourceTree = "<group>"; };
-		F6EDEF152845225B00BB49B9 /* Test_API_Login.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Test_API_Login.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F649B7912847CF5700541235 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		F649B7952847FF4700541235 /* SeeMoreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMoreCollectionViewCell.swift; sourceTree = "<group>"; };
+		F649B797284860D100541235 /* Test_Home_ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_Home_ViewModel.swift; sourceTree = "<group>"; };
+		F66387F12846791000E078BF /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		F66387F82846AE8F00E078BF /* NewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCollectionViewCell.swift; sourceTree = "<group>"; };
+		F6C342C12845BF2D005F877F /* NewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsResponse.swift; sourceTree = "<group>"; };
+		F6C342C32845C18E005F877F /* NewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsService.swift; sourceTree = "<group>"; };
+		F6EDEF152845225B00BB49B9 /* Test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Test.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6EDEF1E2845227100BB49B9 /* Test_API_Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Test_API_Login.swift; sourceTree = "<group>"; };
 		F6EDEF222845236C00BB49B9 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		F6EDEF242845236C00BB49B9 /* LoginUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
@@ -92,7 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				03398C5E27DFDFCC001BC793 /* SwiftTemplate */,
-				F6EDEF162845225B00BB49B9 /* Test_API_Login */,
+				F6EDEF162845225B00BB49B9 /* Test */,
 				03398C5D27DFDFCC001BC793 /* Products */,
 				3DB6AFA112805A9E1C12E06A /* Pods */,
 				D09B5ACF9F2EC811C05BA0E5 /* Frameworks */,
@@ -103,7 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				03398C5C27DFDFCC001BC793 /* SwiftTemplate.app */,
-				F6EDEF152845225B00BB49B9 /* Test_API_Login.xctest */,
+				F6EDEF152845225B00BB49B9 /* Test.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -153,6 +167,7 @@
 		03C194392844E2F300D0D6CE /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				F6C342BC2845BE72005F877F /* Home */,
 				F6EDEF202845236C00BB49B9 /* Login */,
 				0394793C283ECC47000E75C8 /* Signup */,
 			);
@@ -202,12 +217,66 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F6EDEF162845225B00BB49B9 /* Test_API_Login */ = {
+		F66387F52846865800E078BF /* News */ = {
+			isa = PBXGroup;
+			children = (
+				F66387F82846AE8F00E078BF /* NewsCollectionViewCell.swift */,
+				F649B7952847FF4700541235 /* SeeMoreCollectionViewCell.swift */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		F6C342BC2845BE72005F877F /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				F6C342BE2845BE86005F877F /* Model */,
+				F6C342BF2845BE8D005F877F /* View */,
+				F6C342BD2845BE7F005F877F /* ViewModel */,
+				F6C342C02845BE96005F877F /* Service */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		F6C342BD2845BE7F005F877F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F66387F12846791000E078BF /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F6C342BE2845BE86005F877F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F6C342C12845BF2D005F877F /* NewsResponse.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F6C342BF2845BE8D005F877F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F649B7912847CF5700541235 /* HomeViewController.swift */,
+				F66387F52846865800E078BF /* News */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F6C342C02845BE96005F877F /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				F6C342C32845C18E005F877F /* NewsService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		F6EDEF162845225B00BB49B9 /* Test */ = {
 			isa = PBXGroup;
 			children = (
 				F6EDEF1E2845227100BB49B9 /* Test_API_Login.swift */,
+				F649B797284860D100541235 /* Test_Home_ViewModel.swift */,
 			);
-			path = Test_API_Login;
+			path = Test;
 			sourceTree = "<group>";
 		};
 		F6EDEF202845236C00BB49B9 /* Login */ = {
@@ -294,9 +363,9 @@
 			productReference = 03398C5C27DFDFCC001BC793 /* SwiftTemplate.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F6EDEF142845225B00BB49B9 /* Test_API_Login */ = {
+		F6EDEF142845225B00BB49B9 /* Test */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F6EDEF1B2845225B00BB49B9 /* Build configuration list for PBXNativeTarget "Test_API_Login" */;
+			buildConfigurationList = F6EDEF1B2845225B00BB49B9 /* Build configuration list for PBXNativeTarget "Test" */;
 			buildPhases = (
 				F6EDEF112845225B00BB49B9 /* Sources */,
 				F6EDEF122845225B00BB49B9 /* Frameworks */,
@@ -307,9 +376,9 @@
 			dependencies = (
 				F6EDEF1A2845225B00BB49B9 /* PBXTargetDependency */,
 			);
-			name = Test_API_Login;
+			name = Test;
 			productName = Test_API_Login;
-			productReference = F6EDEF152845225B00BB49B9 /* Test_API_Login.xctest */;
+			productReference = F6EDEF152845225B00BB49B9 /* Test.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -345,7 +414,7 @@
 			projectRoot = "";
 			targets = (
 				03398C5B27DFDFCC001BC793 /* SwiftTemplate */,
-				F6EDEF142845225B00BB49B9 /* Test_API_Login */,
+				F6EDEF142845225B00BB49B9 /* Test */,
 			);
 		};
 /* End PBXProject section */
@@ -423,13 +492,19 @@
 				4054DF89283EE18F00E781B6 /* SignUpManager.swift in Sources */,
 				03947947283ECCBE000E75C8 /* Extensions.swift in Sources */,
 				4054DFAB283FEE9000E781B6 /* ServiceManagerSingleton.swift in Sources */,
+				F649B7962847FF4700541235 /* SeeMoreCollectionViewCell.swift in Sources */,
+				F649B7922847CF5700541235 /* HomeViewController.swift in Sources */,
 				4054DF83283EDE8300E781B6 /* NewUser.swift in Sources */,
 				F6EDEF402845236C00BB49B9 /* LoginService.swift in Sources */,
+				F6C342C22845BF2D005F877F /* NewsResponse.swift in Sources */,
+				F6C342C42845C18E005F877F /* NewsService.swift in Sources */,
 				4054DF81283EDE6F00E781B6 /* UserRegisterData.swift in Sources */,
 				F6EDEF462845252100BB49B9 /* ApiManager.swift in Sources */,
 				F6EDEF3F2845236C00BB49B9 /* LogInViewController.swift in Sources */,
 				03398C6027DFDFCC001BC793 /* AppDelegate.swift in Sources */,
 				F6EDEF332845236C00BB49B9 /* LoginViewModel.swift in Sources */,
+				F66387F22846791000E078BF /* HomeViewModel.swift in Sources */,
+				F66387F92846AE8F00E078BF /* NewsCollectionViewCell.swift in Sources */,
 				F6EDEF342845236C00BB49B9 /* LoginUser.swift in Sources */,
 				F66A1738283DCF6A0064DD56 /* (null) in Sources */,
 				4054DF85283EDF0C00E781B6 /* SignUpViewModel.swift in Sources */,
@@ -442,6 +517,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6EDEF1F2845227100BB49B9 /* Test_API_Login.swift in Sources */,
+				F649B798284860D100541235 /* Test_Home_ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,6 +658,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftTemplate/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -609,6 +686,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftTemplate/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -685,7 +763,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F6EDEF1B2845225B00BB49B9 /* Build configuration list for PBXNativeTarget "Test_API_Login" */ = {
+		F6EDEF1B2845225B00BB49B9 /* Build configuration list for PBXNativeTarget "Test" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F6EDEF1C2845225B00BB49B9 /* Debug */,
