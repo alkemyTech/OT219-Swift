@@ -12,10 +12,18 @@ class MockNewsServiceSuccess: NewsFetching{
     
     func fetchNews(onComplete: @escaping ([News]) -> (), onError: @escaping (String) -> ()) {
         
-        let news1 = News(id: 1, name: "Prueba", content: nil, image: nil, categoryID: nil, createdAt: "1", updatedAt: "2", groupID: nil)
-        let news2 = News(id: 2, name: "Prueba", content: nil, image: nil, categoryID: nil, createdAt: "1", updatedAt: "2", groupID: nil)
-        let newsArray = [news1, news2]
+        let url = Bundle.main.url(forResource: "NewsMock", withExtension: "json")
+        print(url)
+        do{
+            let decoder = JSONDecoder()
+            let jsonData = try Data(contentsOf: url!)
+            let model = try decoder.decode(NewsResponse.self, from: jsonData)
+            onComplete(model.data)
+        } catch{
+            onError("")
+        }
+        
+        
 
-            onComplete(newsArray)
     }
 }

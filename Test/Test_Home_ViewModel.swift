@@ -25,12 +25,17 @@ class Test_Home_ViewModel: XCTestCase {
         sut = HomeViewModel(newsService: mock)
         let expectation = XCTestExpectation(description: "Should return data")
         
-        sut.getNewsData()
-        expectation.fulfill()
+        sut.newsService.fetchNews { news in
+            XCTAssertTrue(news.count > 0)
+            expectation.fulfill()
+        } onError: { error in
+            XCTAssertTrue(error.isEmpty)
+            expectation.fulfill()
+        }
         
-        wait(for: [expectation], timeout: 5)
-        XCTAssertEqual(sut.getNewsCount(), 2)
-        XCTAssertEqual(sut.news[1].name, "Prueba")
+        wait(for: [expectation], timeout: 3)
+        
+
     }
     
     func test_HomeViewModel_GetsNewsData_ShouldShowError(){
