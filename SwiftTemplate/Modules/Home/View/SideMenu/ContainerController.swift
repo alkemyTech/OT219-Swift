@@ -16,6 +16,7 @@ class ContainerController: UIViewController {
     //MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         configureHomeController()
     }
     
