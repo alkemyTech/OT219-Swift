@@ -1,16 +1,19 @@
-//
 //  PruebaViewController.swift
 //  SwiftTemplate
 //
 //  Created by Cristian Sancricca on 01/06/2022.
-//
 
 import UIKit
+
+protocol HomeViewControllerDelegate: AnyObject {
+    func handleMenuToggle(forMenuOption menuOption: MenuOption?)
+}
 
 class HomeViewController: UIViewController {
     
     //MARK: - Properties
-    
+    weak var delegate: HomeViewControllerDelegate?
+
     lazy var viewModel: HomeViewModel = {
         let homeViewModel = HomeViewModel()
         homeViewModel.delegate = self
@@ -64,6 +67,8 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureNavigationBar()
 
         view.backgroundColor = .white
         
@@ -91,6 +96,17 @@ class HomeViewController: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+    }
+    
+    @objc func handleMenuToggle() {
+        delegate?.handleMenuToggle(forMenuOption: nil)
+    }
+    
+    func configureNavigationBar() {
+        navigationController?.navigationBar.barTintColor = .darkGray
+        navigationController?.navigationBar.barStyle = .black
+        navigationItem.title = "Home"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenuToggle))
     }
 }
 
@@ -156,4 +172,3 @@ extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
         }
     }
 }
-
