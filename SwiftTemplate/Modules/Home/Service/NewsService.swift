@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct NewsService {
+protocol NewsFetching {
+    func fetchNews(onComplete: @escaping ([News]) -> (), onError: @escaping (String) -> ())
+}
+
+struct NewsService: NewsFetching {
     
     static let shared = NewsService()
     

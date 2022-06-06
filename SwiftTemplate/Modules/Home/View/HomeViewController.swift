@@ -12,7 +12,7 @@ class HomeViewController: UIViewController {
     //MARK: - Properties
     
     lazy var viewModel: HomeViewModel = {
-        let homeViewModel = HomeViewModel()
+        let homeViewModel = HomeViewModel(newsFetching: NewsService())
         homeViewModel.delegate = self
         homeViewModel.delegateTimer = self
         return homeViewModel
@@ -144,7 +144,8 @@ extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
         }
     }
     
-    func didFailGettingNewsData() {
+    func didFailGettingNewsData(error: String) {
+        print(error)
         DispatchQueue.main.async { [weak self] in
             self?.collectionView.isHidden = true
         }
