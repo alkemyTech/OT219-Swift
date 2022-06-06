@@ -22,7 +22,7 @@ class Test_Home_ViewModel: XCTestCase {
 
     func test_HomeViewModel_GetsNewsData_ShouldReturnData(){
         let mock = MockNewsServiceSuccess()
-        sut = HomeViewModel(newsFetching: mock)
+        sut = HomeViewModel(newsService: mock)
         let expectation = XCTestExpectation(description: "Should return data")
         
         sut.getNewsData()
@@ -35,7 +35,7 @@ class Test_Home_ViewModel: XCTestCase {
     
     func test_HomeViewModel_GetsNewsData_ShouldShowError(){
         let mock = MockNewsServiceFail()
-        sut = HomeViewModel(newsFetching: mock)
+        sut = HomeViewModel(newsService: mock)
         
         let expectation = XCTestExpectation(description: "Should return error")
         

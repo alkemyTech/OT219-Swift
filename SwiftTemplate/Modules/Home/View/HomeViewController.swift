@@ -12,7 +12,7 @@ class HomeViewController: UIViewController {
     //MARK: - Properties
     
     lazy var viewModel: HomeViewModel = {
-        let homeViewModel = HomeViewModel(newsFetching: NewsService())
+        let homeViewModel = HomeViewModel()
         homeViewModel.delegate = self
         homeViewModel.delegateTimer = self
         return homeViewModel

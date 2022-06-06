@@ -34,8 +34,8 @@ class HomeViewModel {
     
     var newsService: NewsFetching
     
-    init(newsFetching: NewsFetching){
-        newsService = newsFetching
+    init(newsService: NewsFetching = NewsService()){
+        self.newsService = newsService
     }
     
     func getNewsData(){
