@@ -14,6 +14,10 @@
 		03947947283ECCBE000E75C8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03947946283ECCBE000E75C8 /* Extensions.swift */; };
 		0959EFB92847A1FA003FAEF0 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0959EFB82847A1FA003FAEF0 /* WelcomeViewController.swift */; };
 		0959EFBB2847A6FC003FAEF0 /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0959EFBA2847A6FC003FAEF0 /* CollectionTableViewCell.swift */; };
+		09914A02284DB90A00D084B5 /* TitleCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09914A00284DB90A00D084B5 /* TitleCollectionViewCellViewModel.swift */; };
+		09914A03284DB90A00D084B5 /* CollectionTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09914A01284DB90A00D084B5 /* CollectionTableViewCellViewModel.swift */; };
+		09914A05284DB92600D084B5 /* TitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09914A04284DB92600D084B5 /* TitleCollectionViewCell.swift */; };
+		09914A07284DB94400D084B5 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09914A06284DB94400D084B5 /* WelcomeViewModel.swift */; };
 		4054DF81283EDE6F00E781B6 /* UserRegisterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DF80283EDE6F00E781B6 /* UserRegisterData.swift */; };
 		4054DF83283EDE8300E781B6 /* NewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DF82283EDE8300E781B6 /* NewUser.swift */; };
 		4054DF85283EDF0C00E781B6 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DF84283EDF0C00E781B6 /* SignUpViewModel.swift */; };
@@ -53,6 +57,10 @@
 		03947946283ECCBE000E75C8 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0959EFB82847A1FA003FAEF0 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		0959EFBA2847A6FC003FAEF0 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
+		09914A00284DB90A00D084B5 /* TitleCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		09914A01284DB90A00D084B5 /* CollectionTableViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		09914A04284DB92600D084B5 /* TitleCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewCell.swift; sourceTree = "<group>"; };
+		09914A06284DB94400D084B5 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
 		19DC9E1E40C36079E44F490A /* Pods_SwiftTemplate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftTemplate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4054DF80283EDE6F00E781B6 /* UserRegisterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterData.swift; sourceTree = "<group>"; };
 		4054DF82283EDE8300E781B6 /* NewUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUser.swift; sourceTree = "<group>"; };
@@ -167,6 +175,7 @@
 		0959EFAD2847085F003FAEF0 /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
+				099149FF284DB90A00D084B5 /* Model */,
 				0959EFB22847129B003FAEF0 /* View */,
 				0959EFB3284712AB003FAEF0 /* ViewModel */,
 			);
@@ -176,6 +185,7 @@
 		0959EFB22847129B003FAEF0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				09914A04284DB92600D084B5 /* TitleCollectionViewCell.swift */,
 				0959EFB82847A1FA003FAEF0 /* WelcomeViewController.swift */,
 				0959EFBA2847A6FC003FAEF0 /* CollectionTableViewCell.swift */,
 			);
@@ -185,8 +195,18 @@
 		0959EFB3284712AB003FAEF0 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				09914A06284DB94400D084B5 /* WelcomeViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		099149FF284DB90A00D084B5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				09914A00284DB90A00D084B5 /* TitleCollectionViewCellViewModel.swift */,
+				09914A01284DB90A00D084B5 /* CollectionTableViewCellViewModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		3DB6AFA112805A9E1C12E06A /* Pods */ = {
@@ -447,6 +467,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03947942283ECC47000E75C8 /* SignupViewController.swift in Sources */,
+				09914A07284DB94400D084B5 /* WelcomeViewModel.swift in Sources */,
 				F6EDEF422845238300BB49B9 /* ApiError.swift in Sources */,
 				F6EDEF352845236C00BB49B9 /* LoginUserResponse.swift in Sources */,
 				F66A1739283DCF6A0064DD56 /* (null) in Sources */,
@@ -456,10 +477,13 @@
 				4054DF83283EDE8300E781B6 /* NewUser.swift in Sources */,
 				F6EDEF402845236C00BB49B9 /* LoginService.swift in Sources */,
 				4054DF81283EDE6F00E781B6 /* UserRegisterData.swift in Sources */,
+				09914A03284DB90A00D084B5 /* CollectionTableViewCellViewModel.swift in Sources */,
 				F6EDEF462845252100BB49B9 /* ApiManager.swift in Sources */,
+				09914A02284DB90A00D084B5 /* TitleCollectionViewCellViewModel.swift in Sources */,
 				F6EDEF3F2845236C00BB49B9 /* LogInViewController.swift in Sources */,
 				03398C6027DFDFCC001BC793 /* AppDelegate.swift in Sources */,
 				F6EDEF332845236C00BB49B9 /* LoginViewModel.swift in Sources */,
+				09914A05284DB92600D084B5 /* TitleCollectionViewCell.swift in Sources */,
 				F6EDEF342845236C00BB49B9 /* LoginUser.swift in Sources */,
 				0959EFBB2847A6FC003FAEF0 /* CollectionTableViewCell.swift in Sources */,
 				F66A1738283DCF6A0064DD56 /* (null) in Sources */,
