@@ -28,6 +28,7 @@ class HomeViewController: UIViewController {
         collectionView.register(NewsCollectionViewCell.self, forCellWithReuseIdentifier: NewsCollectionViewCell.identifier)
         collectionView.register(SeeMoreCollectionViewCell.self, forCellWithReuseIdentifier: SeeMoreCollectionViewCell.identifier)
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isHidden = true
         return collectionView
     }()
     
@@ -60,6 +61,7 @@ class HomeViewController: UIViewController {
         button.layer.shadowRadius = 0.0
         button.layer.masksToBounds = false
         button.layer.cornerRadius = 10.0
+        button.isHidden = true
         return button
     }()
     
@@ -107,6 +109,19 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.barStyle = .black
         navigationItem.title = "Home"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenuToggle))
+    }
+    
+    func showMessageError(message: String){
+        let alert = UIAlertController(title: "Fail", message: message, preferredStyle: .alert)
+        let actionRetry = UIAlertAction(title: "Retry?", style: .default) { [weak self] _ in
+            self?.viewModel.getNewsData()
+        }
+        let actionCancel = UIAlertAction(title: "Cancel", style: .destructive)
+        
+        alert.addAction(actionRetry)
+        alert.addAction(actionCancel)
+        
+        present(alert, animated: true)
     }
 }
 
@@ -157,12 +172,17 @@ extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
     func didGetNewsData() {
         DispatchQueue.main.async { [weak self] in
             self?.collectionView.reloadData()
+            self?.serParteButton.isHidden = false
+            self?.collectionView.isHidden = false
         }
     }
     
-    func didFailGettingNewsData() {
+    func didFailGettingNewsData(error: String) {
         DispatchQueue.main.async { [weak self] in
             self?.collectionView.isHidden = true
+            self?.serParteButton.isHidden = true
+            self?.viewModel.stopTimer()
+            self?.showMessageError(message: error)
         }
     }
     

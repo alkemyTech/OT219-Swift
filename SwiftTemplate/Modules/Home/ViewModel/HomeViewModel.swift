@@ -9,7 +9,7 @@ import Foundation
 
 protocol HomeViewModelDelegate: AnyObject {
     func didGetNewsData()
-    func didFailGettingNewsData()
+    func didFailGettingNewsData(error: String)
 }
 
 protocol TimerNewsUpdate: AnyObject {
@@ -34,9 +34,9 @@ class HomeViewModel {
         DispatchQueue.global().async {
             NewsService.shared.fetchNews { [weak self] news in
                 self?.news = news
-                self?.getNewsCount() == 0 ? self?.delegate?.didFailGettingNewsData() : self?.delegate?.didGetNewsData()
+                self?.getNewsCount() == 0 ? self?.delegate?.didFailGettingNewsData(error: ApiError.noNewsData.errorDescription!) : self?.delegate?.didGetNewsData()
             } onError: { [weak self] error in
-                self?.delegate?.didFailGettingNewsData()
+                self?.delegate?.didFailGettingNewsData(error: error)
             }
         }
     }
@@ -55,6 +55,11 @@ class HomeViewModel {
     
     func startTimer(){
         timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveNextIndex), userInfo: nil, repeats: true)
+    }
+    
+    func stopTimer(){
+        timer?.invalidate()
+        timer = nil
     }
     
     @objc func moveNextIndex(){
