@@ -58,7 +58,9 @@ extension LogInViewController: LoginViewModelDelegate{
     }
     
     func didFailUserLogin(error: String) {
-        print(error)
+        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: .cancel))
+        present(alert, animated: true)
     }
     
     
