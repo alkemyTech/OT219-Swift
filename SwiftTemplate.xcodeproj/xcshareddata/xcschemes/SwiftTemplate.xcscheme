@@ -67,6 +67,11 @@
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
+            key = "endpoint.News"
+            value = "api/news"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
             key = "baseURL"
             value = "https://ongapi.alkemy.org/"
             isEnabled = "YES">

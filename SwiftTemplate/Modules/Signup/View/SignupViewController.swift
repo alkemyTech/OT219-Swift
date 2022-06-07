@@ -88,6 +88,13 @@ class SignupViewController: UIViewController {
         return textField
     }()
     
+    private let labelSamePassword: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 30, height: 15))
+        label.text = "Passwords are not the same"
+        label.isHidden = true
+        return label
+    }()
+    
     private let signupButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
@@ -116,6 +123,10 @@ class SignupViewController: UIViewController {
         setupGradientLayer()
         setupView()
         setupObserverKeyboard()
+  
+        configurationButton()
+        viewModel = SignUpViewModel()
+        viewModel?.delegate = self
 //
 //        lazy var viewModel: SignUpViewModel = {
 //            let signUpViewModel = SignUpViewModel()
@@ -129,6 +140,11 @@ class SignupViewController: UIViewController {
 
     //MARK: - Helpers
     
+    func configurationButton(){
+        signupButton.backgroundColor = .gray
+        signupButton.isEnabled = false
+    }
+    
     private func setupView(){
         view.addSubview(scrollView)
         scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
@@ -140,7 +156,7 @@ class SignupViewController: UIViewController {
         logoImage.anchor(top: scrollView.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
         
         
-        let stack = UIStackView(arrangedSubviews: [emailTextField,fullnameTextfield, passwordTextField ,reEnterPasswordTextField, signupButton])
+        let stack = UIStackView(arrangedSubviews: [emailTextField,fullnameTextfield, passwordTextField ,reEnterPasswordTextField, labelSamePassword,signupButton])
         stack.axis = .vertical
         stack.spacing = 20
         scrollView.addSubview(stack)
@@ -166,6 +182,16 @@ class SignupViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        emailTextField.addTarget(self, action: #selector(self.validateEmail), for: UIControl.Event.editingDidEnd)
+        
+        fullnameTextfield.addTarget(self, action: #selector(self.validateName), for: .editingDidEnd)
+        
+        passwordTextField.addTarget(self, action: #selector(self.validatePassword), for: .editingDidEnd)
+        
+        reEnterPasswordTextField.addTarget(self, action: #selector(self.validateSamePassword), for: .allEditingEvents)
+        
+        signupButton.addTarget(self, action: #selector(self.registerUser), for: .touchUpInside)
     }
     
     @objc func keyboardAppear(notification: NSNotification){
@@ -176,9 +202,53 @@ class SignupViewController: UIViewController {
     @objc func keyboardDisappear(){
         scrollView.contentInset.bottom = 0
     }
+    
+    @objc func validateEmail(){
+        viewModel?.validateEmail(value: emailTextField.text)
+    }
+    
+    @objc func validateName(){
+        viewModel?.validateName(value: fullnameTextfield.text)
+    }
+
+    @objc func validatePassword(){
+        viewModel?.validatePasswordA(value: passwordTextField.text)
+    }
+    
+    @objc func validateSamePassword(){
+        viewModel?.validateSamePassword(valueA: passwordTextField.text, valueB: reEnterPasswordTextField.text)
+    }
+    
+    @objc func registerUser(){
+        viewModel?.register(name: fullnameTextfield.text!, email: emailTextField.text!, pass: passwordTextField.text!)
+    }
 }
 
 extension SignupViewController: SignUpViewModelDelegate {
+    func desactivateButton() {
+        signupButton.isEnabled = false
+        signupButton.backgroundColor = .gray
+    }
+    
+    func labelPasswordNotShow() {
+        labelSamePassword.isHidden = true
+    }
+    
+    func labelPasswordShow() {
+        labelSamePassword.isHidden = false
+    }
+    
+    func activateButton() {
+        signupButton.backgroundColor = .systemBlue
+        signupButton.isEnabled = true
+    }
+    
+    func showAlertsTextFields(messages: String) {
+        let alert = UIAlertController(title: "Error", message: messages, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func userRegisterSuccess() {
         let alert = UIAlertController(title: "Usuario registrado de manera exitosa", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {(action: UIAlertAction!) in
