@@ -30,7 +30,7 @@ class ProgramsCollectionViewCell: UICollectionViewCell {
     
     private var labelTitle: UILabel = {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: .max))
-        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textColor = .black
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
@@ -63,7 +63,7 @@ class ProgramsCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(labelWelcome)
         labelWelcome.anchor(top: imageView.bottomAnchor, left: leftAnchor, paddingTop: 12, paddingLeft: 12)
         contentView.addSubview(labelTitle)
-        labelTitle.anchor(top: labelWelcome.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 12, paddingLeft: 12)
+        labelTitle.anchor(top: labelWelcome.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 10, paddingLeft: 12)
         contentView.addSubview(labelDescription)
         labelDescription.anchor(top: labelTitle.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 5, paddingLeft: 12, paddingRight: 12)
     }
@@ -71,7 +71,6 @@ class ProgramsCollectionViewCell: UICollectionViewCell {
     func configure(with viewModel: ProgramsCollectionViewCellViewModel){
         labelTitle.text = viewModel.title
         labelDescription.text = viewModel.description
-        
         imageView.image = UIImage(named: viewModel.nameImage) ?? UIImage(named: "logo-Alkemy")
     }
 }

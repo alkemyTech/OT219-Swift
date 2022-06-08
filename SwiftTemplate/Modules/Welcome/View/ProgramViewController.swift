@@ -23,7 +23,6 @@ class ProgramViewController: UIViewController{
         collectionView.register(ProgramsCollectionViewCell.self, forCellWithReuseIdentifier: ProgramsCollectionViewCell.identifier)
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
-        
     }()
     
     private var logoImage: UIImageView = {
@@ -52,6 +51,7 @@ class ProgramViewController: UIViewController{
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("program view controller")
         setupViews()
         setUpContrains()
     }

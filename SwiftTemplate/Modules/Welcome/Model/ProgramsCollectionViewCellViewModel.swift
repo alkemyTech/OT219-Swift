@@ -8,7 +8,6 @@
 import Foundation
 
 struct ProgramsCollectionViewCellViewModel{
-
     let title: String
     let description: String
     let nameImage: String

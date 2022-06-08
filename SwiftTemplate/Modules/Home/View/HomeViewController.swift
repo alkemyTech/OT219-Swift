@@ -112,7 +112,6 @@ class HomeViewController: UIViewController {
 }
 
 //MARK: - CollectionView Delegate, DataSource
-
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
        return 1
@@ -150,7 +149,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 
 //MARK: - Delegate
-
 extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
     
     func didGetNewsData() {
