@@ -7,9 +7,12 @@
 
 import UIKit
 
+
 class NosotrosViewController: UIViewController {
 
     //MARK: - Properties
+    
+    weak var delegate: HomeViewControllerDelegate?
     
     private var nosotrosHeader: UILabel = {
         let label = UILabel()
@@ -163,6 +166,7 @@ class NosotrosViewController: UIViewController {
         rightArrowImage.centerY(inView: collectionView)
         rightArrowImage.anchor(right: view.rightAnchor)
         
+        configureNavigationBar()
     }
     
 
@@ -171,6 +175,18 @@ class NosotrosViewController: UIViewController {
     @objc func pageControlTapHandler(sender: UIPageControl){
         collectionView.scrollToItem(at: IndexPath(row: sender.currentPage, section: 0), at: .left, animated: true)
     }
+    
+    func configureNavigationBar() {
+        navigationController?.navigationBar.barTintColor = .darkGray
+        navigationController?.navigationBar.barStyle = .black
+        navigationItem.title = "Nosotros"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenuToggle))
+    }
+    
+    @objc func handleMenuToggle() {
+        delegate?.handleMenuToggle(forMenuOption: nil)
+    }
+    
 
 }
 
