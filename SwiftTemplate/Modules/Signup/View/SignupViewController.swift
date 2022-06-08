@@ -10,7 +10,12 @@ import UIKit
 class SignupViewController: UIViewController {
 
     //MARK: - Properties
-    private var viewModel: SignUpViewModel?
+    private lazy var viewModel: SignUpViewModel = {
+        let viewModel = SignUpViewModel()
+        viewModel.delegate = self
+        return viewModel
+    }()
+    
     private var isKeyboardExpanded = false
     
     private let scrollView: UIScrollView = {
@@ -125,8 +130,6 @@ class SignupViewController: UIViewController {
         setupObserverKeyboard()
   
         configurationButton()
-        viewModel = SignUpViewModel()
-        viewModel?.delegate = self
 //
 //        lazy var viewModel: SignUpViewModel = {
 //            let signUpViewModel = SignUpViewModel()
@@ -204,23 +207,23 @@ class SignupViewController: UIViewController {
     }
     
     @objc func validateEmail(){
-        viewModel?.validateEmail(value: emailTextField.text)
+        viewModel.validateEmail(value: emailTextField.text)
     }
     
     @objc func validateName(){
-        viewModel?.validateName(value: fullnameTextfield.text)
+        viewModel.validateName(value: fullnameTextfield.text)
     }
 
     @objc func validatePassword(){
-        viewModel?.validatePasswordA(value: passwordTextField.text)
+        viewModel.validatePasswordA(value: passwordTextField.text)
     }
     
     @objc func validateSamePassword(){
-        viewModel?.validateSamePassword(valueA: passwordTextField.text, valueB: reEnterPasswordTextField.text)
+        viewModel.validateSamePassword(valueA: passwordTextField.text, valueB: reEnterPasswordTextField.text)
     }
     
     @objc func registerUser(){
-        viewModel?.register(name: fullnameTextfield.text!, email: emailTextField.text!, pass: passwordTextField.text!)
+        viewModel.register(name: fullnameTextfield.text!, email: emailTextField.text!, pass: passwordTextField.text!)
     }
 }
 
