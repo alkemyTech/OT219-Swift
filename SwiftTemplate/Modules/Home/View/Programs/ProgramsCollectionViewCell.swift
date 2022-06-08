@@ -9,6 +9,7 @@ import UIKit
 
 class ProgramsCollectionViewCell: UICollectionViewCell {
     //MARK: - Properties
+    
     static let identifier = "ProgramsCollectionViewCell"
     
     private var imageView: UIImageView = {
@@ -46,6 +47,7 @@ class ProgramsCollectionViewCell: UICollectionViewCell {
     }()
     
     //MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -55,7 +57,8 @@ class ProgramsCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Setup
+    //MARK: - SetupViews
+    
     func setupViews(){
         contentView.addSubview(imageView)
         imageView.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 8)
@@ -68,6 +71,7 @@ class ProgramsCollectionViewCell: UICollectionViewCell {
         labelDescription.anchor(top: labelTitle.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 5, paddingLeft: 12, paddingRight: 12)
     }
     //MARK: - Configuration CollectionViewCell
+    
     func configure(with viewModel: ProgramsCollectionViewCellViewModel){
         labelTitle.text = viewModel.title
         labelDescription.text = viewModel.description

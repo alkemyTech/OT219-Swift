@@ -27,6 +27,7 @@ class HomeViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero	, collectionViewLayout: layout)
         collectionView.register(NewsCollectionViewCell.self, forCellWithReuseIdentifier: NewsCollectionViewCell.identifier)
         collectionView.register(SeeMoreCollectionViewCell.self, forCellWithReuseIdentifier: SeeMoreCollectionViewCell.identifier)
+        collectionView.register(ProgramsCollectionViewCell.self, forCellWithReuseIdentifier: ProgramsCollectionViewCell.identifier)
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
         
@@ -114,7 +115,7 @@ class HomeViewController: UIViewController {
 //MARK: - CollectionView Delegate, DataSource
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-       return 1
+       return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -122,6 +123,14 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.row == 0 {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProgramsCollectionViewCell.identifier, for: indexPath) as? ProgramsCollectionViewCell else{
+                return UICollectionViewCell()
+            }
+            cell.configure(with: viewModel.getProgram(index: indexPath.row))
+            return cell
+        }
+        
         if indexPath.row == 3{
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SeeMoreCollectionViewCell.identifier, for: indexPath) as? SeeMoreCollectionViewCell else {
                 return UICollectionViewCell()
@@ -134,7 +143,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let new = viewModel.getNews(at: indexPath.row)
             cell.configureCell(with: new)
             return cell
-
         }
     }
     
