@@ -104,9 +104,13 @@ class NosotrosViewController: UIViewController {
     
     private var leftArrowImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(systemName: "arrow.left.circle.fill")?.withRenderingMode(.alwaysOriginal)
-        image.tintColor = .white
-        image.backgroundColor = .black
+        image.image = UIImage(systemName: "arrow.left.circle.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        return image
+    }()
+    
+    private var rightArrowImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(systemName: "arrow.right.circle.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal)
         return image
     }()
 
@@ -128,6 +132,7 @@ class NosotrosViewController: UIViewController {
         view.addSubview(collectionView)
         view.addSubview(pageControl)
         view.addSubview(leftArrowImage)
+        view.addSubview(rightArrowImage)
         
         logoImage.anchor(top: view.safeAreaLayoutGuide.topAnchor)
         logoImage.setHeight(90)
@@ -155,6 +160,8 @@ class NosotrosViewController: UIViewController {
         serParteButton.anchor(top: pageControl.bottomAnchor, left: view.leftAnchor, paddingTop: 20, paddingLeft: 12)
         
         leftArrowImage.centerY(inView: collectionView)
+        rightArrowImage.centerY(inView: collectionView)
+        rightArrowImage.anchor(right: view.rightAnchor)
         
     }
     
