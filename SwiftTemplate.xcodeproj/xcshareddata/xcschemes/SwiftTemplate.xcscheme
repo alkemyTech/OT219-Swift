@@ -72,6 +72,11 @@
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
+            key = "endpoint.Slides"
+            value = "api/slides"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
             key = "baseURL"
             value = "https://ongapi.alkemy.org/"
             isEnabled = "YES">

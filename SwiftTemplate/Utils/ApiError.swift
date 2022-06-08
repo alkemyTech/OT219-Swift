@@ -8,7 +8,7 @@
 import Foundation
 
 enum ApiError {
-    case loginError, noNewsData
+    case loginError, noNewsData, noSlidesData
 }
 
 extension ApiError: LocalizedError {
@@ -16,6 +16,7 @@ extension ApiError: LocalizedError {
         switch self {
         case .loginError : return "The email address or password you entered is invalid"
         case .noNewsData : return "News data is not available"
+        case .noSlidesData : return "Slides data is not available"
         }
     }
 }

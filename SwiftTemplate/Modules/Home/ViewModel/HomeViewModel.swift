@@ -10,6 +10,8 @@ import Foundation
 protocol HomeViewModelDelegate: AnyObject {
     func didGetNewsData()
     func didFailGettingNewsData()
+    func didGetSlidesData()
+    func didFailGettingSlidesData()
 }
 
 protocol TimerNewsUpdate: AnyObject {
@@ -65,4 +67,27 @@ class HomeViewModel {
         }
         delegateTimer?.updateImageView(at: currentCellIndex)
     }
+    
+    
+    var slides = [Slides]()
+    
+    func getSlidesData(){
+        DispatchQueue.global().async {
+            SlidesService.shared.fetchSlides { [weak self] slides in
+                self?.slides = slides
+                self?.getSlidesCount() == 0 ? self?.delegate?.didFailGettingSlidesData() : self?.delegate?.didGetSlidesData()
+            } onError: { [weak self] error in
+                self?.delegate?.didFailGettingSlidesData()
+            }
+        }
+    }
+    
+    func getSlidesCount() -> Int{
+        return slides.count
+    }
+    
+    func getSlides(at index:Int) -> Slides{
+        return slides[index]
+    }
+    
 }
