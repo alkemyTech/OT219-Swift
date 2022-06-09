@@ -1,16 +1,19 @@
-//
 //  PruebaViewController.swift
 //  SwiftTemplate
 //
 //  Created by Cristian Sancricca on 01/06/2022.
-//
 
 import UIKit
+
+protocol HomeViewControllerDelegate: AnyObject {
+    func handleMenuToggle(forMenuOption menuOption: MenuOption?)
+}
 
 class HomeViewController: UIViewController {
     
     //MARK: - Properties
-    
+    weak var delegate: HomeViewControllerDelegate?
+
     lazy var viewModel: HomeViewModel = {
         let homeViewModel = HomeViewModel()
         homeViewModel.delegate = self
@@ -25,6 +28,7 @@ class HomeViewController: UIViewController {
         collectionView.register(NewsCollectionViewCell.self, forCellWithReuseIdentifier: NewsCollectionViewCell.identifier)
         collectionView.register(SeeMoreCollectionViewCell.self, forCellWithReuseIdentifier: SeeMoreCollectionViewCell.identifier)
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isHidden = true
         return collectionView
     }()
     
@@ -57,6 +61,7 @@ class HomeViewController: UIViewController {
         button.layer.shadowRadius = 0.0
         button.layer.masksToBounds = false
         button.layer.cornerRadius = 10.0
+        button.isHidden = true
         return button
     }()
     
@@ -64,6 +69,8 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureNavigationBar()
 
         view.backgroundColor = .white
         
@@ -91,6 +98,30 @@ class HomeViewController: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+    }
+    
+    @objc func handleMenuToggle() {
+        delegate?.handleMenuToggle(forMenuOption: nil)
+    }
+    
+    func configureNavigationBar() {
+        navigationController?.navigationBar.barTintColor = .darkGray
+        navigationController?.navigationBar.barStyle = .black
+        navigationItem.title = "Home"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenuToggle))
+    }
+    
+    func showMessageError(message: String){
+        let alert = UIAlertController(title: "Fail", message: message, preferredStyle: .alert)
+        let actionRetry = UIAlertAction(title: "Retry?", style: .default) { [weak self] _ in
+            self?.viewModel.getNewsData()
+        }
+        let actionCancel = UIAlertAction(title: "Cancel", style: .destructive)
+        
+        alert.addAction(actionRetry)
+        alert.addAction(actionCancel)
+        
+        present(alert, animated: true)
     }
 }
 
@@ -141,13 +172,17 @@ extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
     func didGetNewsData() {
         DispatchQueue.main.async { [weak self] in
             self?.collectionView.reloadData()
+            self?.serParteButton.isHidden = false
+            self?.collectionView.isHidden = false
         }
     }
     
     func didFailGettingNewsData(error: String) {
-        print(error)
         DispatchQueue.main.async { [weak self] in
             self?.collectionView.isHidden = true
+            self?.serParteButton.isHidden = true
+            self?.viewModel.stopTimer()
+            self?.showMessageError(message: error)
         }
     }
     
@@ -157,4 +192,3 @@ extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
         }
     }
 }
-

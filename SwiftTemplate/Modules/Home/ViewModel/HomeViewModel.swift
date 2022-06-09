@@ -65,6 +65,11 @@ class HomeViewModel {
         timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveNextIndex), userInfo: nil, repeats: true)
     }
     
+    func stopTimer(){
+        timer?.invalidate()
+        timer = nil
+    }
+    
     @objc func moveNextIndex(){
         if currentCellIndex < 3 {
             currentCellIndex += 1
