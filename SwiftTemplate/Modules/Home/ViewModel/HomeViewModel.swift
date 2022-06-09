@@ -16,6 +16,8 @@ protocol TimerNewsUpdate: AnyObject {
     func updateImageView(at index:Int)
 }
 
+
+
 class HomeViewModel {
     
     weak var delegate: HomeViewModelDelegate?
@@ -30,12 +32,18 @@ class HomeViewModel {
     
     private var currentCellIndex = 0
     
+    var newsService: NewsFetching
+    
+    init(newsService: NewsFetching = NewsService()){
+        self.newsService = newsService
+    }
+    
     func getNewsData(){
-        DispatchQueue.global().async {
-            NewsService.shared.fetchNews { [weak self] news in
+        DispatchQueue.global().async { [weak self] in
+            self?.newsService.fetchNews { news in
                 self?.news = news
                 self?.getNewsCount() == 0 ? self?.delegate?.didFailGettingNewsData(error: ApiError.noNewsData.errorDescription!) : self?.delegate?.didGetNewsData()
-            } onError: { [weak self] error in
+            } onError: { error in
                 self?.delegate?.didFailGettingNewsData(error: error)
             }
         }
