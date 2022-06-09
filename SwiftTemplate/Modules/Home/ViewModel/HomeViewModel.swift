@@ -10,6 +10,7 @@ import Foundation
 protocol HomeViewModelDelegate: AnyObject {
     func didGetNewsData()
     func didFailGettingNewsData()
+    // func didFailAllServices()
 }
 
 protocol TimerNewsUpdate: AnyObject {
@@ -30,14 +31,35 @@ class HomeViewModel {
     
     private var currentCellIndex = 0
     
+    private var isServiceNewsAvailable = false
+    private var isServiceSlidesAvailable = false
+    private var isServiceTestimonialAvailable = false
+    
     func getNewsData(){
         DispatchQueue.global().async {
             NewsService.shared.fetchNews { [weak self] news in
                 self?.news = news
-                self?.getNewsCount() == 0 ? self?.delegate?.didFailGettingNewsData() : self?.delegate?.didGetNewsData()
+                //self?.getNewsCount() == 0 ? self?.delegate?.didFailGettingNewsData() : self?.delegate?.didGetNewsData()
+                self?.isServiceNewsAvailable = true
             } onError: { [weak self] error in
-                self?.delegate?.didFailGettingNewsData()
+                //self?.delegate?.didFailGettingNewsData()
+                self?.isServiceNewsAvailable = false
             }
+        }
+    }
+    
+    func getAllServices(){
+        getNewsData()
+        //getNewsTestimonial
+        //getNewsSlides
+        
+        checkServiceAvailable()
+    }
+    
+    func checkServiceAvailable(){
+        // aca chequeo con un if news && slide && test { delegate.didFailAll... else didFailNews, test, slide,
+        if !isServiceNewsAvailable {
+            delegate?.didFailGettingNewsData()
         }
     }
     
