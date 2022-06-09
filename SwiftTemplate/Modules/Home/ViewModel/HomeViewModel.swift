@@ -42,14 +42,22 @@ class HomeViewModel {
     }
     
     // MARK: Welcome methods
-    func getWelcomeData() -> [CollectionTableViewCellViewModel] {
+    func getWelcomeData(index: Int) -> TitleCollectionViewCellViewModel {
         // Aca estoy trayendo el mock que creaste
-        return WelcomeViewModel().moduls
+        return WelcomeViewModel().moduls[index]
     }
     
     func getWelcomeCount() -> Int {
         // y aca la cantidad
         return WelcomeViewModel().moduls.count
+    }
+    
+    func countInSession(section: Int) -> Int{
+        if section == 1 {
+            return getWelcomeCount()
+        }else{
+            return getNewsCount()
+        }
     }
     
     // MARK: News methods

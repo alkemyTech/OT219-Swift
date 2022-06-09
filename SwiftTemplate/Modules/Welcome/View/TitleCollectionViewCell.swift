@@ -25,13 +25,21 @@ class TitleCollectionViewCell: UICollectionViewCell {
         label.font = .systemFont(ofSize: 25, weight: .bold)
         return label
     }()
-    
-    private var labelDescription: UILabel = {
+    private var labelTitle: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.numberOfLines = 0
-        label.autoresizesSubviews = true
-        label.font = .systemFont(ofSize: 17, weight: .medium)
+        label.font = .systemFont(ofSize: 17, weight: .bold)
+        return label
+    }()
+    
+    private var labelDescription: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: .max))
+        label.textColor = .black
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.sizeToFit()
+        label.font = .systemFont(ofSize: 17, weight: .light)
         return label
     }()
     //MARK: - Init
@@ -43,31 +51,26 @@ class TitleCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    //MARK: - Layout
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        labelWelcome.frame = CGRect(x: 5,
-                                    y:contentView.frame.size.height-320,
-                                    width:contentView.frame.size.width-10,
-                                    height: 50)
-        
-        labelDescription.frame = CGRect(x: 5,
-                                        y: contentView.frame.size.height-270,
-                                        width: contentView.frame.size.width-10,
-                                        height: 265)
-        imageView.frame = CGRect(x: 5,
-                                 y: 0,
-                                 width: contentView.frame.size.width-10,
-                                 height: contentView.frame.size.height-320)
-    }
+
     //MARK: - Setup
     func setupViews(){
-        contentView.addSubview(labelWelcome)
+        contentView.backgroundColor = .white
         contentView.addSubview(imageView)
+        imageView.anchor(top: safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 5)
+        imageView.setHeight(200)
+        
+        contentView.addSubview(labelWelcome)
+        labelWelcome.anchor(top: imageView.bottomAnchor, left: leftAnchor, paddingTop: 10, paddingLeft: 12)
+        contentView.addSubview(labelTitle)
+        labelTitle.anchor(top: labelWelcome.bottomAnchor, left: leftAnchor, paddingTop: 10, paddingLeft: 12)
+        
         contentView.addSubview(labelDescription)
+        labelDescription.anchor(top: labelTitle.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 5, paddingLeft: 12, paddingRight: 12)
     }
+
     //MARK: - Configuration CollectionViewCell
     func configure(with viewModel: TitleCollectionViewCellViewModel){
+        labelTitle.text = viewModel.titleDescription
         labelDescription.text = viewModel.description
         imageView.image = UIImage(named: viewModel.nameImage) ?? UIImage(named: "logo-Alkemy")
     }

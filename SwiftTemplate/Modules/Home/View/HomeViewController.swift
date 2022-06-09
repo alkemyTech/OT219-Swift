@@ -14,8 +14,6 @@ class HomeViewController: UIViewController {
     //MARK: - Properties
     weak var delegate: HomeViewControllerDelegate?
 
-    private var viewModels: [TitleCollectionViewCellViewModel] = []
-
     lazy var viewModel: HomeViewModel = {
         let homeViewModel = HomeViewModel()
         homeViewModel.delegate = self
@@ -128,12 +126,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.row == 0 {
             // aca pondremos nuestra celda porque va a ir primera.
-            // aca ya puse lo que pienso es tu celda... 
+            // aca ya puse lo que pienso es tu celda...
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TitleCollectionViewCell.identifier, for: indexPath) as? TitleCollectionViewCell else {
                 fatalError()
             }
             // resta adaptar esta parte.
-            cell.configure(with: viewModels[indexPath.row])
+            cell.configure(with: viewModel.getWelcomeData(index: indexPath.row))
             return cell
         }
         if indexPath.row == 3{
@@ -148,27 +146,17 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let new = viewModel.getNews(at: indexPath.row)
             cell.configureCell(with: new)
             return cell
-            
         }
     }
-    
-    // copie esta funcion aca.
-    func configure(with viewModel: CollectionTableViewCellViewModel){
-        self.viewModels = viewModel.viewModels
-        collectionView.reloadData()
-    }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // aca tenemos la cantidad de items en la seccion... en nuestro caso:
-        
-        return min(viewModel.getNewsCount(), 4)
+        return viewModel.countInSession(section: section)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-    
-    
     
 }
 

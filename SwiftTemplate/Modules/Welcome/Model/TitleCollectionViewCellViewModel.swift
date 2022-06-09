@@ -6,10 +6,9 @@
 //
 
 import Foundation
-import UIKit
 
 struct TitleCollectionViewCellViewModel{
+    let titleDescription: String
     let description: String
     let nameImage: String
-    let backgroundColor: UIColor
 }
