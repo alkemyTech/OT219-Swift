@@ -38,8 +38,8 @@ struct NewsService: NewsFetching {
                 }catch{
                     onError(ApiError.noNewsData.errorDescription!)
                 }
-            case .failure(let error):
-                onError(error.localizedDescription)
+            case .failure(_):
+                onError(ApiError.noNewsData.errorDescription!)
             }
         }
     }
