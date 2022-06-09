@@ -2,49 +2,27 @@
 //  SignUpViewModel.swift
 //  SwiftTemplate
 //
-//  Created by Cristian Costa on 25/05/2022.
+//  Created by Adriancys Jesus Villegas Toro on 24/5/22.
 //
 
 import Foundation
 
-protocol SignUpViewModelDelegate: AnyObject {
-    func userRegisterSuccess()
-    func userRegisterError()
-    func showAlertsTextFields(messages: String)
-    func activateButton()
-    func desactivateButton()
-    func labelPasswordShow()
-    func labelPasswordNotShow()
-}
-
-class SignUpViewModel {
+class SignUpViewModel{
     
     private var nameValidation: Bool = false
     private var emailValidation: Bool = false
     private var passwordValidation : Bool = false
     private var confPasswordValidation : Bool = false
     
-    var signUpManager = SignUpManager()
-    weak var delegate: SignUpViewModelDelegate?
-    
-    func register(name: String, email: String, pass: String) {
-        let user = NewUser(name: name, email: email, password: pass)
-        signUpManager.registerUser(user: user) { response in
-            self.delegate?.userRegisterSuccess()
-        } didFail: {
-            self.delegate?.userRegisterError()
-        }
+    func login(email:String, password:String){
+        
     }
 }
-
 //MARK: - FuntionsToActivateRegister
 extension SignUpViewModel{
     func showButtonRegister(){
         if nameValidation && emailValidation && passwordValidation && confPasswordValidation{
 //            activate Button
-            self.delegate?.activateButton()
-        }else {
-            self.delegate?.desactivateButton()
         }
     }
 }
@@ -57,8 +35,7 @@ extension SignUpViewModel{
         if let nameValue = value{
             validationNameCharacters(value: nameValue)
             if nameValue.count < 3{
-                let message = "The name must have more that 2 characters"
-                self.delegate?.showAlertsTextFields(messages: message)
+                _ = "The name must have more that 2 characters"
                 nameValidation = false
             }else{
                 nameValidation = true
@@ -72,25 +49,28 @@ extension SignUpViewModel{
         let decimalRange = value.rangeOfCharacter(from: decimalCharters)
         if decimalRange != nil{
             let message = "Plase don't used number un your name"
-            self.delegate?.showAlertsTextFields(messages: message)
         }
     }
 
     //MARK: - Validation Email
     func validateEmail(value: String?){
-        
         if let emailValue = value{
-                let regularExpresion = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-                let predicate = NSPredicate(format: "SELF MATCHES %@",regularExpresion)
-                if !predicate.evaluate(with: emailValue){
-                    let message = "Please type an email address. example@gmail.com"
-                    self.delegate?.showAlertsTextFields(messages: message)
-                    emailValidation = false
-                } else{
-                    emailValidation = true
-                }
+            let regularExpresion = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+            let predicate = NSPredicate(format: "SELF MATCHES %@",regularExpresion)
+            if !predicate.evaluate(with: emailValue){
+                validateEmailCount(value: emailValue)
+                emailValidation = false
+            } else{
+                emailValidation = true
+            }
         }
         showButtonRegister()
+    }
+
+    func validateEmailCount(value: String){
+        if value.count > 30{
+            let message = "Please type an email address. example@gmail.com"
+        }
     }
 
     //MARK: - Validate Password
@@ -104,8 +84,6 @@ extension SignUpViewModel{
                     contentUpperCase(value: passwordValue) {
                     passwordValidation = true
                 }else{
-                    let message = "Please use uppercase, lowercase and numbers to create a password"
-                    self.delegate?.showAlertsTextFields(messages: message)
                     passwordValidation = false
                 }
             }
@@ -135,11 +113,11 @@ extension SignUpViewModel{
         if let passA = valueA, let passB = valueB{
             if passA == passB{
                 confPasswordValidation = true
-                self.delegate?.labelPasswordNotShow()
             }else{
-                self.delegate?.labelPasswordShow()
+                let message = "Passwords are not the same"
             }
         }
         showButtonRegister()
     }
 }
+
