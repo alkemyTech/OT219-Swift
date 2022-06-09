@@ -28,7 +28,6 @@ class LoginViewModel{
         } onError: { [weak self] error in
             self?.delegate?.didFailUserLogin(error: error)
         }
-
+        
     }
-    
 }

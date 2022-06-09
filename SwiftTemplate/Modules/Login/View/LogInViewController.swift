@@ -54,7 +54,9 @@ class LogInViewController: UIViewController {
 
 extension LogInViewController: LoginViewModelDelegate{
     func didSuccessUserLogin() {
-        print("logueado")
+        let homeViewController = HomeViewController()
+        self.navigationController?.pushViewController(homeViewController, animated: true)
+        
     }
     
     func didFailUserLogin(error: String) {
