@@ -9,6 +9,7 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
+    let userSessionRepository = UserSessionRepository()
     var window: UIWindow?
 
 
@@ -23,10 +24,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let LoginViewController = LogInViewController()
-        let navigationController = UINavigationController(rootViewController: LoginViewController)
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
+        
+        if userSessionRepository.validateCurrentUser(){
+            let homeViewController = HomeViewController()
+            window?.rootViewController = homeViewController
+            window?.makeKeyAndVisible()
+        }else {
+            let LoginViewController = LogInViewController()
+            let navigationController = UINavigationController(rootViewController: LoginViewController)
+            window?.rootViewController = navigationController
+            window?.makeKeyAndVisible()
+        }
+        
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
