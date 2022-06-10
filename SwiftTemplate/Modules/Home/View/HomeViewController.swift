@@ -13,7 +13,36 @@ class HomeViewController: UIViewController {
     
     //MARK: - Properties
     weak var delegate: HomeViewControllerDelegate?
-
+    
+    lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 400)
+    
+    lazy var scrollView: UIScrollView = {
+        let view = UIScrollView(frame: .zero)
+        view.backgroundColor = .white
+        view.frame = self.view.bounds
+        view.contentSize = contentViewSize
+        view.autoresizingMask = .flexibleHeight
+        view.showsHorizontalScrollIndicator = true
+        view.bounces = true
+        return view
+    }()
+    
+    lazy var containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.frame.size = contentViewSize
+        return view
+    }()
+    
+    lazy var tableView: UITableView = {
+        let tableV = UITableView()
+        tableV.separatorStyle = .none
+        tableV.rowHeight = 120
+        tableV.backgroundColor = .white
+        tableV.register(TestimonialsCell.self, forCellReuseIdentifier: TestimonialsCell.identifier)
+        return tableV
+    }()
+    
     lazy var viewModel: HomeViewModel = {
         let homeViewModel = HomeViewModel()
         homeViewModel.delegate = self
@@ -35,6 +64,14 @@ class HomeViewController: UIViewController {
     private var newsHeader: UILabel = {
         let label = UILabel()
         label.text = "News"
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.textColor = .black
+        return label
+    }()
+    
+    private var testimonialsHeader: UILabel = {
+        let label = UILabel()
+        label.text = "Testimonials"
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.textColor = .black
         return label
@@ -69,35 +106,50 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureNavigationBar()
-
-        view.backgroundColor = .white
+        setupView()
         
-        view.addSubview(logoImage)
-        view.addSubview(collectionView)
-        view.addSubview(newsHeader)
-        view.addSubview(serParteButton)
-        
-        
-        logoImage.anchor(top: view.safeAreaLayoutGuide.topAnchor)
-        logoImage.setHeight(90)
-        logoImage.centerX(inView: view)
-        
-        newsHeader.anchor(top: logoImage.bottomAnchor)
-        newsHeader.centerX(inView: view)
-        
-        collectionView.anchor(top: newsHeader.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 12)
-        collectionView.setHeight(400)
-        
-        serParteButton.anchor(top: collectionView.bottomAnchor, left: view.leftAnchor, paddingTop: 12, paddingLeft: 12)
-        
-        
+        //ViewModel
         viewModel.getNewsData()
         viewModel.startTimer()
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    func setupView() {
+        view.backgroundColor = .white
+        view.addSubview(scrollView)
+        scrollView.addSubview(containerView)
+        
+        containerView.addSubview(logoImage)
+        logoImage.anchor(top: containerView.safeAreaLayoutGuide.topAnchor)
+        logoImage.setHeight(90)
+        logoImage.centerX(inView: containerView)
+        
+        //News - newsHeader, collectionView, button
+        containerView.addSubview(newsHeader)
+        newsHeader.anchor(top: logoImage.bottomAnchor)
+        newsHeader.centerX(inView: containerView)
+        
+        containerView.addSubview(collectionView)
+        collectionView.anchor(top: newsHeader.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 12)
+        collectionView.setHeight(400)
+        
+        containerView.addSubview(serParteButton)
+        serParteButton.anchor(top: collectionView.bottomAnchor, left: containerView.leftAnchor, paddingTop: 12, paddingLeft: 12)
+
+        //Testimonials
+        containerView.addSubview(testimonialsHeader)
+        testimonialsHeader.anchor(top: serParteButton.bottomAnchor, paddingTop: 30)
+        testimonialsHeader.centerX(inView: containerView)
+        
+        containerView.addSubview(tableView)
+        tableView.anchor(top: testimonialsHeader.bottomAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, right: containerView.rightAnchor, paddingTop: 30)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     @objc func handleMenuToggle() {
@@ -105,7 +157,7 @@ class HomeViewController: UIViewController {
     }
     
     func configureNavigationBar() {
-        navigationController?.navigationBar.barTintColor = .darkGray
+        navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.barStyle = .black
         navigationItem.title = "Home"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenuToggle))
@@ -122,6 +174,17 @@ class HomeViewController: UIViewController {
         alert.addAction(actionCancel)
         
         present(alert, animated: true)
+    }
+}
+//MARK: - TableView Delegate, Datasource
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TestimonialsCell.identifier, for: indexPath) as? TestimonialsCell else { return UITableViewCell() }
+        return cell
     }
 }
 
@@ -149,7 +212,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let new = viewModel.getNews(at: indexPath.row)
             cell.configureCell(with: new)
             return cell
-            
         }
     }
     
@@ -160,9 +222,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-    
-    
-    
 }
 
 //MARK: - Delegate

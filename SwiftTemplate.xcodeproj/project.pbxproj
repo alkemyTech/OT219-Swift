@@ -21,6 +21,7 @@
 		4054DF85283EDF0C00E781B6 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DF84283EDF0C00E781B6 /* SignUpViewModel.swift */; };
 		4054DF89283EE18F00E781B6 /* SignUpManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DF88283EE18F00E781B6 /* SignUpManager.swift */; };
 		4054DFAB283FEE9000E781B6 /* ServiceManagerSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DFAA283FEE8F00E781B6 /* ServiceManagerSingleton.swift */; };
+		4086D27F2852B9FF003BF837 /* TestimonialsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4086D27E2852B9FF003BF837 /* TestimonialsCell.swift */; };
 		A6470E527C25B4694F07B987 /* Pods_SwiftTemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19DC9E1E40C36079E44F490A /* Pods_SwiftTemplate.framework */; };
 		F649B7922847CF5700541235 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F649B7912847CF5700541235 /* HomeViewController.swift */; };
 		F649B7962847FF4700541235 /* SeeMoreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F649B7952847FF4700541235 /* SeeMoreCollectionViewCell.swift */; };
@@ -70,6 +71,7 @@
 		4054DF84283EDF0C00E781B6 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		4054DF88283EE18F00E781B6 /* SignUpManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpManager.swift; sourceTree = "<group>"; };
 		4054DFAA283FEE8F00E781B6 /* ServiceManagerSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManagerSingleton.swift; sourceTree = "<group>"; };
+		4086D27E2852B9FF003BF837 /* TestimonialsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestimonialsCell.swift; sourceTree = "<group>"; };
 		54065947B66C7BED0004E9F4 /* Pods-SwiftTemplate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftTemplate.release.xcconfig"; path = "Target Support Files/Pods-SwiftTemplate/Pods-SwiftTemplate.release.xcconfig"; sourceTree = "<group>"; };
 		A44B2E4CE22C626FA79CD586 /* Pods-SwiftTemplate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftTemplate.debug.xcconfig"; path = "Target Support Files/Pods-SwiftTemplate/Pods-SwiftTemplate.debug.xcconfig"; sourceTree = "<group>"; };
 		F649B7912847CF5700541235 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -227,6 +229,14 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		4086D27D2852B9C7003BF837 /* Testimonials */ = {
+			isa = PBXGroup;
+			children = (
+				4086D27E2852B9FF003BF837 /* TestimonialsCell.swift */,
+			);
+			path = Testimonials;
+			sourceTree = "<group>";
+		};
 		D09B5ACF9F2EC811C05BA0E5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,6 +288,7 @@
 				F649B7912847CF5700541235 /* HomeViewController.swift */,
 				4050AAA7284D9ED3004B16B1 /* SideMenu */,
 				F66387F52846865800E078BF /* News */,
+				4086D27D2852B9C7003BF837 /* Testimonials */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -523,6 +534,7 @@
 				F6C342C42845C18E005F877F /* NewsService.swift in Sources */,
 				4054DF81283EDE6F00E781B6 /* UserRegisterData.swift in Sources */,
 				F6EDEF462845252100BB49B9 /* ApiManager.swift in Sources */,
+				4086D27F2852B9FF003BF837 /* TestimonialsCell.swift in Sources */,
 				F6EDEF3F2845236C00BB49B9 /* LogInViewController.swift in Sources */,
 				03398C6027DFDFCC001BC793 /* AppDelegate.swift in Sources */,
 				F6EDEF332845236C00BB49B9 /* LoginViewModel.swift in Sources */,
