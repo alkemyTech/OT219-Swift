@@ -25,6 +25,7 @@ class LoginViewModel{
             let userDefaults = UserDefaults.standard
             userDefaults.set(token, forKey: "token")
             self?.delegate?.didSuccessUserLogin()
+            
         } onError: { [weak self] error in
             self?.delegate?.didFailUserLogin(error: error)
         }

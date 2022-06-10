@@ -36,6 +36,7 @@ class LogInViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
+    
     @IBAction func navigateToSignUp(_ sender: Any) {
         let signUpvc = SignupViewController()
         self.navigationController?.pushViewController(signUpvc,animated:true)
