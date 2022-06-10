@@ -8,8 +8,9 @@
 import UIKit
 
 class UserSessionRepository: UINavigationController {
-    
-    
+    /*    esta clase podria dedicarse para validaciones al momento de agregar comentarios,
+            para la apertura de la app y para la parte del log Out
+     */
     func validateCurrentUser() -> Bool{
         if let data = UserDefaults.standard.string(forKey: Constants.keyUserDefaults){
             return true
@@ -17,8 +18,6 @@ class UserSessionRepository: UINavigationController {
             return false
         }
     }
-/*    esta clase podria dedicarse para validaciones al momento de agregar comentarios,
-        para la apertura de la app y para la parte del log Out
- */
+
 
 }
