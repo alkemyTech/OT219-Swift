@@ -23,6 +23,7 @@ class LogInViewController: UIViewController {
         super.viewDidLoad()
         title = "LogIn"
         checkIfLogin()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
