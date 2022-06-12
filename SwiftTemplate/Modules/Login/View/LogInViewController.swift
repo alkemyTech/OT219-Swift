@@ -37,6 +37,7 @@ class LogInViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
+    
     @IBAction func navigateToSignUp(_ sender: Any) {
         let signUpvc = SignupViewController()
         self.navigationController?.pushViewController(signUpvc,animated:true)
@@ -55,7 +56,9 @@ class LogInViewController: UIViewController {
 
 extension LogInViewController: LoginViewModelDelegate{
     func didSuccessUserLogin() {
-        print("logueado")
+        let homeViewController = HomeViewController()
+        self.navigationController?.pushViewController(homeViewController, animated: true)
+        
     }
     
     func didFailUserLogin(error: String) {
