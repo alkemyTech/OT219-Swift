@@ -37,7 +37,6 @@ class HomeViewController: UIViewController {
     lazy var tableView: UITableView = {
         let tableV = UITableView()
         tableV.separatorStyle = .none
-        tableV.rowHeight = 120
         tableV.backgroundColor = .white
         tableV.isHidden = true
         return tableV
@@ -136,6 +135,11 @@ class HomeViewController: UIViewController {
         tableView.dataSource = self
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
+    }
+    
     func setupView() {
         view.backgroundColor = .white
         view.addSubview(scrollView)
@@ -165,17 +169,13 @@ class HomeViewController: UIViewController {
         
         containerView.addSubview(tableView)
         tableView.anchor(top: testimonialsHeader.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 12, paddingLeft: 12, paddingRight: 12)
-        tableView.setHeight(680)
+        tableView.setHeight(600)
         
         containerView.addSubview(verTestimonios)
         verTestimonios.anchor(top: tableView.bottomAnchor, left: containerView.leftAnchor, paddingTop: 20, paddingLeft: 12)
         
         tableView.register(UINib(nibName: "TestimonialsCell", bundle: nil), forCellReuseIdentifier: TestimonialsCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 100
-        
     }
     
     @objc func handleMenuToggle() {

@@ -13,6 +13,7 @@ class TestimonialsCell: UITableViewCell {
     @IBOutlet weak var imageTest: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var testimonialLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,21 +26,13 @@ class TestimonialsCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         let bgColorView = UIView()
-        let leftSpace: CGFloat = 4.0
-        let rightSpace: CGFloat = 4.0
-        let topSpace: CGFloat = 6.0
-        self.contentView.frame = self.contentView.frame.inset(by: UIEdgeInsets(top: topSpace, left: leftSpace, bottom: 0, right: rightSpace))
         
         imageTest.circleImageView()
         
-//        testimonialLabel.numberOfLines = 0
-//        testimonialLabel.lineBreakMode = .byWordWrapping
-//        testimonialLabel.sizeToFit()
-
-        self.contentView.layer.cornerRadius = 10.0
-        self.contentView.layer.borderWidth = 5.0
-        self.contentView.layer.borderColor = UIColor.clear.cgColor
-        self.contentView.layer.masksToBounds = true
+        containerView.layer.cornerRadius = 15.0
+        self.containerView.layer.borderWidth = 5.0
+        self.containerView.layer.borderColor = UIColor.clear.cgColor
+        self.containerView.layer.masksToBounds = true
         self.selectedBackgroundView = bgColorView
     }
     
