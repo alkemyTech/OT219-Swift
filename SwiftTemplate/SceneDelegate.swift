@@ -9,17 +9,26 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
+    let userSessionRepository = UserSessionRepository()
     var window: UIWindow?
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let LoginViewController = LogInViewController()
-        let navigationController = UINavigationController(rootViewController: LoginViewController)
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
+        
+        if userSessionRepository.validateCurrentUser(){
+            let homeViewController = HomeViewController()
+            let navigationController = UINavigationController(rootViewController: homeViewController)
+            window?.rootViewController = navigationController
+            window?.makeKeyAndVisible()
+        }else {
+            let LoginViewController = LogInViewController()
+            let navigationController = UINavigationController(rootViewController: LoginViewController)
+            window?.rootViewController = navigationController
+            window?.makeKeyAndVisible()
+        }
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

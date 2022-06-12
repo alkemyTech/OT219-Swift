@@ -9,12 +9,14 @@ import Foundation
 
 protocol HomeViewModelDelegate: AnyObject {
     func didGetNewsData()
-    func didFailGettingNewsData()
+    func didFailGettingNewsData(error: String)
 }
 
 protocol TimerNewsUpdate: AnyObject {
     func updateImageView(at index:Int)
 }
+
+
 
 class HomeViewModel {
     
@@ -30,13 +32,19 @@ class HomeViewModel {
     
     private var currentCellIndex = 0
     
+    var newsService: NewsFetching
+    
+    init(newsService: NewsFetching = NewsService()){
+        self.newsService = newsService
+    }
+    
     func getNewsData(){
-        DispatchQueue.global().async {
-            NewsService.shared.fetchNews { [weak self] news in
+        DispatchQueue.global().async { [weak self] in
+            self?.newsService.fetchNews { news in
                 self?.news = news
-                self?.getNewsCount() == 0 ? self?.delegate?.didFailGettingNewsData() : self?.delegate?.didGetNewsData()
-            } onError: { [weak self] error in
-                self?.delegate?.didFailGettingNewsData()
+                self?.getNewsCount() == 0 ? self?.delegate?.didFailGettingNewsData(error: ApiError.noNewsData.errorDescription!) : self?.delegate?.didGetNewsData()
+            } onError: { error in
+                self?.delegate?.didFailGettingNewsData(error: error)
             }
         }
     }
@@ -55,6 +63,11 @@ class HomeViewModel {
     
     func startTimer(){
         timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveNextIndex), userInfo: nil, repeats: true)
+    }
+    
+    func stopTimer(){
+        timer?.invalidate()
+        timer = nil
     }
     
     @objc func moveNextIndex(){

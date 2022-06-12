@@ -23,6 +23,7 @@ class LogInViewController: UIViewController {
         super.viewDidLoad()
         title = "LogIn"
         checkIfLogin()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,6 +36,7 @@ class LogInViewController: UIViewController {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
+    
     
     @IBAction func navigateToSignUp(_ sender: Any) {
         let signUpvc = SignupViewController()
@@ -54,7 +56,9 @@ class LogInViewController: UIViewController {
 
 extension LogInViewController: LoginViewModelDelegate{
     func didSuccessUserLogin() {
-        print("logueado")
+        let homeViewController = HomeViewController()
+        self.navigationController?.pushViewController(homeViewController, animated: true)
+        
     }
     
     func didFailUserLogin(error: String) {
