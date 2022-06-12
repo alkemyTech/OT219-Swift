@@ -8,51 +8,48 @@
 import UIKit
 
 class TestimonialsCell: UITableViewCell {
+    static let identifier = "ReusableTestimonialCell"
 
-    //MARK: - Properties
-    static let identifier = "testimonialsTableViewIdentifier"
+    @IBOutlet weak var imageTest: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var testimonialLabel: UILabel!
     
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 20)
-        label.text = "Nombre y apellido"
-        return label
-    }()
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
     
-    let descriptionLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: .max))
-        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.sizeToFit()
-        label.textColor = .black
-        label.text = "testimonialstestimonialstestimonialstestimonialstestimonialstestimonialstestimonialstestimonialstestimonialstestimonialstestimonialstestimonials"
-        return label
-    }()
-    
-    //MARK: - Init
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .white
-        addSubview(titleLabel)
-        addSubview(descriptionLabel)
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let bgColorView = UIView()
+        let leftSpace: CGFloat = 4.0
+        let rightSpace: CGFloat = 4.0
+        let topSpace: CGFloat = 6.0
+        self.contentView.frame = self.contentView.frame.inset(by: UIEdgeInsets(top: topSpace, left: leftSpace, bottom: 0, right: rightSpace))
         
-        titleLabel.anchor(top: topAnchor, left: leftAnchor, paddingTop: 12, paddingLeft: 12)
+        imageTest.circleImageView()
+        
+//        testimonialLabel.numberOfLines = 0
+//        testimonialLabel.lineBreakMode = .byWordWrapping
+//        testimonialLabel.sizeToFit()
 
-        descriptionLabel.anchor(top: titleLabel.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 12, paddingLeft: 12, paddingRight: 12)
-                
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        self.selectionStyle = .none
+        self.contentView.layer.cornerRadius = 10.0
+        self.contentView.layer.borderWidth = 5.0
+        self.contentView.layer.borderColor = UIColor.clear.cgColor
+        self.contentView.layer.masksToBounds = true
+        self.selectedBackgroundView = bgColorView
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    public func configureCell(with model: Testimonials){
+        guard let urlString = URL(string: "\(model.image ?? "")") else {return}
+        DispatchQueue.main.async { [weak self] in
+            self?.nameLabel.text = model.name
+            self?.testimonialLabel.text = "\"\(model.description ?? "")\""
+            self?.imageTest.load(url: urlString)
+        }
     }
-    
-    //MARK: - Handlers
-    
-
 }
+

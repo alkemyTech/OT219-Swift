@@ -21,7 +21,10 @@
 		4054DF85283EDF0C00E781B6 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DF84283EDF0C00E781B6 /* SignUpViewModel.swift */; };
 		4054DF89283EE18F00E781B6 /* SignUpManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DF88283EE18F00E781B6 /* SignUpManager.swift */; };
 		4054DFAB283FEE9000E781B6 /* ServiceManagerSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DFAA283FEE8F00E781B6 /* ServiceManagerSingleton.swift */; };
+		407C42A72854F6A300B8102D /* TestimonialsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 407C42A52854F6A300B8102D /* TestimonialsCell.xib */; };
 		4086D27F2852B9FF003BF837 /* TestimonialsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4086D27E2852B9FF003BF837 /* TestimonialsCell.swift */; };
+		40DED4412854075E004BD580 /* TestimonialsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DED4402854075E004BD580 /* TestimonialsService.swift */; };
+		40DED443285407B9004BD580 /* TestimonialsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DED442285407B9004BD580 /* TestimonialsResponse.swift */; };
 		A6470E527C25B4694F07B987 /* Pods_SwiftTemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19DC9E1E40C36079E44F490A /* Pods_SwiftTemplate.framework */; };
 		F649B7922847CF5700541235 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F649B7912847CF5700541235 /* HomeViewController.swift */; };
 		F649B7962847FF4700541235 /* SeeMoreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F649B7952847FF4700541235 /* SeeMoreCollectionViewCell.swift */; };
@@ -71,7 +74,10 @@
 		4054DF84283EDF0C00E781B6 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		4054DF88283EE18F00E781B6 /* SignUpManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpManager.swift; sourceTree = "<group>"; };
 		4054DFAA283FEE8F00E781B6 /* ServiceManagerSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManagerSingleton.swift; sourceTree = "<group>"; };
+		407C42A52854F6A300B8102D /* TestimonialsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestimonialsCell.xib; sourceTree = "<group>"; };
 		4086D27E2852B9FF003BF837 /* TestimonialsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestimonialsCell.swift; sourceTree = "<group>"; };
+		40DED4402854075E004BD580 /* TestimonialsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestimonialsService.swift; sourceTree = "<group>"; };
+		40DED442285407B9004BD580 /* TestimonialsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestimonialsResponse.swift; sourceTree = "<group>"; };
 		54065947B66C7BED0004E9F4 /* Pods-SwiftTemplate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftTemplate.release.xcconfig"; path = "Target Support Files/Pods-SwiftTemplate/Pods-SwiftTemplate.release.xcconfig"; sourceTree = "<group>"; };
 		A44B2E4CE22C626FA79CD586 /* Pods-SwiftTemplate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftTemplate.debug.xcconfig"; path = "Target Support Files/Pods-SwiftTemplate/Pods-SwiftTemplate.debug.xcconfig"; sourceTree = "<group>"; };
 		F649B7912847CF5700541235 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -233,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				4086D27E2852B9FF003BF837 /* TestimonialsCell.swift */,
+				407C42A52854F6A300B8102D /* TestimonialsCell.xib */,
 			);
 			path = Testimonials;
 			sourceTree = "<group>";
@@ -278,6 +285,7 @@
 			children = (
 				403C21C3284BD07800026635 /* MenuOption.swift */,
 				F6C342C12845BF2D005F877F /* NewsResponse.swift */,
+				40DED442285407B9004BD580 /* TestimonialsResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -297,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				F6C342C32845C18E005F877F /* NewsService.swift */,
+				40DED4402854075E004BD580 /* TestimonialsService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -456,6 +465,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6EDEF3C2845236C00BB49B9 /* LogInViewController.xib in Resources */,
+				407C42A72854F6A300B8102D /* TestimonialsCell.xib in Resources */,
 				03398C6927DFDFCD001BC793 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -520,6 +530,7 @@
 				403C21B1284AD2A400026635 /* MenuController.swift in Sources */,
 				F6EDEF422845238300BB49B9 /* ApiError.swift in Sources */,
 				F6EDEF352845236C00BB49B9 /* LoginUserResponse.swift in Sources */,
+				40DED443285407B9004BD580 /* TestimonialsResponse.swift in Sources */,
 				F66A1739283DCF6A0064DD56 /* (null) in Sources */,
 				4054DF89283EE18F00E781B6 /* SignUpManager.swift in Sources */,
 				403C21C4284BD07800026635 /* MenuOption.swift in Sources */,
@@ -537,6 +548,7 @@
 				4086D27F2852B9FF003BF837 /* TestimonialsCell.swift in Sources */,
 				F6EDEF3F2845236C00BB49B9 /* LogInViewController.swift in Sources */,
 				03398C6027DFDFCC001BC793 /* AppDelegate.swift in Sources */,
+				40DED4412854075E004BD580 /* TestimonialsService.swift in Sources */,
 				F6EDEF332845236C00BB49B9 /* LoginViewModel.swift in Sources */,
 				F66387F22846791000E078BF /* HomeViewModel.swift in Sources */,
 				F66387F92846AE8F00E078BF /* NewsCollectionViewCell.swift in Sources */,

@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
     //MARK: - Properties
     weak var delegate: HomeViewControllerDelegate?
     
-    lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 400)
+    lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 700)
     
     lazy var scrollView: UIScrollView = {
         let view = UIScrollView(frame: .zero)
@@ -39,7 +39,7 @@ class HomeViewController: UIViewController {
         tableV.separatorStyle = .none
         tableV.rowHeight = 120
         tableV.backgroundColor = .white
-        tableV.register(TestimonialsCell.self, forCellReuseIdentifier: TestimonialsCell.identifier)
+        tableV.isHidden = true
         return tableV
     }()
     
@@ -71,7 +71,7 @@ class HomeViewController: UIViewController {
     
     private var testimonialsHeader: UILabel = {
         let label = UILabel()
-        label.text = "Testimonials"
+        label.text = "Testimoniales"
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.textColor = .black
         return label
@@ -102,6 +102,22 @@ class HomeViewController: UIViewController {
         return button
     }()
     
+    private var verTestimonios: UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = UIColor.white
+        button.setTitle("Ver todos los testimonios", for: .normal)
+        button.backgroundColor = UIColor(named: "ButtonColor")
+        button.setDimensions(height: 50, width: 300)
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
+        button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        button.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        button.layer.shadowOpacity = 1.0
+        button.layer.shadowRadius = 0.0
+        button.layer.masksToBounds = false
+        button.layer.cornerRadius = 10.0
+        return button
+    }()
+    
     //MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -110,12 +126,12 @@ class HomeViewController: UIViewController {
         setupView()
         
         //ViewModel
+        viewModel.getTestimonialsData()
         viewModel.getNewsData()
         viewModel.startTimer()
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -130,7 +146,7 @@ class HomeViewController: UIViewController {
         logoImage.setHeight(90)
         logoImage.centerX(inView: containerView)
         
-        //News - newsHeader, collectionView, button
+        //News View - newsHeader, collectionView, button
         containerView.addSubview(newsHeader)
         newsHeader.anchor(top: logoImage.bottomAnchor)
         newsHeader.centerX(inView: containerView)
@@ -142,14 +158,24 @@ class HomeViewController: UIViewController {
         containerView.addSubview(serParteButton)
         serParteButton.anchor(top: collectionView.bottomAnchor, left: containerView.leftAnchor, paddingTop: 12, paddingLeft: 12)
 
-        //Testimonials
+        //Testimonials View - testimonialsHeader, tableView, Button
         containerView.addSubview(testimonialsHeader)
         testimonialsHeader.anchor(top: serParteButton.bottomAnchor, paddingTop: 30)
         testimonialsHeader.centerX(inView: containerView)
         
         containerView.addSubview(tableView)
-        tableView.anchor(top: testimonialsHeader.bottomAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, right: containerView.rightAnchor, paddingTop: 30)
+        tableView.anchor(top: testimonialsHeader.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 12, paddingLeft: 12, paddingRight: 12)
+        tableView.setHeight(680)
+        
+        containerView.addSubview(verTestimonios)
+        verTestimonios.anchor(top: tableView.bottomAnchor, left: containerView.leftAnchor, paddingTop: 20, paddingLeft: 12)
+        
+        tableView.register(UINib(nibName: "TestimonialsCell", bundle: nil), forCellReuseIdentifier: TestimonialsCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100
+        
     }
     
     @objc func handleMenuToggle() {
@@ -167,6 +193,7 @@ class HomeViewController: UIViewController {
         let alert = UIAlertController(title: "Fail", message: message, preferredStyle: .alert)
         let actionRetry = UIAlertAction(title: "Retry?", style: .default) { [weak self] _ in
             self?.viewModel.getNewsData()
+            self?.viewModel.getTestimonialsData()
         }
         let actionCancel = UIAlertAction(title: "Cancel", style: .destructive)
         
@@ -179,17 +206,18 @@ class HomeViewController: UIViewController {
 //MARK: - TableView Delegate, Datasource
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return min(viewModel.getTestimonialsCount(), 3)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TestimonialsCell.identifier, for: indexPath) as? TestimonialsCell else { return UITableViewCell() }
+        let testimonial = viewModel.getTestimonials(at: indexPath.row)
+        cell.configureCell(with: testimonial)
         return cell
     }
 }
 
 //MARK: - CollectionView Delegate, DataSource
-
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
        return 1
@@ -227,7 +255,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 //MARK: - Delegate
 
 extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
-    
+    //News
     func didGetNewsData() {
         DispatchQueue.main.async { [weak self] in
             self?.collectionView.reloadData()
@@ -250,4 +278,19 @@ extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
             self?.collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: true)
         }
     }
+    
+    //Testimonials
+    func didGetTestimonialsData() {
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+            self?.tableView.isHidden = false
+        }
+    }
+    
+    func didFailGettingTestimonialsData(error: String) {
+        DispatchQueue.main.async { [weak self] in
+            self?.showMessageError(message: error)
+        }
+    }
 }
+
