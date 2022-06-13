@@ -67,6 +67,11 @@
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
+            key = "endpoint.Testimonials"
+            value = "api/testimonials"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
             key = "endpoint.News"
             value = "api/news"
             isEnabled = "YES">
