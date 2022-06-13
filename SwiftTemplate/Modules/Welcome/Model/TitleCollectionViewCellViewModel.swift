@@ -8,7 +8,6 @@
 import Foundation
 
 struct TitleCollectionViewCellViewModel{
-    let titleDescription: String
     let description: String
     let nameImage: String
 }

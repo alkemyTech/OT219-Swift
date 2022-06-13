@@ -14,6 +14,7 @@ protocol HomeViewModelDelegate: AnyObject {
     func didFailGettingTestimonialsData(error: String)
     func didGetWelcomeData()
     func didFailGettingWelcomeData(error: String)
+    
 }
 
 protocol TimerNewsUpdate: AnyObject {
@@ -33,19 +34,21 @@ class HomeViewModel {
     
     private var currentCellIndex = 0
     
-    // MARK: Welcome methods
-    func getWelcomeData(index: Int) -> TitleCollectionViewCellViewModel {
-        // Aca estoy trayendo el mock que creaste
-        return WelcomeViewModel().moduls[index]
+    // MARK: - Welcome methods
+    
+    func getDataWelcome() {
+        if WelcomeViewModel().getDescriptionWelcomeViewModel().isEmpty || WelcomeViewModel().getImage().isEmpty{
+            let error = "Error getting data on Welcome View"
+            self.delegate?.didFailGettingWelcomeData(error: error)
+        }
     }
     
-    func getWelcomeCount() -> Int {
-        // y aca la cantidad
-        return WelcomeViewModel().moduls.count
+    func getDescriptionWelcome() -> String{
+        WelcomeViewModel().getDescriptionWelcomeViewModel()
     }
     
-    func countInSession(section: Int) -> Int{
-        return getWelcomeCount()
+    func getImageWelcome() -> String {
+        WelcomeViewModel().getImage()
     }
     
     // MARK: News methods

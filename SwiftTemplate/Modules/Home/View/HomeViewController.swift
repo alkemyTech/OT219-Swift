@@ -79,17 +79,36 @@ class HomeViewController: UIViewController {
     
     private var welcomeImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.image = UIImage(named: "logo-Alkemy")
+        imageView.contentMode = .scaleToFill
         // cargar la imagen ...
         return imageView
     }()
     
+    private var welcomeTitle : UILabel = {
+        let label = UILabel()
+        label.text = "Hola! Bienvenidx"
+        label.font = UIFont.systemFont(ofSize: 24, weight: .medium)
+        return label
+    }()
+    
     private var welcomeDescription: UILabel = {
         let label = UILabel()
-        label.text = "Lorem ipsum es el texto que se usa habitualmente en diseño gráfico o de moda en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final."
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .light)
         label.textColor = .black
         return label
+    }()
+    
+    private var contactButton : UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = UIColor.white
+        button.setTitle("Contactanos", for: .normal)
+        button.backgroundColor = .systemRed
+        button.setDimensions(height: 50, width: 200)
+        button.layer.cornerRadius = 10.0
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
+        return button
     }()
     
     lazy var viewModel: HomeViewModel = {
@@ -163,6 +182,8 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         configureNavigationBar()
         setupView()
+        didGetWelcomeData()
+        
         
         //ViewModel
         viewModel.getTestimonialsData()
@@ -192,7 +213,7 @@ class HomeViewController: UIViewController {
         logoImage.centerX(inView: containerView)
         
         [
-            welcomeHeader, welcomeDescription,
+            welcomeHeader, welcomeImageView, welcomeTitle, welcomeDescription, contactButton,
             newsHeader, newsCollectionView, serParteButton,
             testimonialsHeader, testimonialsTableView, verTestimonios
         ].forEach {
@@ -202,10 +223,14 @@ class HomeViewController: UIViewController {
         //Welcome View - newsHeader, collectionView, button
         welcomeHeader.anchor(top: logoImage.bottomAnchor)
         welcomeHeader.centerX(inView: containerView)
-        welcomeDescription.anchor(top: welcomeHeader.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 30, paddingLeft: 12, paddingRight: 12)
+//
+        welcomeImageView.anchor(top: welcomeHeader.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 12, paddingLeft: 16, paddingRight: 16,width: 328, height: 250)
+        welcomeTitle.anchor(top: welcomeImageView.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 12, paddingLeft: 12, paddingRight: 12)
+        welcomeDescription.anchor(top: welcomeTitle.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 15, paddingLeft: 12, paddingRight: 12, width: 328, height: 126)
+        contactButton.anchor(top: welcomeDescription.bottomAnchor, left: containerView.leftAnchor, paddingTop: 15, paddingLeft: 12)
         
         //News View - newsHeader, collectionView, button
-        newsHeader.anchor(top: welcomeDescription.bottomAnchor, paddingTop: 20)
+        newsHeader.anchor(top: contactButton.bottomAnchor, paddingTop: 20)
         newsHeader.centerX(inView: containerView)
         
         newsCollectionView.anchor(top: newsHeader.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 12)
@@ -305,12 +330,15 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
     // Welcome
     func didGetWelcomeData() {
-        self.welcomeDescription.text = ""
+        self.welcomeDescription.text = viewModel.getDescriptionWelcome()
+        self.welcomeImageView.image = UIImage(named: viewModel.getImageWelcome())
         self.welcomeHeader.text = ""
     }
     
     func didFailGettingWelcomeData(error: String) {
-        
+        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true)
     }
     
     //News

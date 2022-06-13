@@ -7,14 +7,24 @@
 
 import Foundation
 
-struct WelcomeViewModel{
+class WelcomeViewModel{
     
-    var moduls : [TitleCollectionViewCellViewModel] = [
+    var welcomeData = TitleCollectionViewCellViewModel(description: "Lorem ipsum es el texto que se usa habitualmente en diseño gráfico o de moda en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final. habitualmente en diseño gráfico o de moda en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.", nameImage: "logo-Alkemy")
+    
+    func getDescriptionWelcomeViewModel() -> String {
+        welcomeData.description
+    }
+    
+    func getImage() -> String {
+        welcomeData.nameImage
+    }
+    
+    func errorGettingData() -> String{
+        if welcomeData.description.isEmpty || welcomeData.nameImage.isEmpty{
+            return "We cannot show data welcomeView"
+        }else {
+            return ""
+        }
         
-        TitleCollectionViewCellViewModel(titleDescription: "PROGRAMA 1", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse dictum, nisi nec accumsan dictum, erat ante consectetur urna, sit amet rutrum nisl mauris eget mauris. Aliquam blandit magna in dui varius, ac aliquam ex dapibus. Sed fringilla a nisi ut porta. Proin eleifend lobortis dui quis faucibus. Curabitur dignissim ultricies efficitur. Pellentesque condimentum purus sed ligula lacinia, eu sollicitudin erat vulputate. Aenean tincidunt vehicula mattis. Sed quis tortor sit amet elit placerat condimentum. Donec gravida magna id mi bibendum cursus.", nameImage: "logo-Alkemy"),
-                TitleCollectionViewCellViewModel(titleDescription: "PROGRAMA 1",description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse dictum, nisi nec accumsan dictum, erat ante consectetur urna, sit amet rutrum nisl mauris eget mauris. Aliquam blandit magna in dui varius, ac aliquam ex dapibus. Sed fringilla a nisi ut porta. Proin eleifend lobortis dui quis faucibus. Curabitur dignissim ultricies efficitur. Pellentesque condimentum purus sed ligula lacinia, eu sollicitudin erat vulputate. Aenean tincidunt vehicula mattis. Sed quis tortor sit amet elit placerat condimentum. Donec gravida magna id mi bibendum cursus.", nameImage: "LOGO-SOMOS MAS"),
-                TitleCollectionViewCellViewModel(titleDescription: "PROGRAMA 1", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse dictum, nisi nec accumsan dictum, erat ante consectetur urna, sit amet rutrum nisl mauris eget mauris. Aliquam blandit magna in dui varius, ac aliquam ex dapibus. Sed fringilla a nisi ut porta. Proin eleifend lobortis dui quis faucibus. Curabitur dignissim ultricies efficitur. Pellentesque condimentum purus sed ligula lacinia, eu sollicitudin erat vulputate. Aenean tincidunt vehicula mattis. Sed quis tortor sit amet elit placerat condimentum. Donec gravida magna id mi bibendum cursus.", nameImage: "logo-Alkemy"),
-                TitleCollectionViewCellViewModel(titleDescription: "PROGRAMA 1", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse dictum, nisi nec accumsan dictum, erat ante consectetur urna, sit amet rutrum nisl mauris eget mauris. Aliquam blandit magna in dui varius, ac aliquam ex dapibus. Sed fringilla a nisi ut porta. Proin eleifend lobortis dui quis faucibus. Curabitur dignissim ultricies efficitur. Pellentesque condimentum purus sed ligula lacinia, eu sollicitudin erat vulputate. Aenean tincidunt vehicula mattis. Sed quis tortor sit amet elit placerat condimentum. Donec gravida magna id mi bibendum cursus.", nameImage: "LOGO-SOMOS MAS"),
-                TitleCollectionViewCellViewModel(titleDescription: "PROGRAMA 1", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse dictum, nisi nec accumsan dictum, erat ante consectetur urna, sit amet rutrum nisl mauris eget mauris. Aliquam blandit magna in dui varius, ac aliquam ex dapibus. Sed fringilla a nisi ut porta. Proin eleifend lobortis dui quis faucibus. Curabitur dignissim ultricies efficitur. Pellentesque condimentum purus sed ligula lacinia, eu sollicitudin erat vulputate. Aenean tincidunt vehicula mattis. Sed quis tortor sit amet elit placerat condimentum. Donec gravida magna id mi bibendum cursus.", nameImage: "logo-Alkemy")
-    ]
+    }
 }
