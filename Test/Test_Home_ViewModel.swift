@@ -13,7 +13,7 @@ class Test_Home_ViewModel: XCTestCase {
     var sut: HomeViewModel!
 
     override func setUpWithError() throws {
-        sut = HomeViewModel()
+
     }
 
     override func tearDownWithError() throws {
@@ -21,17 +21,40 @@ class Test_Home_ViewModel: XCTestCase {
     }
 
     func test_HomeViewModel_GetsNewsData_ShouldReturnData(){
+        let mock = MockNewsServiceSuccess()
+        sut = HomeViewModel(newsService: mock)
+        let expectation = XCTestExpectation(description: "Should return data")
         
-        sut.getNewsData()
+        sut.newsService.fetchNews { news in
+            XCTAssertTrue(news.count > 0)
+            expectation.fulfill()
+        } onError: { error in
+            XCTAssertTrue(error.isEmpty)
+            expectation.fulfill()
+        }
         
-        let expectation = XCTestExpectation(description: "Should have data")
+        wait(for: [expectation], timeout: 3)
         
-        expectation.fulfill()
+
+    }
+    
+    func test_HomeViewModel_GetsNewsData_ShouldShowError(){
+        let mock = MockNewsServiceFail()
+        sut = HomeViewModel(newsService: mock)
         
+        let expectation = XCTestExpectation(description: "Should return error")
+        
+        sut.newsService.fetchNews { news in
+            XCTAssertNil(news)
+            expectation.fulfill()
+        } onError: { error in
+            XCTAssertEqual(error, "News data is not available")
+            expectation.fulfill()
+        
+        }
+
         wait(for: [expectation], timeout: 5)
         
-        XCTAssertNotNil(sut.getNewsCount)
-        XCTAssertNotNil(sut.news)
     }
 
 }

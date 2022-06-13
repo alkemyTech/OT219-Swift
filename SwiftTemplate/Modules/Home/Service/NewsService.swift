@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct NewsService {
+protocol NewsFetching {
+    func fetchNews(onComplete: @escaping ([News]) -> (), onError: @escaping (String) -> ())
+}
+
+struct NewsService: NewsFetching {
     
     static let shared = NewsService()
     
@@ -34,8 +38,8 @@ struct NewsService {
                 }catch{
                     onError(ApiError.noNewsData.errorDescription!)
                 }
-            case .failure(let error):
-                onError(error.localizedDescription)
+            case .failure(_):
+                onError(ApiError.noNewsData.errorDescription!)
             }
         }
     }

@@ -9,7 +9,11 @@ import Foundation
 
 protocol HomeViewModelDelegate: AnyObject {
     func didGetNewsData()
-    func didFailGettingNewsData()
+    func didFailGettingNewsData(error: String)
+    func didGetTestimonialsData()
+    func didFailGettingTestimonialsData(error: String)
+    func didGetWelcomeData()
+    func didFailGettingWelcomeData(error: String)
 }
 
 protocol TimerNewsUpdate: AnyObject {
@@ -17,29 +21,17 @@ protocol TimerNewsUpdate: AnyObject {
 }
 
 class HomeViewModel {
-    
     weak var delegate: HomeViewModelDelegate?
-    
     weak var delegateTimer: TimerNewsUpdate?
-    
     private var sectionsTitles = ["News"]
     
     var news = [News]()
     private var viewModels: [TitleCollectionViewCellViewModel] = []
+    var testimonials = [Testimonials]()
     
     private var timer : Timer?
     
     private var currentCellIndex = 0
-    
-    func getSectionsCount() -> Int {
-        var sections = 0
-        if getNewsCount() > 0 {
-            sections += 1
-        } else if getWelcomeCount() > 0 {
-            sections += 1
-        }
-        return sections
-    }
     
     // MARK: Welcome methods
     func getWelcomeData(index: Int) -> TitleCollectionViewCellViewModel {
@@ -53,21 +45,23 @@ class HomeViewModel {
     }
     
     func countInSession(section: Int) -> Int{
-        if section == 1 {
-            return getWelcomeCount()
-        }else{
-            return getNewsCount()
-        }
+        return getWelcomeCount()
     }
     
     // MARK: News methods
+    var newsService: NewsFetching
+    
+    init(newsService: NewsFetching = NewsService()){
+        self.newsService = newsService
+    }
+    
     func getNewsData(){
-        DispatchQueue.global().async {
-            NewsService.shared.fetchNews { [weak self] news in
+        DispatchQueue.global().async { [weak self] in
+            self?.newsService.fetchNews { news in
                 self?.news = news
-                self?.getNewsCount() == 0 ? self?.delegate?.didFailGettingNewsData() : self?.delegate?.didGetNewsData()
-            } onError: { [weak self] error in
-                self?.delegate?.didFailGettingNewsData()
+                self?.getNewsCount() == 0 ? self?.delegate?.didFailGettingNewsData(error: ApiError.noNewsData.errorDescription!) : self?.delegate?.didGetNewsData()
+            } onError: { error in
+                self?.delegate?.didFailGettingNewsData(error: error)
             }
         }
     }
@@ -85,7 +79,12 @@ class HomeViewModel {
     }
     
     func startTimer(){
-        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveNextIndex), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 5.5, target: self, selector: #selector(moveNextIndex), userInfo: nil, repeats: true)
+    }
+    
+    func stopTimer(){
+        timer?.invalidate()
+        timer = nil
     }
     
     @objc func moveNextIndex(){
@@ -95,5 +94,27 @@ class HomeViewModel {
             currentCellIndex = 0
         }
         delegateTimer?.updateImageView(at: currentCellIndex)
+    }
+}
+
+//MARK: - Testimonials Logic
+extension HomeViewModel {
+    func getTestimonialsData() {
+        DispatchQueue.global().async {
+            TestimonialsService.shared.fetchTestimonials { [weak self] testimonials in
+                self?.testimonials = testimonials
+                self?.getNewsCount() == 0 ? self?.delegate?.didFailGettingTestimonialsData(error: ApiError.noTestimonialsData.errorDescription!) : self?.delegate?.didGetTestimonialsData()
+            } onError: { [weak self] error in
+                self?.delegate?.didFailGettingTestimonialsData(error: error)
+            }
+        }
+    }
+    
+    func getTestimonials(at index: Int) -> Testimonials {
+        return testimonials[index]
+    }
+    
+    func getTestimonialsCount() -> Int{
+        return testimonials.count
     }
 }
