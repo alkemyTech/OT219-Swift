@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
     //MARK: - Properties
     weak var delegate: HomeViewControllerDelegate?
     
-    lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 900)
+    lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 1000)
     
     lazy var scrollView: UIScrollView = {
         let view = UIScrollView(frame: .zero)
@@ -206,7 +206,7 @@ class HomeViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(scrollView)
         scrollView.addSubview(containerView)
-        
+
         containerView.addSubview(logoImage)
         logoImage.anchor(top: containerView.safeAreaLayoutGuide.topAnchor)
         logoImage.setHeight(90)

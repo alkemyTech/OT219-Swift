@@ -31,6 +31,7 @@ struct LoginService {
                         let decoder = JSONDecoder()
                         let response = try decoder.decode(LoginUserResponse.self, from: data)
                         if response.success {
+                            print(response.data.token)
                             onComplete(response.data.token)
                         }else{
                             onError(ApiError.loginError.errorDescription!)

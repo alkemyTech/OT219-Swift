@@ -10,6 +10,8 @@ import UIKit
 class LogInViewController: UIViewController {
     
     //MARK: - Properties
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passTextField: UITextField!
     
     lazy var viewModel: LoginViewModel = {
         let loginViewModel = LoginViewModel()
@@ -22,14 +24,11 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "LogIn"
-        checkIfLogin()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
     }
    
     override func viewWillDisappear(_ animated: Bool) {
@@ -37,28 +36,26 @@ class LogInViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
+    @IBAction func navigateToHome(_ sender: Any) {
+        guard let email = emailTextField.text else {return}
+        guard let pass = passTextField.text else {return}
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            self?.viewModel.login(email: email, pass: pass)
+        }
+    }
     
     @IBAction func navigateToSignUp(_ sender: Any) {
         let signUpvc = SignupViewController()
         self.navigationController?.pushViewController(signUpvc,animated:true)
     }
-    
-    private func checkIfLogin(){
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            self?.viewModel.checkLogin()
-        }
-    }
-
 }
-
 
 //MARK: - LoginViewModelDelegate
 
 extension LogInViewController: LoginViewModelDelegate{
     func didSuccessUserLogin() {
-        let homeViewController = HomeViewController()
+        let homeViewController = ContainerController()
         self.navigationController?.pushViewController(homeViewController, animated: true)
-        
     }
     
     func didFailUserLogin(error: String) {
@@ -66,6 +63,4 @@ extension LogInViewController: LoginViewModelDelegate{
         alert.addAction(UIAlertAction(title: "Aceptar", style: .cancel))
         present(alert, animated: true)
     }
-    
-    
 }
