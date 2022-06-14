@@ -6,5 +6,5 @@ target 'SwiftTemplate' do
   use_frameworks!
 
   # Pods for SwiftTemplate
-  pod 'Alamofire'
+  pod 'Alamofire', '~> 5.4'
 end

@@ -12,13 +12,14 @@ protocol HomeViewModelDelegate: AnyObject {
     func didFailGettingNewsData(error: String)
     func didGetTestimonialsData()
     func didFailGettingTestimonialsData(error: String)
+    func didGetWelcomeData()
+    func didFailGettingWelcomeData(error: String)
+    
 }
 
 protocol TimerNewsUpdate: AnyObject {
     func updateImageView(at index:Int)
 }
-
-
 
 class HomeViewModel {
     weak var delegate: HomeViewModelDelegate?
@@ -32,6 +33,24 @@ class HomeViewModel {
     
     private var currentCellIndex = 0
     
+    // MARK: - Welcome methods
+    
+    func getDataWelcome() {
+        if WelcomeViewModel().getDescriptionWelcomeViewModel().isEmpty || WelcomeViewModel().getImage().isEmpty{
+            let error = "Error getting data on Welcome View"
+            self.delegate?.didFailGettingWelcomeData(error: error)
+        }
+    }
+    
+    func getDescriptionWelcome() -> String{
+        WelcomeViewModel().getDescriptionWelcomeViewModel()
+    }
+    
+    func getImageWelcome() -> String {
+        WelcomeViewModel().getImage()
+    }
+    
+    // MARK: News methods
     var newsService: NewsFetching
     
     init(newsService: NewsFetching = NewsService()){
