@@ -19,7 +19,6 @@ struct LoginService {
         	
         guard let email = user.email else {return}
         guard let password = user.password else {return}
-
         
         let params = ["email": email, "password": password]
         
@@ -31,7 +30,6 @@ struct LoginService {
                         let decoder = JSONDecoder()
                         let response = try decoder.decode(LoginUserResponse.self, from: data)
                         if response.success {
-                            print(response.data.token)
                             onComplete(response.data.token)
                         }else{
                             onError(ApiError.loginError.errorDescription!)
