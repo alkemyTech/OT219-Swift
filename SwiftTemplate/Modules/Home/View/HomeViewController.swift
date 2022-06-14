@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
     //MARK: - Properties
     weak var delegate: HomeViewControllerDelegate?
     
-    lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 700)
+    lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 900)
     
     lazy var scrollView: UIScrollView = {
         let view = UIScrollView(frame: .zero)
@@ -34,38 +34,12 @@ class HomeViewController: UIViewController {
         return view
     }()
     
-    lazy var tableView: UITableView = {
+    lazy var testimonialsTableView: UITableView = {
         let tableV = UITableView()
         tableV.separatorStyle = .none
         tableV.backgroundColor = .white
         tableV.isHidden = true
         return tableV
-    }()
-    
-    lazy var viewModel: HomeViewModel = {
-        let homeViewModel = HomeViewModel()
-        homeViewModel.delegate = self
-        homeViewModel.delegateTimer = self
-        return homeViewModel
-    }()
-    
-    lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let collectionView = UICollectionView(frame: .zero	, collectionViewLayout: layout)
-        collectionView.register(NewsCollectionViewCell.self, forCellWithReuseIdentifier: NewsCollectionViewCell.identifier)
-        collectionView.register(SeeMoreCollectionViewCell.self, forCellWithReuseIdentifier: SeeMoreCollectionViewCell.identifier)
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.isHidden = true
-        return collectionView
-    }()
-    
-    private var newsHeader: UILabel = {
-        let label = UILabel()
-        label.text = "News"
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        label.textColor = .black
-        return label
     }()
     
     private var testimonialsHeader: UILabel = {
@@ -76,12 +50,97 @@ class HomeViewController: UIViewController {
         return label
     }()
     
+    private var newsHeader: UILabel = {
+        let label = UILabel()
+        label.text = "News"
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.textColor = .black
+        return label
+    }()
+    
+    lazy var newsCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero	, collectionViewLayout: layout)
+        collectionView.register(NewsCollectionViewCell.self, forCellWithReuseIdentifier: NewsCollectionViewCell.identifier)
+        collectionView.register(SeeMoreCollectionViewCell.self, forCellWithReuseIdentifier: SeeMoreCollectionViewCell.identifier)
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isHidden = true
+        return collectionView
+    }()
+    
+    private var welcomeHeader: UILabel = {
+        let label = UILabel()
+        label.text = "Welcome"
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.textColor = .black
+        return label
+    }()
+    
+    private var welcomeImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "logo-Alkemy")
+        imageView.contentMode = .scaleToFill
+        // cargar la imagen ...
+        return imageView
+    }()
+    
+    private var welcomeTitle : UILabel = {
+        let label = UILabel()
+        label.text = "Hola! Bienvenidx"
+        label.font = UIFont.systemFont(ofSize: 24, weight: .medium)
+        return label
+    }()
+    
+    private var welcomeDescription: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 18, weight: .light)
+        label.textColor = .black
+        return label
+    }()
+    
+    private var contactButton : UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = UIColor.white
+        button.setTitle("Contactanos", for: .normal)
+        button.backgroundColor = .systemRed
+        button.setDimensions(height: 50, width: 200)
+        button.layer.cornerRadius = 10.0
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
+        return button
+    }()
+    
+    lazy var viewModel: HomeViewModel = {
+        let homeViewModel = HomeViewModel()
+        homeViewModel.delegate = self
+        homeViewModel.delegateTimer = self
+        return homeViewModel
+    }()
+    
     private var logoImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.image = UIImage(named: "LOGO-SOMOS MAS")
         return imageView
+    }()
+    
+    private var Button: UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = UIColor.white
+        button.setTitle("¡Quiero ser parte!", for: .normal)
+        button.backgroundColor = UIColor(named: "ButtonColor")
+        button.setDimensions(height: 50, width: 200)
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
+        button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        button.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        button.layer.shadowOpacity = 1.0
+        button.layer.shadowRadius = 0.0
+        button.layer.masksToBounds = false
+        button.layer.cornerRadius = 10.0
+        button.isHidden = true
+        return button
     }()
     
     private var serParteButton: UIButton = {
@@ -123,21 +182,24 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         configureNavigationBar()
         setupView()
+        didGetWelcomeData()
+        
         
         //ViewModel
         viewModel.getTestimonialsData()
         viewModel.getNewsData()
         viewModel.startTimer()
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        tableView.delegate = self
-        tableView.dataSource = self
+        newsCollectionView.delegate = self
+        newsCollectionView.dataSource = self
+        
+        testimonialsTableView.delegate = self
+        testimonialsTableView.dataSource = self
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
+        testimonialsTableView.frame = view.bounds
     }
     
     func setupView() {
@@ -150,32 +212,43 @@ class HomeViewController: UIViewController {
         logoImage.setHeight(90)
         logoImage.centerX(inView: containerView)
         
+        [
+            welcomeHeader, welcomeImageView, welcomeTitle, welcomeDescription, contactButton,
+            newsHeader, newsCollectionView, serParteButton,
+            testimonialsHeader, testimonialsTableView, verTestimonios
+        ].forEach {
+            containerView.addSubview($0)
+        }
+        
+        //Welcome View - newsHeader, collectionView, button
+        welcomeHeader.anchor(top: logoImage.bottomAnchor)
+        welcomeHeader.centerX(inView: containerView)
+//
+        welcomeImageView.anchor(top: welcomeHeader.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 12, paddingLeft: 16, paddingRight: 16,width: 328, height: 250)
+        welcomeTitle.anchor(top: welcomeImageView.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 12, paddingLeft: 12, paddingRight: 12)
+        welcomeDescription.anchor(top: welcomeTitle.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 15, paddingLeft: 12, paddingRight: 12, width: 328, height: 126)
+        contactButton.anchor(top: welcomeDescription.bottomAnchor, left: containerView.leftAnchor, paddingTop: 15, paddingLeft: 12)
+        
         //News View - newsHeader, collectionView, button
-        containerView.addSubview(newsHeader)
-        newsHeader.anchor(top: logoImage.bottomAnchor)
+        newsHeader.anchor(top: contactButton.bottomAnchor, paddingTop: 20)
         newsHeader.centerX(inView: containerView)
         
-        containerView.addSubview(collectionView)
-        collectionView.anchor(top: newsHeader.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 12)
-        collectionView.setHeight(400)
+        newsCollectionView.anchor(top: newsHeader.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 12)
+        newsCollectionView.setHeight(400)
         
-        containerView.addSubview(serParteButton)
-        serParteButton.anchor(top: collectionView.bottomAnchor, left: containerView.leftAnchor, paddingTop: 12, paddingLeft: 12)
+        serParteButton.anchor(top: newsCollectionView.bottomAnchor, left: containerView.leftAnchor, paddingTop: 12, paddingLeft: 12)
 
         //Testimonials View - testimonialsHeader, tableView, Button
-        containerView.addSubview(testimonialsHeader)
         testimonialsHeader.anchor(top: serParteButton.bottomAnchor, paddingTop: 30)
         testimonialsHeader.centerX(inView: containerView)
         
-        containerView.addSubview(tableView)
-        tableView.anchor(top: testimonialsHeader.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 12, paddingLeft: 12, paddingRight: 12)
-        tableView.setHeight(600)
+        testimonialsTableView.anchor(top: testimonialsHeader.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 12, paddingLeft: 12, paddingRight: 12)
+        testimonialsTableView.setHeight(600)
         
-        containerView.addSubview(verTestimonios)
-        verTestimonios.anchor(top: tableView.bottomAnchor, left: containerView.leftAnchor, paddingTop: 20, paddingLeft: 12)
+        verTestimonios.anchor(top: testimonialsTableView.bottomAnchor, left: containerView.leftAnchor, paddingTop: 20, paddingLeft: 12)
         
-        tableView.register(UINib(nibName: "TestimonialsCell", bundle: nil), forCellReuseIdentifier: TestimonialsCell.identifier)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        testimonialsTableView.register(UINib(nibName: "TestimonialsCell", bundle: nil), forCellReuseIdentifier: TestimonialsCell.identifier)
+        testimonialsTableView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     @objc func handleMenuToggle() {
@@ -220,7 +293,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: - CollectionView Delegate, DataSource
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-       return 1
+        return viewModel.getNewsCount() > 0 ? 1 : 0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -228,12 +301,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.row == 3{
+        if indexPath.row == 3 {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SeeMoreCollectionViewCell.identifier, for: indexPath) as? SeeMoreCollectionViewCell else {
                 return UICollectionViewCell()
             }
             return cell
-        }else {
+        } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCollectionViewCell.identifier, for: indexPath) as? NewsCollectionViewCell else {
                 return UICollectionViewCell()
             }
@@ -242,9 +315,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return cell
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return min(viewModel.getNewsCount(), 4)
+        return viewModel.getNewsCount()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -255,18 +328,31 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 //MARK: - Delegate
 
 extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
+    // Welcome
+    func didGetWelcomeData() {
+        self.welcomeDescription.text = viewModel.getDescriptionWelcome()
+        self.welcomeImageView.image = UIImage(named: viewModel.getImageWelcome())
+        self.welcomeHeader.text = ""
+    }
+    
+    func didFailGettingWelcomeData(error: String) {
+        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true)
+    }
+    
     //News
     func didGetNewsData() {
         DispatchQueue.main.async { [weak self] in
-            self?.collectionView.reloadData()
+            self?.newsCollectionView.reloadData()
             self?.serParteButton.isHidden = false
-            self?.collectionView.isHidden = false
+            self?.newsCollectionView.isHidden = false
         }
     }
     
     func didFailGettingNewsData(error: String) {
         DispatchQueue.main.async { [weak self] in
-            self?.collectionView.isHidden = true
+            self?.newsCollectionView.isHidden = true
             self?.serParteButton.isHidden = true
             self?.viewModel.stopTimer()
             self?.showMessageError(message: error)
@@ -274,16 +360,18 @@ extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
     }
     
     func updateImageView(at index: Int) {
-        DispatchQueue.main.async { [weak self] in
-            self?.collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: true)
+        if viewModel.getNewsCount() > 0 {
+            DispatchQueue.main.async { [weak self] in
+                self?.newsCollectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: true)
+            }
         }
     }
     
     //Testimonials
     func didGetTestimonialsData() {
         DispatchQueue.main.async { [weak self] in
-            self?.tableView.reloadData()
-            self?.tableView.isHidden = false
+            self?.testimonialsTableView.reloadData()
+            self?.testimonialsTableView.isHidden = false
         }
     }
     
@@ -293,4 +381,5 @@ extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
         }
     }
 }
+
 
