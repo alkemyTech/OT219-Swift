@@ -27,7 +27,6 @@ class HomeViewModel {
     private var sectionsTitles = ["News"]
     
     var news = [News]()
-    private var viewModels: [WelcomeModel] = []
     var testimonials = [Testimonials]()
     
     private var timer : Timer?
