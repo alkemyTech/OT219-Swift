@@ -8,33 +8,51 @@
 import Foundation
 
 protocol HomeViewModelDelegate: AnyObject {
-    func didGetNewsData()
-    func didFailGettingNewsData(error: String)
-    func didFailGettingNewsData()
-    func didGetSlidesData()
-    func didFailGettingSlidesData()
+func didGetNewsData()
+func didFailGettingNewsData(error: String)
+func didGetTestimonialsData()
+func didFailGettingTestimonialsData(error: String)
+func didGetWelcomeData()
+func didFailGettingWelcomeData(error: String)
+func didFailGettingNewsData()
+func didGetSlidesData()
+func didFailGettingSlidesData()
 }
 
 protocol TimerNewsUpdate: AnyObject {
     func updateImageView(at index:Int)
 }
 
-
-
 class HomeViewModel {
-    
     weak var delegate: HomeViewModelDelegate?
-    
     weak var delegateTimer: TimerNewsUpdate?
-    
     private var sectionsTitles = ["News"]
     
     var news = [News]()
+    var testimonials = [Testimonials]()
     
     private var timer : Timer?
     
     private var currentCellIndex = 0
     
+    // MARK: - Welcome methods
+    
+    func getDataWelcome() {
+        if WelcomeViewModel().getDescriptionWelcomeViewModel().isEmpty || WelcomeViewModel().getImage().isEmpty{
+            let error = "Error getting data on Welcome View"
+            self.delegate?.didFailGettingWelcomeData(error: error)
+        }
+    }
+    
+    func getDescriptionWelcome() -> String{
+        WelcomeViewModel().getDescriptionWelcomeViewModel()
+    }
+    
+    func getImageWelcome() -> String {
+        WelcomeViewModel().getImage()
+    }
+    
+    // MARK: News methods
     var newsService: NewsFetching
     
     init(newsService: NewsFetching = NewsService()){
@@ -65,7 +83,7 @@ class HomeViewModel {
     }
     
     func startTimer(){
-        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveNextIndex), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 5.5, target: self, selector: #selector(moveNextIndex), userInfo: nil, repeats: true)
     }
     
     func stopTimer(){
@@ -104,4 +122,26 @@ class HomeViewModel {
         return slides[index]
     }
     
+}
+
+//MARK: - Testimonials Logic
+extension HomeViewModel {
+    func getTestimonialsData() {
+        DispatchQueue.global().async {
+            TestimonialsService.shared.fetchTestimonials { [weak self] testimonials in
+                self?.testimonials = testimonials
+                self?.getNewsCount() == 0 ? self?.delegate?.didFailGettingTestimonialsData(error: ApiError.noTestimonialsData.errorDescription!) : self?.delegate?.didGetTestimonialsData()
+            } onError: { [weak self] error in
+                self?.delegate?.didFailGettingTestimonialsData(error: error)
+            }
+        }
+    }
+    
+    func getTestimonials(at index: Int) -> Testimonials {
+        return testimonials[index]
+    }
+    
+    func getTestimonialsCount() -> Int{
+        return testimonials.count
+    }
 }
