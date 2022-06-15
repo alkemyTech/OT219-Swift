@@ -7,8 +7,12 @@
 
 import Foundation
 
-struct TestimonialsService {
-    
+protocol TestimonialsFetching {
+    func fetchTestimonials(onComplete: @escaping ([Testimonials]) -> (), onError: @escaping (String) -> ())
+}
+
+struct TestimonialsService: TestimonialsFetching {
+
     static let shared = TestimonialsService()
     
     private let baseURL = ProcessInfo.processInfo.environment["baseURL"]!

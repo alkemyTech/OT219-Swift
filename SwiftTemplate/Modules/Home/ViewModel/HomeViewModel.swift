@@ -52,9 +52,11 @@ class HomeViewModel {
     
     // MARK: News methods
     var newsService: NewsFetching
+    var testimonialService: TestimonialsFetching
     
-    init(newsService: NewsFetching = NewsService()){
+    init(newsService: NewsFetching = NewsService(), testimonio: TestimonialsFetching = TestimonialsService()){
         self.newsService = newsService
+        self.testimonialService = testimonio
     }
     
     func getNewsData(){
@@ -101,9 +103,10 @@ class HomeViewModel {
 
 //MARK: - Testimonials Logic
 extension HomeViewModel {
+    
     func getTestimonialsData() {
         DispatchQueue.global().async {
-            TestimonialsService.shared.fetchTestimonials { [weak self] testimonials in
+            self.testimonialService.fetchTestimonials { [weak self] testimonials in
                 self?.testimonials = testimonials
                 self?.getNewsCount() == 0 ? self?.delegate?.didFailGettingTestimonialsData(error: ApiError.noTestimonialsData.errorDescription!) : self?.delegate?.didGetTestimonialsData()
             } onError: { [weak self] error in
