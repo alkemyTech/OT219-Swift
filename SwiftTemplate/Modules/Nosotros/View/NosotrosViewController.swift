@@ -101,6 +101,8 @@ class NosotrosViewController: UIViewController {
 
         view.backgroundColor = .white
         
+        showToast(message: "Nosotros", font: UIFont.systemFont(ofSize: 20))
+        
         view.addSubview(logoImage)
         view.addSubview(nosotrosHeader)
         view.addSubview(serParteNosotrosButton)
@@ -153,17 +155,37 @@ class NosotrosViewController: UIViewController {
     }
     
     func configureNavigationBar() {
+        navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.barTintColor = .darkGray
         navigationController?.navigationBar.barStyle = .black
         navigationItem.title = "Nosotros"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenuToggle))
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
+
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenuToggle))
     }
     
     @objc func handleMenuToggle() {
         delegate?.handleMenuToggle(forMenuOption: nil)
     }
     
-
+    func showToast(message : String, font: UIFont) {
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 90, y: self.view.frame.size.height-100, width: 180, height: 42))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        toastLabel.textColor = UIColor.white
+        toastLabel.font = font
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        toastLabel.textAlignment = .center;
+        UIView.animate(withDuration: 2.0, delay: 0, options: .curveEaseInOut, animations: {
+             toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
+    }
 }
 
 extension NosotrosViewController: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{

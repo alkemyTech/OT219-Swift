@@ -15,20 +15,15 @@ protocol LoginViewModelDelegate: AnyObject{
 class LoginViewModel{
     	
     weak var delegate: LoginViewModelDelegate?
-    
-    private var email = "cristian"
-    private var password = "cristian"
-    
-    func checkLogin(){
-        let user = LoginUser(email: email, password: password)
+        
+    func login(email: String, pass: String) {
+        let user = LoginUser(email: email, password: pass)
         LoginService.shared.login(user: user) { [weak self] token in
             let userDefaults = UserDefaults.standard
             userDefaults.set(token, forKey: "token")
             self?.delegate?.didSuccessUserLogin()
-            
         } onError: { [weak self] error in
             self?.delegate?.didFailUserLogin(error: error)
         }
-        
     }
 }

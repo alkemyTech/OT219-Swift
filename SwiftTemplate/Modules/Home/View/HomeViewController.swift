@@ -14,6 +14,7 @@ class HomeViewController: UIViewController {
     //MARK: - Properties
     weak var delegate: HomeViewControllerDelegate?
     
+
     lazy var viewModel: HomeViewModel = {
         let homeViewModel = HomeViewModel()
         homeViewModel.delegate = self
@@ -22,6 +23,7 @@ class HomeViewController: UIViewController {
     }()
     
     lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 1700)
+
     
     lazy var scrollView: UIScrollView = {
         let view = UIScrollView(frame: .zero)
@@ -222,6 +224,12 @@ class HomeViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(containerView)
 
+
+        containerView.addSubview(logoImage)
+        logoImage.anchor(top: containerView.safeAreaLayoutGuide.topAnchor)
+        logoImage.setHeight(90)
+        logoImage.centerX(inView: containerView)
+
         
         [
             logoView, welcomeHeader, welcomeImageView, welcomeTitle, welcomeDescription, contactButton,
@@ -312,8 +320,8 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.barStyle = .black
         navigationItem.title = "Home"
-        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
-        navigationController?.navigationBar.titleTextAttributes = textAttributes
+
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenuToggle))
     }
     
@@ -331,6 +339,7 @@ class HomeViewController: UIViewController {
         present(alert, animated: true)
     }
 }
+
 //MARK: - TableView Delegate, Datasource
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

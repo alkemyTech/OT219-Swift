@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LogInViewController" customModule="SwiftTemplate" customModuleProvider="target">
             <connections>
+                <outlet property="emailTextField" destination="xce-Nf-Gl0" id="GFh-SQ-hdk"/>
+                <outlet property="passTextField" destination="NV7-91-lpB" id="3xL-Bg-14W"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -47,6 +49,9 @@
                     <color key="tintColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" title="Login"/>
+                    <connections>
+                        <action selector="navigateToHome:" destination="-1" eventType="touchUpInside" id="6jp-ab-gBg"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZV7-cg-8D9">
                     <rect key="frame" x="20" y="692" width="374" height="31"/>
