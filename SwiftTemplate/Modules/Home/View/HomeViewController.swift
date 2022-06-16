@@ -14,7 +14,14 @@ class HomeViewController: UIViewController {
     //MARK: - Properties
     weak var delegate: HomeViewControllerDelegate?
     
-    lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 2000)
+    lazy var viewModel: HomeViewModel = {
+        let homeViewModel = HomeViewModel()
+        homeViewModel.delegate = self
+        homeViewModel.delegateTimer = self
+        return homeViewModel
+    }()
+    
+    lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 1700)
     
     lazy var scrollView: UIScrollView = {
         let view = UIScrollView(frame: .zero)
@@ -39,40 +46,7 @@ class HomeViewController: UIViewController {
         return image
     }()
     
-    lazy var testimonialsTableView: UITableView = {
-        let tableV = UITableView()
-        tableV.separatorStyle = .none
-        tableV.backgroundColor = .white
-        tableV.isHidden = true
-        return tableV
-    }()
-    
-    private var testimonialsHeader: CustomLabel = {
-        let label = CustomLabel(label: "Testimoniales", fontSize: 20, fontWeight: .bold)
-        return label
-    }()
-    
-    private var newsHeader: CustomLabel = {
-        let label = CustomLabel(label: "News", fontSize: 20, fontWeight: .bold)
-        return label
-    }()
-    
-    private var welcomeHeader: CustomLabel = {
-        let label = CustomLabel(label: "Welcome", fontSize: 20, fontWeight: .bold)
-        return label
-    }()
-    
-    
-    lazy var newsCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let collectionView = UICollectionView(frame: .zero	, collectionViewLayout: layout)
-        collectionView.register(NewsCollectionViewCell.self, forCellWithReuseIdentifier: NewsCollectionViewCell.identifier)
-        collectionView.register(SeeMoreCollectionViewCell.self, forCellWithReuseIdentifier: SeeMoreCollectionViewCell.identifier)
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.isHidden = true
-        return collectionView
-    }()
+    //MARK: - Welcome props
     
     private var welcomeImageView: CustomImage = {
         let image = CustomImage(imageName: "ong", mode: .scaleAspectFill)
@@ -95,28 +69,39 @@ class HomeViewController: UIViewController {
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         return button
     }()
-
     
-    lazy var viewModel: HomeViewModel = {
-        let homeViewModel = HomeViewModel()
-        homeViewModel.delegate = self
-        homeViewModel.delegateTimer = self
-        return homeViewModel
+    private var welcomeHeader: CustomLabel = {
+        let label = CustomLabel(label: "Welcome", fontSize: 20, fontWeight: .bold)
+        return label
     }()
     
-
+    //MARK: - News props
+    
+    lazy var newsCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero	, collectionViewLayout: layout)
+        collectionView.register(NewsCollectionViewCell.self, forCellWithReuseIdentifier: NewsCollectionViewCell.identifier)
+        collectionView.register(SeeMoreCollectionViewCell.self, forCellWithReuseIdentifier: SeeMoreCollectionViewCell.identifier)
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isHidden = true
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        return collectionView
+    }()
+    
+    private var newsHeader: CustomLabel = {
+        let label = CustomLabel(label: "News", fontSize: 20, fontWeight: .bold)
+        return label
+    }()
+    
     private var serParteButtonNews: CustomButton = {
         let button = CustomButton(titleLabel: "¡Quiero ser parte!", width: 200)
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         return button
     }()
     
-    private var verTestimoniosButton: CustomButton = {
-        let button = CustomButton(titleLabel: "Ver todos los testimonios", width: 300)
-        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
-        return button
-    }()
-    
+    //MARK: - Nosotros props
     
     private var nosotrosHeader:CustomLabel = {
         let label = CustomLabel(label: "¡Nuestro staff!", fontSize: 20, fontWeight: .bold)
@@ -160,6 +145,7 @@ class HomeViewController: UIViewController {
         collectionView.isPagingEnabled = true
         return collectionView
     }()
+    
     private var serParteNosotrosButton: CustomButton = {
         let button = CustomButton(titleLabel: "¡Ver todos los miembros!", width: 250)
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
@@ -187,6 +173,29 @@ class HomeViewController: UIViewController {
         return image
     }()
     
+    //MARK: - Testimonials props
+    
+    lazy var testimonialsTableView: UITableView = {
+        let tableV = UITableView()
+        tableV.separatorStyle = .none
+        tableV.backgroundColor = .white
+        tableV.isHidden = true
+        tableV.delegate = self
+        tableV.dataSource = self
+        return tableV
+    }()
+    
+    private var verTestimoniosButton: CustomButton = {
+        let button = CustomButton(titleLabel: "Ver todos los testimonios", width: 300)
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
+        return button
+    }()
+    
+    private var testimonialsHeader: CustomLabel = {
+        let label = CustomLabel(label: "Testimoniales", fontSize: 20, fontWeight: .bold)
+        return label
+    }()
+    
     //MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -195,18 +204,11 @@ class HomeViewController: UIViewController {
         setupView()
         didGetWelcomeData()
         
-        
-        
+
         //ViewModel
         viewModel.getTestimonialsData()
         viewModel.getNewsData()
         viewModel.startTimer()
-        
-        newsCollectionView.delegate = self
-        newsCollectionView.dataSource = self
-        
-        testimonialsTableView.delegate = self
-        testimonialsTableView.dataSource = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -310,6 +312,8 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.barStyle = .black
         navigationItem.title = "Home"
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenuToggle))
     }
     
@@ -344,35 +348,81 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: - CollectionView Delegate, DataSource
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return viewModel.getNewsCount() > 0 ? 1 : 0
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch collectionView {
+        case newsCollectionView:
+            return CGSize(width: view.frame.width, height: 400)
+        case collectionViewNosotros:
+            return CGSize(width: collectionView.frame.width/4, height: 100)
+        default:
+            break
+        }
         return CGSize(width: view.frame.width, height: 400)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.row == 3 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SeeMoreCollectionViewCell.identifier, for: indexPath) as? SeeMoreCollectionViewCell else {
-                return UICollectionViewCell()
+        switch collectionView {
+        case newsCollectionView:
+            if indexPath.row == 3 {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SeeMoreCollectionViewCell.identifier, for: indexPath) as? SeeMoreCollectionViewCell else {
+                    return UICollectionViewCell()
+                }
+                return cell
+            } else {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCollectionViewCell.identifier, for: indexPath) as? NewsCollectionViewCell else {
+                    return UICollectionViewCell()
+                }
+                let new = viewModel.getNews(at: indexPath.row)
+                cell.configureCell(with: new)
+                return cell
             }
+        case collectionViewNosotros:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCollectionViewCell.identifier, for: indexPath) as? ProfileCollectionViewCell else { return UICollectionViewCell()}
+            
+
             return cell
-        } else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCollectionViewCell.identifier, for: indexPath) as? NewsCollectionViewCell else {
-                return UICollectionViewCell()
-            }
-            let new = viewModel.getNews(at: indexPath.row)
-            cell.configureCell(with: new)
-            return cell
+        default:
+            break
         }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCollectionViewCell.identifier, for: indexPath) as? ProfileCollectionViewCell else { return UICollectionViewCell()}
+        
+
+        return cell
+     
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch collectionView {
+        case newsCollectionView:
+            return viewModel.getNewsCount()
+        case collectionViewNosotros:
+            return 10
+        default:
+            break
+        }
         return viewModel.getNewsCount()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        if collectionView == newsCollectionView{
+            return 0
+        }
+        return 10
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == collectionViewNosotros{
+            let viewController = NosotrosDetailViewController()
+            navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if collectionView == collectionViewNosotros{
+            pageControlNosotros.currentPage = indexPath.row
+        }
     }
 }
 
