@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
     //MARK: - Properties
     weak var delegate: HomeViewControllerDelegate?
     
-    lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 900)
+    lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 1000)
     
     lazy var scrollView: UIScrollView = {
         let view = UIScrollView(frame: .zero)
@@ -206,7 +206,7 @@ class HomeViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(scrollView)
         scrollView.addSubview(containerView)
-        
+
         containerView.addSubview(logoImage)
         logoImage.anchor(top: containerView.safeAreaLayoutGuide.topAnchor)
         logoImage.setHeight(90)
@@ -259,6 +259,7 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.barStyle = .black
         navigationItem.title = "Home"
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenuToggle))
     }
     
@@ -276,6 +277,7 @@ class HomeViewController: UIViewController {
         present(alert, animated: true)
     }
 }
+
 //MARK: - TableView Delegate, Datasource
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

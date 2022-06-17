@@ -19,7 +19,6 @@ struct LoginService {
         	
         guard let email = user.email else {return}
         guard let password = user.password else {return}
-
         
         let params = ["email": email, "password": password]
         
