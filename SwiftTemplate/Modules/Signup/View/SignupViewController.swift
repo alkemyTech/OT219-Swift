@@ -18,12 +18,13 @@ class SignupViewController: UIViewController {
         return view
     }()
     
-    private let logoImage: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: "logo-Alkemy")
-        image.contentMode = .scaleAspectFill
-        return image
-    }()
+    private var logoImage: UIImageView = {
+         let imageView = UIImageView()
+         imageView.contentMode = .scaleAspectFit
+         imageView.clipsToBounds = true
+         imageView.image = UIImage(named: "LOGO-SOMOS MAS")
+         return imageView
+     }()
     
     private let emailTextField: UITextField = {
         let spacer = UIView()
@@ -32,12 +33,11 @@ class SignupViewController: UIViewController {
         let textField = UITextField()
         textField.leftView = spacer
         textField.leftViewMode = .always
-        textField.borderStyle = .none
-        textField.textColor = .white
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.textColor = .black
         textField.keyboardType = .emailAddress
-        textField.backgroundColor = UIColor(white: 1, alpha: 0.1)
+        textField.placeholder = "Email"
         textField.setHeight(40)
-        textField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [.foregroundColor: UIColor(white: 1, alpha: 0.7)])
         return textField
     }()
     
@@ -48,11 +48,10 @@ class SignupViewController: UIViewController {
         let textField = UITextField()
         textField.leftView = spacer
         textField.leftViewMode = .always
-        textField.borderStyle = .none
-        textField.textColor = .white
-        textField.backgroundColor = UIColor(white: 1, alpha: 0.1)
+        textField.borderStyle = .roundedRect
+        textField.textColor = .black
         textField.setHeight(40)
-        textField.attributedPlaceholder = NSAttributedString(string: "Fullname", attributes: [.foregroundColor: UIColor(white: 1, alpha: 0.7)])
+        textField.placeholder = "Fullname"
         return textField
     }()
     
@@ -63,28 +62,26 @@ class SignupViewController: UIViewController {
         let textField = UITextField()
         textField.leftView = spacer
         textField.leftViewMode = .always
-        textField.borderStyle = .none
-        textField.textColor = .white
+        textField.borderStyle = .roundedRect
+        textField.textColor = .black
         textField.isSecureTextEntry = true
-        textField.backgroundColor = UIColor(white: 1, alpha: 0.1)
         textField.setHeight(40)
-        textField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [.foregroundColor: UIColor(white: 1, alpha: 0.7)])
+        textField.placeholder = "Password"
         return textField
     }()
     
-    private let reEnterPasswordTextField: UITextField = {
+    private let confirmPasswordTextField: UITextField = {
         let spacer = UIView()
         spacer.setDimensions(height: 40, width: 12)
         
         let textField = UITextField()
         textField.leftView = spacer
         textField.leftViewMode = .always
-        textField.borderStyle = .none
-        textField.textColor = .white
+        textField.borderStyle = .roundedRect
+        textField.textColor = .black
         textField.isSecureTextEntry = true
-        textField.backgroundColor = UIColor(white: 1, alpha: 0.1)
+        textField.placeholder = "Confirm Password"
         textField.setHeight(40)
-        textField.attributedPlaceholder = NSAttributedString(string: "Re enter Password", attributes: [.foregroundColor: UIColor(white: 1, alpha: 0.7)])
         return textField
     }()
     
@@ -97,9 +94,9 @@ class SignupViewController: UIViewController {
     
     private let signupButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Sign Up", for: .normal)
+        button.setTitle("Registrarme", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
+        button.backgroundColor = UIColor(named: "ButtonColor")
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.setHeight(40)
@@ -108,9 +105,10 @@ class SignupViewController: UIViewController {
     
     private let alreadyHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Already have an Account? Sign in", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitle("Ya tenes cuenta? Ingresa!", for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        button.addTarget(self, action: #selector(showLogin), for: .touchUpInside)
         return button
     }()
     
@@ -120,22 +118,13 @@ class SignupViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        setupGradientLayer()
+        navigationItem.setHidesBackButton(true, animated: true)
         setupView()
         setupObserverKeyboard()
   
         configurationButton()
         viewModel = SignUpViewModel()
         viewModel?.delegate = self
-//
-//        lazy var viewModel: SignUpViewModel = {
-//            let signUpViewModel = SignUpViewModel()
-//            signUpViewModel.delegate = self
-//            return signUpViewModel
-//        }()
-        
-        //Call this function when user press register button IBAction 
-//        viewModel.register(name: "String", email: "String", pass: "String")
     }
 
     //MARK: - Helpers
@@ -152,30 +141,28 @@ class SignupViewController: UIViewController {
         
         scrollView.addSubview(logoImage)
         logoImage.centerX(inView: scrollView)
-        logoImage.setDimensions(height: 80, width: 120)
-        logoImage.anchor(top: scrollView.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
+        logoImage.setHeight(200)
+        logoImage.anchor(top: scrollView.safeAreaLayoutGuide.topAnchor, paddingTop: 100)
         
         
-        let stack = UIStackView(arrangedSubviews: [emailTextField,fullnameTextfield, passwordTextField ,reEnterPasswordTextField, labelSamePassword,signupButton])
+        let stack = UIStackView(arrangedSubviews: [emailTextField,fullnameTextfield, passwordTextField ,confirmPasswordTextField, labelSamePassword,signupButton])
         stack.axis = .vertical
         stack.spacing = 20
         scrollView.addSubview(stack)
-        stack.anchor(top: logoImage.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 42, paddingLeft: 32, paddingRight: 32)
+        stack.anchor(top: logoImage.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
         
         
         scrollView.addSubview(alreadyHaveAccountButton)
         
         alreadyHaveAccountButton.centerX(inView: scrollView)
-        alreadyHaveAccountButton.anchor(bottom: scrollView.safeAreaLayoutGuide.bottomAnchor)
+        alreadyHaveAccountButton.anchor(top: stack.bottomAnchor, paddingTop: 10)
     
     }
     
-    private func setupGradientLayer(){
-        let gradient = CAGradientLayer()
-        gradient.colors = [UIColor.systemGray.cgColor, UIColor.systemBlue.cgColor]
-        gradient.locations = [0,1]
-        view.layer.addSublayer(gradient)
-        gradient.frame = view.frame
+    @objc func showLogin(){
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
     }
     
     func setupObserverKeyboard(){
@@ -189,7 +176,7 @@ class SignupViewController: UIViewController {
         
         passwordTextField.addTarget(self, action: #selector(self.validatePassword), for: .editingDidEnd)
         
-        reEnterPasswordTextField.addTarget(self, action: #selector(self.validateSamePassword), for: .allEditingEvents)
+        confirmPasswordTextField.addTarget(self, action: #selector(self.validateSamePassword), for: .allEditingEvents)
         
         signupButton.addTarget(self, action: #selector(self.registerUser), for: .touchUpInside)
     }
@@ -216,7 +203,7 @@ class SignupViewController: UIViewController {
     }
     
     @objc func validateSamePassword(){
-        viewModel?.validateSamePassword(valueA: passwordTextField.text, valueB: reEnterPasswordTextField.text)
+        viewModel?.validateSamePassword(valueA: passwordTextField.text, valueB: confirmPasswordTextField.text)
     }
     
     @objc func registerUser(){
@@ -239,7 +226,7 @@ extension SignupViewController: SignUpViewModelDelegate {
     }
     
     func activateButton() {
-        signupButton.backgroundColor = .systemBlue
+        signupButton.backgroundColor = UIColor(named: "ButtonColor")
         signupButton.isEnabled = true
     }
     
@@ -252,7 +239,8 @@ extension SignupViewController: SignUpViewModelDelegate {
     func userRegisterSuccess() {
         let alert = UIAlertController(title: "Usuario registrado de manera exitosa", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {(action: UIAlertAction!) in
-            _ = self.navigationController?.popViewController(animated: true)
+            let homeVC = HomeViewController()
+            self.navigationController?.pushViewController(homeVC, animated: true)
         }))
         self.present(alert, animated: true, completion: nil)
     }
