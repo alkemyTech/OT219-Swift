@@ -20,6 +20,16 @@ class Test_All_HomeViewModel: XCTestCase {
     
     //MARK: - Welcome Methods
     
+    func test_LookDescriptionWelcomeData_NotNil(){
+        let data = homeViewModel.getDescriptionWelcome()
+        XCTAssertNotNil(data)
+    }
+    
+    func test_LookImagenWelcomeData_NotNil(){
+        let data = homeViewModel.getImageWelcome()
+        XCTAssertNotNil(data)
+    }
+    
     //MARK: - News
     func test_NewsService_ShouldReturnData(){
         let mock = MockNewsServiceSuccess()
