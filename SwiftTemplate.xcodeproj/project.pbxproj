@@ -22,6 +22,7 @@
 		403C21B1284AD2A400026635 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403C21B0284AD2A400026635 /* MenuController.swift */; };
 		403C21C4284BD07800026635 /* MenuOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403C21C3284BD07800026635 /* MenuOption.swift */; };
 		403C21C6284BD09F00026635 /* MenuOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403C21C5284BD09F00026635 /* MenuOptionCell.swift */; };
+		4040EADD285CF858006669E7 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4040EADC285CF858006669E7 /* ContactViewController.swift */; };
 		4054DF81283EDE6F00E781B6 /* UserRegisterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DF80283EDE6F00E781B6 /* UserRegisterData.swift */; };
 		4054DF83283EDE8300E781B6 /* NewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DF82283EDE8300E781B6 /* NewUser.swift */; };
 		4054DF85283EDF0C00E781B6 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DF84283EDF0C00E781B6 /* SignUpViewModel.swift */; };
@@ -85,6 +86,7 @@
 		403C21B0284AD2A400026635 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		403C21C3284BD07800026635 /* MenuOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOption.swift; sourceTree = "<group>"; };
 		403C21C5284BD09F00026635 /* MenuOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOptionCell.swift; sourceTree = "<group>"; };
+		4040EADC285CF858006669E7 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		4054DF80283EDE6F00E781B6 /* UserRegisterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterData.swift; sourceTree = "<group>"; };
 		4054DF82283EDE8300E781B6 /* NewUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUser.swift; sourceTree = "<group>"; };
 		4054DF84283EDF0C00E781B6 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
@@ -205,10 +207,11 @@
 			isa = PBXGroup;
 			children = (
 				03D392E028575D730004CB10 /* Onboarding */,
-				F6C342BC2845BE72005F877F /* Home */,
 				F6EDEF202845236C00BB49B9 /* Login */,
-				F62BC7B7284FB15B006C52B3 /* Nosotros */,
 				0394793C283ECC47000E75C8 /* Signup */,
+				F6C342BC2845BE72005F877F /* Home */,
+				F62BC7B7284FB15B006C52B3 /* Nosotros */,
+				4040EADB285CF838006669E7 /* Contact */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -237,6 +240,22 @@
 				54065947B66C7BED0004E9F4 /* Pods-SwiftTemplate.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		4040EADA285CF7E9006669E7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4040EADC285CF858006669E7 /* ContactViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4040EADB285CF838006669E7 /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				4040EADA285CF7E9006669E7 /* View */,
+			);
+			path = Contact;
 			sourceTree = "<group>";
 		};
 		4050AAA7284D9ED3004B16B1 /* SideMenu */ = {
@@ -615,6 +634,7 @@
 			files = (
 				03947942283ECC47000E75C8 /* SignupViewController.swift in Sources */,
 				033B7248285880FC0090EEED /* WelcomeViewModel.swift in Sources */,
+				4040EADD285CF858006669E7 /* ContactViewController.swift in Sources */,
 				03D392EB2857604B0004CB10 /* TestimonialsCell.swift in Sources */,
 				403C21B1284AD2A400026635 /* MenuController.swift in Sources */,
 				F62BC7BD284FB1D2006C52B3 /* NosotrosViewController.swift in Sources */,

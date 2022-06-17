@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
 
         if userSessionRepository.validateCurrentUser(){
-            let homeViewController = ContainerController()
+            let homeViewController = ContactViewController()
             let navigationController = UINavigationController(rootViewController: homeViewController)
             window?.rootViewController = navigationController
             window?.makeKeyAndVisible()
