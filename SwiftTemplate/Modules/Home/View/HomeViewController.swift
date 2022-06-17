@@ -225,10 +225,10 @@ class HomeViewController: UIViewController {
         scrollView.addSubview(containerView)
 
 
-        containerView.addSubview(logoImage)
-        logoImage.anchor(top: containerView.safeAreaLayoutGuide.topAnchor)
-        logoImage.setHeight(90)
-        logoImage.centerX(inView: containerView)
+        containerView.addSubview(logoView)
+        logoView.anchor(top: containerView.safeAreaLayoutGuide.topAnchor)
+        logoView.setHeight(90)
+        logoView.centerX(inView: containerView)
 
         
         [
