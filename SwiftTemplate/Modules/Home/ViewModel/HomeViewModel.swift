@@ -5,7 +5,7 @@
 //  Created by Cristian Sancricca on 31/05/2022.
 //
 
-import Foundation
+import UIKit
 
 protocol HomeViewModelDelegate: AnyObject {
     func didGetNewsData()
@@ -118,5 +118,25 @@ extension HomeViewModel {
     
     func getTestimonialsCount() -> Int{
         return testimonials.count
+    }
+}
+
+//MARK: - Custom classes
+
+extension HomeViewModel {
+    func createButton(title: String, width: CGFloat, fontSize: CGFloat, fontWeight: UIFont.Weight ) ->CustomButton{
+        let button = CustomButton(titleLabel: title, width: width)
+        button.titleLabel?.font = .systemFont(ofSize: fontSize, weight: fontWeight)
+        return button
+    }
+    
+    func createImage(image: String, mode: UIView.ContentMode, radius: CGFloat = 0) -> CustomImage{
+        let image = CustomImage(imageName: image, mode: mode, radius: radius)
+        return image
+    }
+    
+    func createLabel(label: String, fontSize: CGFloat, fontWeight: UIFont.Weight) -> CustomLabel{
+        let label = CustomLabel(label: label, fontSize: fontSize, fontWeight: fontWeight)
+        return label
     }
 }

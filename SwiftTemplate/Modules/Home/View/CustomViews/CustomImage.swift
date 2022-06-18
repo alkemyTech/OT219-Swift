@@ -9,11 +9,12 @@ import UIKit
 
 class CustomImage: UIImageView {
 
-    init(imageName: String, mode: ContentMode ){
+    init(imageName: String, mode: ContentMode, radius: CGFloat = 0 ){
         super.init(frame: .zero)
         contentMode = mode
         clipsToBounds = true
         image = UIImage(named: imageName)
+        layer.cornerRadius = radius
         
     }
     
