@@ -54,19 +54,24 @@ class ContactViewController: UIViewController {
     private let msgTextField: UITextView = {
         let textField = UITextView()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.isScrollEnabled = true
+        textField.sizeToFit()
         textField.backgroundColor = .white
         textField.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         textField.textColor = .black
-        textField.layer.cornerRadius = 10
+        textField.layer.cornerRadius = 5
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.layer.borderWidth = 0.5
         textField.textContainerInset = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 10)
+        textField.setHeight(150)
         return textField
     }()
     
     private let placeholderLabel: UILabel = {
         let placeholderLabel = UILabel()
         placeholderLabel.text = "Mensaje"
+        placeholderLabel.sizeToFit()
+        placeholderLabel.textColor = .tertiaryLabel
         return placeholderLabel
     }()
     
@@ -93,6 +98,7 @@ class ContactViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupObserverKeyboard()
     }
     
     //MARK: - Helpers
@@ -105,7 +111,7 @@ class ContactViewController: UIViewController {
         scrollView.addSubview(logoImage)
         logoImage.centerX(inView: scrollView)
         logoImage.setDimensions(height: 80, width: 120)
-        logoImage.anchor(top: scrollView.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
+        logoImage.anchor(top: scrollView.safeAreaLayoutGuide.topAnchor, paddingTop: 20)
 
         //Label
         scrollView.addSubview(labelContactate)
@@ -113,40 +119,60 @@ class ContactViewController: UIViewController {
         labelContactate.anchor(top: logoImage.bottomAnchor, paddingTop: 20)
 
         //Stack
-        let stack = UIStackView(arrangedSubviews: [fullnameTextfield, emailTextField])
+        let stack = UIStackView(arrangedSubviews: [fullnameTextfield, emailTextField, msgTextField])
         stack.axis = .vertical
         stack.spacing = 20
         scrollView.addSubview(stack)
-        stack.anchor(top: labelContactate.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
+        stack.anchor(top: labelContactate.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 30, paddingLeft: 20, paddingRight: 20)
         
         //TextView
         msgTextField.delegate = self
-        msgTextField.isScrollEnabled = false
-        scrollView.addSubview(msgTextField)
-        msgTextField.anchor(top: stack.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
-        
-        placeholderLabel.sizeToFit()
         msgTextField.addSubview(placeholderLabel)
         placeholderLabel.frame.origin = CGPoint(x: 20, y: (msgTextField.font?.pointSize)! / 2)
-        placeholderLabel.textColor = .tertiaryLabel
         placeholderLabel.isHidden = !msgTextField.text.isEmpty
         
         //Button
         scrollView.addSubview(sendMessageButton)
-        sendMessageButton.anchor(top: msgTextField.bottomAnchor, left: scrollView.leftAnchor, paddingTop: 20, paddingLeft: 20)
+        sendMessageButton.anchor(top: msgTextField.bottomAnchor, left: scrollView.leftAnchor, paddingTop: 30, paddingLeft: 20)
+        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+    }
+    
+    func setupObserverKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 }
 
+//MARK: - UITextViewDelegate
 extension ContactViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         placeholderLabel.isHidden = !textView.text.isEmpty
-        let size = CGSize(width: view.frame.width, height: .infinity)
-        let estimatedSize = textView.sizeThatFits(size)
-        
-        textView.constraints.forEach{(constraint) in
-            if constraint.firstAttribute == .height {
-                constraint.constant = estimatedSize.height
-            }
+    }
+}
+
+//MARK: - Func Keyboard Handlers
+extension ContactViewController {
+    @objc private func hideKeyboard(){
+        self.view.endEditing(true)
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if msgTextField.isFirstResponder {
+            guard let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            let bottomSpace = self.scrollView.frame.height - (sendMessageButton.frame.origin.y + sendMessageButton.frame.height)
+            self.scrollView.frame.origin.y -= keyboardHeight - bottomSpace + 10
         }
+    }
+    
+    @objc private func keyboardWillHide() {
+        self.scrollView.frame.origin.y = 0
     }
 }
