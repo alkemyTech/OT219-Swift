@@ -15,7 +15,6 @@ class CustomButton: UIButton {
         setTitle(titleLabel, for: .normal)
         backgroundColor = UIColor(named: "ButtonColor")
         setDimensions(height: 50, width: width)
-        //titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
         layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
         layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         layer.shadowOpacity = 1.0
