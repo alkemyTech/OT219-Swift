@@ -29,9 +29,8 @@ class NosotrosViewController: UIViewController {
     
     lazy var rolLabelNosotros = viewModel.createLabel(label: "Coordinador", fontSize: 20, fontWeight: .regular)
     
-    private var captionLabelNosotros : CustomLabel = {
-        let label = CustomLabel(label: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tristique ex massa, sit amet viverra nisi porta eu. Aliquam erat volutpat. Nulla vel aliquet enim. Vivamus aliquet nibh nec magna volutpat", fontSize: 16, fontWeight: .regular)
-        label.numberOfLines = 0
+    lazy var captionLabelNosotros: CustomLabel = {
+        let label = viewModel.createLabel(label: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tristique ex massa, sit amet viverra nisi porta eu. Aliquam erat volutpat. Nulla vel aliquet enim. Vivamus aliquet nibh nec magna volutpat", fontSize: 16, fontWeight: .regular, labelLines: 0)
         label.lineBreakMode = .byWordWrapping
         label.sizeToFit()
         return label
