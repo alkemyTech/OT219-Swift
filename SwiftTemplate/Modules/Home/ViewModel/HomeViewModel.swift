@@ -136,8 +136,7 @@ extension HomeViewModel {
     }
     
     func createLabel(label: String, fontSize: CGFloat, fontWeight: UIFont.Weight, labelLines: Int = 1) -> CustomLabel{
-        let label = CustomLabel(label: label, fontSize: fontSize, fontWeight: fontWeight)
-        label.numberOfLines = labelLines
+        let label = CustomLabel(label: label, fontSize: fontSize, fontWeight: fontWeight, labelLines: labelLines)
         return label
     }
 }
