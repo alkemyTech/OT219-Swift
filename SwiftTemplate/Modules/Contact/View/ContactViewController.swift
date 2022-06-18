@@ -9,6 +9,9 @@ import UIKit
 
 class ContactViewController: UIViewController {
     //MARK: - Properties
+    
+    private var didChangeTextOrHideKeyboard = true
+    
     private let scrollView: UIScrollView = {
         let view = UIScrollView()
         return view
@@ -99,6 +102,7 @@ class ContactViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupObserverKeyboard()
+        configureNavigationBar()
     }
     
     //MARK: - Helpers
@@ -138,10 +142,30 @@ class ContactViewController: UIViewController {
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
     }
     
+    func configureNavigationBar() {
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.navigationBar.barTintColor = .darkGray
+        navigationController?.navigationBar.barStyle = .black
+        navigationItem.title = "Contacto"
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
+    }
+    
     func setupObserverKeyboard() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        emailTextField.addTarget(self, action: #selector(self.validateEmail), for: .editingChanged)
+        fullnameTextfield.addTarget(self, action: #selector(self.validateName), for: .editingChanged)
+    }
+    
+    @objc func validateEmail() {
+        didChangeTextOrHideKeyboard = true
+    }
+    
+    @objc func validateName() {
+        didChangeTextOrHideKeyboard = true
     }
     
     deinit {
@@ -164,15 +188,17 @@ extension ContactViewController {
     }
     
     @objc private func keyboardWillShow(notification: NSNotification) {
-        if msgTextField.isFirstResponder {
+        if msgTextField.isFirstResponder && (didChangeTextOrHideKeyboard == true) {
             guard let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
             let keyboardHeight = keyboardFrame.cgRectValue.height
             let bottomSpace = self.scrollView.frame.height - (sendMessageButton.frame.origin.y + sendMessageButton.frame.height)
             self.scrollView.frame.origin.y -= keyboardHeight - bottomSpace + 10
+            didChangeTextOrHideKeyboard = false
         }
     }
     
     @objc private func keyboardWillHide() {
         self.scrollView.frame.origin.y = 0
+        didChangeTextOrHideKeyboard = true
     }
 }
