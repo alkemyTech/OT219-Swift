@@ -11,7 +11,8 @@ class ContactViewController: UIViewController {
     //MARK: - Properties
     
     private var didChangeTextOrHideKeyboard = true
-    
+    private var viewModel: ContactViewModel?
+
     private let scrollView: UIScrollView = {
         let view = UIScrollView()
         return view
@@ -82,7 +83,6 @@ class ContactViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Enviar mensaje", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.setHeight(50)
@@ -103,6 +103,9 @@ class ContactViewController: UIViewController {
         setupView()
         setupObserverKeyboard()
         configureNavigationBar()
+        
+        viewModel = ContactViewModel()
+        viewModel?.delegate = self
     }
     
     //MARK: - Helpers
@@ -138,8 +141,14 @@ class ContactViewController: UIViewController {
         //Button
         scrollView.addSubview(sendMessageButton)
         sendMessageButton.anchor(top: msgTextField.bottomAnchor, left: scrollView.leftAnchor, paddingTop: 30, paddingLeft: 20)
+        configurationButton()
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+    }
+    
+    func configurationButton(){
+        sendMessageButton.backgroundColor = .gray
+        sendMessageButton.isEnabled = false
     }
     
     func configureNavigationBar() {
@@ -156,21 +165,32 @@ class ContactViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        emailTextField.addTarget(self, action: #selector(self.validateEmail), for: .editingChanged)
-        fullnameTextfield.addTarget(self, action: #selector(self.validateName), for: .editingChanged)
-    }
-    
-    @objc func validateEmail() {
-        didChangeTextOrHideKeyboard = true
-    }
-    
-    @objc func validateName() {
-        didChangeTextOrHideKeyboard = true
+        emailTextField.addTarget(self, action: #selector(self.changeTextOrHideKeyboard), for: .editingChanged)
+        fullnameTextfield.addTarget(self, action: #selector(self.changeTextOrHideKeyboard), for: .editingChanged)
+        
+        emailTextField.addTarget(self, action: #selector(self.validateEmail), for: .editingDidEnd)
+        fullnameTextfield.addTarget(self, action: #selector(self.validateName), for: .editingDidEnd)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func changeTextOrHideKeyboard() {
+        didChangeTextOrHideKeyboard = true
+    }
+    
+    @objc func validateEmail() {
+        viewModel?.validateEmail(value: emailTextField.text)
+    }
+    
+    @objc func validateName() {
+        viewModel?.validateName(value: fullnameTextfield.text)
+    }
+    
+    @objc func validateMessage() {
+        viewModel?.validateMessage(value: msgTextField.text)
     }
 }
 
@@ -178,6 +198,10 @@ class ContactViewController: UIViewController {
 extension ContactViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         placeholderLabel.isHidden = !textView.text.isEmpty
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        validateMessage()
     }
 }
 
@@ -200,5 +224,24 @@ extension ContactViewController {
     @objc private func keyboardWillHide() {
         self.scrollView.frame.origin.y = 0
         didChangeTextOrHideKeyboard = true
+    }
+}
+
+//MARK: - ContactViewModelDelegate
+extension ContactViewController: ContactViewModelDelegate {
+    func activateButton() {
+        sendMessageButton.backgroundColor = .systemBlue
+        sendMessageButton.isEnabled = true
+    }
+    
+    func desactivateButton() {
+        sendMessageButton.isEnabled = false
+        sendMessageButton.backgroundColor = .gray
+    }
+    
+    func showAlertsTextFields(messages: String) {
+        let alert = UIAlertController(title: "Error", message: messages, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
