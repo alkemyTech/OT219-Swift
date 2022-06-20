@@ -105,7 +105,7 @@ extension HomeViewModel {
         DispatchQueue.global().async {
             TestimonialsService.shared.fetchTestimonials { [weak self] testimonials in
                 self?.testimonials = testimonials
-                self?.getNewsCount() == 0 ? self?.delegate?.didFailGettingTestimonialsData(error: ApiError.noTestimonialsData.errorDescription!) : self?.delegate?.didGetTestimonialsData()
+                self?.getTestimonialsCount() == 0 ? self?.delegate?.didFailGettingTestimonialsData(error: ApiError.noTestimonialsData.errorDescription!) : self?.delegate?.didGetTestimonialsData()
             } onError: { [weak self] error in
                 self?.delegate?.didFailGettingTestimonialsData(error: error)
             }
