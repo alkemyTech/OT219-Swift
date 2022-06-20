@@ -13,5 +13,4 @@ class MockTestimonialsFail: TestimonialsFetching{
         onError(ApiError.noTestimonialsData.errorDescription!)
     }
     
-    
 }

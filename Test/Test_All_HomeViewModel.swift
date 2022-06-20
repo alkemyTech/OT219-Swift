@@ -16,10 +16,7 @@ class Test_All_HomeViewModel: XCTestCase {
         homeViewModel = HomeViewModel()
     }
     
-
-    
     //MARK: - Welcome Methods
-    
     func test_LookDescriptionWelcomeData_NotNil(){
         let data = homeViewModel.getDescriptionWelcome()
         XCTAssertNotNil(data)

@@ -22,5 +22,4 @@ class MockTestimonialsSuccess: TestimonialsFetching{
         }
     }
     
-    
 }
