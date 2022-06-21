@@ -19,18 +19,33 @@ class NosotrosViewController: UIViewController {
         return homeViewModel
     }()
     
-    lazy var logoImage = viewModel.createImage(image: "LOGO-SOMOS MAS", mode: .scaleAspectFit)
+    private var logoImage: CustomImage = {
+        let image = CustomImage(imageName: HomeViewModelImagesNames.logoONG, mode: .scaleAspectFit)
+        return image
+    }()
     
-    lazy var nosotrosHeader = viewModel.createLabel(label: "¡Nuestro staff!", fontSize: 20, fontWeight: .bold)
- 
-    lazy var profileImageNosotros = viewModel.createImage(image: "profilePic", mode: .scaleAspectFill, radius: 10)
+    private var nosotrosHeader: CustomLabel = {
+        let label = CustomLabel(label: HomeViewModelLabels.nosotrosHeader, fontSize: 20, fontWeight: .bold)
+        return label
+    }()
     
-    lazy var nameLabelNosotros = viewModel.createLabel(label: "Roberto Martinez", fontSize: 20, fontWeight: .bold)
+    private var profileImageNosotros: CustomImage = {
+        let image = CustomImage(imageName: HomeViewModelImagesNames.profileImageNosotros, mode: .scaleAspectFill, radius: 10)
+        return image
+    }()
+
+    private var nameLabelNosotros: CustomLabel = {
+        let label = CustomLabel(label: HomeViewModelLabels.nameLabelNosotros, fontSize: 20, fontWeight: .bold)
+        return label
+    }()
     
-    lazy var rolLabelNosotros = viewModel.createLabel(label: "Coordinador", fontSize: 20, fontWeight: .regular)
+    private var rolLabelNosotros: CustomLabel = {
+        let label = CustomLabel(label: HomeViewModelLabels.rolLabelNosotros, fontSize: 20, fontWeight: .regular)
+        return label
+    }()
     
-    lazy var captionLabelNosotros: CustomLabel = {
-        let label = viewModel.createLabel(label: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tristique ex massa, sit amet viverra nisi porta eu. Aliquam erat volutpat. Nulla vel aliquet enim. Vivamus aliquet nibh nec magna volutpat", fontSize: 16, fontWeight: .regular, labelLines: 0)
+    private var captionLabelNosotros: CustomLabel = {
+        let label = CustomLabel(label: HomeViewModelLabels.captionLabelNosotros, fontSize: 16, fontWeight: .regular, labelLines: 0)
         label.lineBreakMode = .byWordWrapping
         label.sizeToFit()
         return label
@@ -71,7 +86,11 @@ class NosotrosViewController: UIViewController {
         return image
     }()
     
-    lazy var serParteNosotrosButton = viewModel.createButton(title: "¡Ver todos los miembros!", width: 250, fontSize: 20, fontWeight: .bold)
+    private var serParteNosotrosButton: CustomButton = {
+        let button = CustomButton(titleLabel: HomeViewModelButtonNames.serParteNosotrosButton, width: 250)
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
+        return button
+    }()
 
     
     //MARK: - Lifecycle

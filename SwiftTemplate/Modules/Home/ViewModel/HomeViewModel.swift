@@ -5,7 +5,7 @@
 //  Created by Cristian Sancricca on 31/05/2022.
 //
 
-import UIKit
+import Foundation
 
 protocol HomeViewModelDelegate: AnyObject {
     func didGetNewsData()
@@ -105,7 +105,7 @@ extension HomeViewModel {
         DispatchQueue.global().async {
             TestimonialsService.shared.fetchTestimonials { [weak self] testimonials in
                 self?.testimonials = testimonials
-                self?.getNewsCount() == 0 ? self?.delegate?.didFailGettingTestimonialsData(error: ApiError.noTestimonialsData.errorDescription!) : self?.delegate?.didGetTestimonialsData()
+                self?.getTestimonialsCount() == 0 ? self?.delegate?.didFailGettingTestimonialsData(error: ApiError.noTestimonialsData.errorDescription!) : self?.delegate?.didGetTestimonialsData()
             } onError: { [weak self] error in
                 self?.delegate?.didFailGettingTestimonialsData(error: error)
             }
@@ -121,22 +121,28 @@ extension HomeViewModel {
     }
 }
 
-//MARK: - Custom classes
+//MARK: - Label & Images
 
-extension HomeViewModel {
-    func createButton(title: String, width: CGFloat, fontSize: CGFloat, fontWeight: UIFont.Weight ) ->CustomButton{
-        let button = CustomButton(titleLabel: title, width: width)
-        button.titleLabel?.font = .systemFont(ofSize: fontSize, weight: fontWeight)
-        return button
-    }
-    
-    func createImage(image: String, mode: UIView.ContentMode, radius: CGFloat = 0) -> CustomImage{
-        let image = CustomImage(imageName: image, mode: mode, radius: radius)
-        return image
-    }
-    
-    func createLabel(label: String, fontSize: CGFloat, fontWeight: UIFont.Weight, labelLines: Int = 1) -> CustomLabel{
-        let label = CustomLabel(label: label, fontSize: fontSize, fontWeight: fontWeight, labelLines: labelLines)
-        return label
-    }
+struct HomeViewModelLabels {
+    static let welcomeTitle = "Hola! Bienvenidx"
+    static let welcomeHeader = "Welcome"
+    static let newsHeader = "News"
+    static let nosotrosHeader = "¡Nuestro staff!"
+    static let nameLabelNosotros = "Roberto Martinez"
+    static let rolLabelNosotros = "Coordinador"
+    static let captionLabelNosotros = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tristique ex massa, sit amet viverra nisi porta eu. Aliquam erat volutpat. Nulla vel aliquet enim. Vivamus aliquet nibh nec magna volutpat"
+    static let testimonialsHeader = "Testimoniales"
+}
+
+struct HomeViewModelImagesNames {
+    static let logoONG = "LOGO-SOMOS MAS"
+    static let welcomeImageView = "ong"
+    static let profileImageNosotros = "profilePic"
+}
+
+struct HomeViewModelButtonNames {
+    static let contactButton = "Contactanos"
+    static let serParteButtonNews = "¡Quiero ser parte!"
+    static let serParteNosotrosButton = "¡Ver todos los miembros!"
+    static let verTestimoniosButton = "Ver todos los testimonios"
 }
