@@ -38,6 +38,7 @@
 		F649B7922847CF5700541235 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F649B7912847CF5700541235 /* HomeViewController.swift */; };
 		F649B7962847FF4700541235 /* SeeMoreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F649B7952847FF4700541235 /* SeeMoreCollectionViewCell.swift */; };
 		F649B798284860D100541235 /* Test_Home_ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F649B797284860D100541235 /* Test_Home_ViewModel.swift */; };
+		F65619CF28617354007D0620 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F65619CE28617354007D0620 /* GoogleService-Info.plist */; };
 		F66387F22846791000E078BF /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66387F12846791000E078BF /* HomeViewModel.swift */; };
 		F66387F92846AE8F00E078BF /* NewsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66387F82846AE8F00E078BF /* NewsCollectionViewCell.swift */; };
 		F66A1738283DCF6A0064DD56 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -105,6 +106,7 @@
 		F649B7912847CF5700541235 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F649B7952847FF4700541235 /* SeeMoreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMoreCollectionViewCell.swift; sourceTree = "<group>"; };
 		F649B797284860D100541235 /* Test_Home_ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_Home_ViewModel.swift; sourceTree = "<group>"; };
+		F65619CE28617354007D0620 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F66387F12846791000E078BF /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		F66387F82846AE8F00E078BF /* NewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCollectionViewCell.swift; sourceTree = "<group>"; };
 		F66C6BE8284DAEAE00E21542 /* MockNewsServiceSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNewsServiceSuccess.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				03398C6127DFDFCC001BC793 /* SceneDelegate.swift */,
 				03398C6827DFDFCD001BC793 /* Assets.xcassets */,
 				03398C6D27DFDFCD001BC793 /* Info.plist */,
+				F65619CE28617354007D0620 /* GoogleService-Info.plist */,
 			);
 			path = SwiftTemplate;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				03398C5927DFDFCC001BC793 /* Frameworks */,
 				03398C5A27DFDFCC001BC793 /* Resources */,
 				DF3538A91AF7E4B2797D6DFE /* [CP] Embed Pods Frameworks */,
+				F65619D028617805007D0620 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -585,6 +589,7 @@
 			files = (
 				F6EDEF3C2845236C00BB49B9 /* LogInViewController.xib in Resources */,
 				03D392EA2857604B0004CB10 /* TestimonialsCell.xib in Resources */,
+				F65619CF28617354007D0620 /* GoogleService-Info.plist in Resources */,
 				03398C6927DFDFCD001BC793 /* Assets.xcassets in Resources */,
 				F6BC67C7284E9BC5006FB210 /* NewsMock.json in Resources */,
 			);
@@ -638,6 +643,26 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwiftTemplate/Pods-SwiftTemplate-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		F65619D028617805007D0620 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${SwiftTemplate}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(info.plist)",
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -836,6 +861,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = N5B5236N46;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftTemplate/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
@@ -864,6 +891,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N5B5236N46;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftTemplate/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";

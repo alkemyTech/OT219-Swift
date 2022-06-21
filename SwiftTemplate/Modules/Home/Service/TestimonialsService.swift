@@ -11,8 +11,11 @@ struct TestimonialsService {
     
     static let shared = TestimonialsService()
     
-    private let baseURL = ProcessInfo.processInfo.environment["baseURL"]!
-    private let endpointTestimonials = ProcessInfo.processInfo.environment["endpoint.Testimonials"]!
+    let baseURL = "https://ongapi.alkemy.org/"
+    let endpointTestimonials = "api/testimonials"
+    
+    //private let baseURL = ProcessInfo.processInfo.environment["baseURL"]!
+    //private let endpointTestimonials = ProcessInfo.processInfo.environment["endpoint.Testimonials"]!
     
     func fetchTestimonials(onComplete: @escaping ([Testimonials]) -> (), onError: @escaping (String) -> ()){
         ApiManager.shared.get(url: "\(baseURL)\(endpointTestimonials)") { response in

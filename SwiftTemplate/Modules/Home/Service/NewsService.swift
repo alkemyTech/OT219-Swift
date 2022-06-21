@@ -15,8 +15,10 @@ struct NewsService: NewsFetching {
     
     static let shared = NewsService()
     
-    private let baseURL = ProcessInfo.processInfo.environment["baseURL"]!
-    private let endpointNews = ProcessInfo.processInfo.environment["endpoint.News"]!
+    let baseURL = "https://ongapi.alkemy.org/"
+    let endpointNews = "api/news"
+    //private let baseURL = ProcessInfo.processInfo.environment["baseURL"]!
+    //private let endpointNews = ProcessInfo.processInfo.environment["endpoint.News"]!
     
     
     func fetchNews(onComplete: @escaping ([News]) -> (), onError: @escaping (String) -> ()){
