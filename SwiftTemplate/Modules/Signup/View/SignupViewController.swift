@@ -13,8 +13,23 @@ class SignupViewController: UIViewController {
     private var viewModel: SignUpViewModel?
     private var isKeyboardExpanded = false
     
-    private let scrollView: UIScrollView = {
-        let view = UIScrollView()
+    lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
+    
+    lazy var scrollView: UIScrollView = {
+        let view = UIScrollView(frame: .zero)
+        view.backgroundColor = .white
+        view.frame = self.view.bounds
+        view.contentSize = contentViewSize
+        view.autoresizingMask = .flexibleHeight
+        view.showsHorizontalScrollIndicator = true
+        view.bounces = true
+        return view
+    }()
+    
+    lazy var containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.frame.size = contentViewSize
         return view
     }()
     
@@ -136,25 +151,25 @@ class SignupViewController: UIViewController {
     
     private func setupView(){
         view.addSubview(scrollView)
-        scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
         
+        scrollView.addSubview(containerView)
         
-        scrollView.addSubview(logoImage)
-        logoImage.centerX(inView: scrollView)
+        containerView.addSubview(logoImage)
+        logoImage.centerX(inView: containerView)
         logoImage.setHeight(200)
-        logoImage.anchor(top: scrollView.safeAreaLayoutGuide.topAnchor, paddingTop: 100)
+        logoImage.anchor(top: containerView.safeAreaLayoutGuide.topAnchor, paddingTop: 100)
         
         
         let stack = UIStackView(arrangedSubviews: [emailTextField,fullnameTextfield, passwordTextField ,confirmPasswordTextField, labelSamePassword,signupButton])
         stack.axis = .vertical
         stack.spacing = 20
-        scrollView.addSubview(stack)
-        stack.anchor(top: logoImage.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
+        containerView.addSubview(stack)
+        stack.anchor(top: logoImage.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
         
         
-        scrollView.addSubview(alreadyHaveAccountButton)
+        containerView.addSubview(alreadyHaveAccountButton)
         
-        alreadyHaveAccountButton.centerX(inView: scrollView)
+        alreadyHaveAccountButton.centerX(inView: containerView)
         alreadyHaveAccountButton.anchor(top: stack.bottomAnchor, paddingTop: 10)
     
     }
@@ -182,12 +197,17 @@ class SignupViewController: UIViewController {
     }
     
     @objc func keyboardAppear(notification: NSNotification){
-        guard let keyboardFrameValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
-        scrollView.contentInset.bottom = view.convert(keyboardFrameValue.cgRectValue, from: nil).size.height
+        if !isKeyboardExpanded{
+            self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.scrollView.frame.height + 200)
+            isKeyboardExpanded = true
+        }
     }
     
     @objc func keyboardDisappear(){
-        scrollView.contentInset.bottom = 0
+        if isKeyboardExpanded {
+            self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.scrollView.frame.height - 200)
+            isKeyboardExpanded = false
+        }
     }
     
     @objc func validateEmail(){
@@ -208,6 +228,7 @@ class SignupViewController: UIViewController {
     
     @objc func registerUser(){
         viewModel?.register(name: fullnameTextfield.text!, email: emailTextField.text!, pass: passwordTextField.text!)
+        signupButton.endEditing(true)
     }
 }
 
