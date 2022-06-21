@@ -36,6 +36,7 @@ struct TestimonialsService {
                 }
             case .failure(let error):
                 onError(error.localizedDescription)
+                TrackerAnalytics.trackErrorTestimonialsSeccion(error: error.localizedDescription)
             }
         }
     }

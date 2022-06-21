@@ -45,6 +45,7 @@
 		F66A1739283DCF6A0064DD56 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		F66C6BE9284DAEAE00E21542 /* MockNewsServiceSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66C6BE8284DAEAE00E21542 /* MockNewsServiceSuccess.swift */; };
 		F66C6BEB284DBE4A00E21542 /* MockNewsServiceFail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66C6BEA284DBE4A00E21542 /* MockNewsServiceFail.swift */; };
+		F6725D8E28621B2B00BA88B7 /* TrackerAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6725D8D28621B2B00BA88B7 /* TrackerAnalytics.swift */; };
 		F692AD8D285D87BA00CF0F35 /* Test_Signup_ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F692AD8C285D87BA00CF0F35 /* Test_Signup_ViewModel.swift */; };
 		F6BC67C7284E9BC5006FB210 /* NewsMock.json in Resources */ = {isa = PBXBuildFile; fileRef = F6BC67C6284E9BC5006FB210 /* NewsMock.json */; };
 		F6C342C22845BF2D005F877F /* NewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C342C12845BF2D005F877F /* NewsResponse.swift */; };
@@ -111,6 +112,7 @@
 		F66387F82846AE8F00E078BF /* NewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCollectionViewCell.swift; sourceTree = "<group>"; };
 		F66C6BE8284DAEAE00E21542 /* MockNewsServiceSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNewsServiceSuccess.swift; sourceTree = "<group>"; };
 		F66C6BEA284DBE4A00E21542 /* MockNewsServiceFail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNewsServiceFail.swift; sourceTree = "<group>"; };
+		F6725D8D28621B2B00BA88B7 /* TrackerAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerAnalytics.swift; sourceTree = "<group>"; };
 		F692AD8C285D87BA00CF0F35 /* Test_Signup_ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_Signup_ViewModel.swift; sourceTree = "<group>"; };
 		F6BC67C6284E9BC5006FB210 /* NewsMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = NewsMock.json; sourceTree = "<group>"; };
 		F6C342C12845BF2D005F877F /* NewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsResponse.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 			children = (
 				F6EDEF412845238300BB49B9 /* ApiError.swift */,
 				03947946283ECCBE000E75C8 /* Extensions.swift */,
+				F6725D8D28621B2B00BA88B7 /* TrackerAnalytics.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -685,6 +688,7 @@
 				03D392E228575D730004CB10 /* UserSessionRepository.swift in Sources */,
 				03D392ED285760AC0004CB10 /* Constants.swift in Sources */,
 				F66A1739283DCF6A0064DD56 /* (null) in Sources */,
+				F6725D8E28621B2B00BA88B7 /* TrackerAnalytics.swift in Sources */,
 				4054DF89283EE18F00E781B6 /* SignUpManager.swift in Sources */,
 				403C21C4284BD07800026635 /* MenuOption.swift in Sources */,
 				403C21AF284AD29900026635 /* ContainerController.swift in Sources */,
