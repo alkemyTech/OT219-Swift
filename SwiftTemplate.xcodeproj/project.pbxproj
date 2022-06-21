@@ -18,10 +18,12 @@
 		03D392EA2857604B0004CB10 /* TestimonialsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03D392E82857604B0004CB10 /* TestimonialsCell.xib */; };
 		03D392EB2857604B0004CB10 /* TestimonialsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D392E92857604B0004CB10 /* TestimonialsCell.swift */; };
 		03D392ED285760AC0004CB10 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D392EC285760AC0004CB10 /* Constants.swift */; };
+		40364FCC285FB72900180F15 /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40364FCB285FB72900180F15 /* ContactViewModel.swift */; };
 		403C21AF284AD29900026635 /* ContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403C21AE284AD29900026635 /* ContainerController.swift */; };
 		403C21B1284AD2A400026635 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403C21B0284AD2A400026635 /* MenuController.swift */; };
 		403C21C4284BD07800026635 /* MenuOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403C21C3284BD07800026635 /* MenuOption.swift */; };
 		403C21C6284BD09F00026635 /* MenuOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403C21C5284BD09F00026635 /* MenuOptionCell.swift */; };
+		4040EADD285CF858006669E7 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4040EADC285CF858006669E7 /* ContactViewController.swift */; };
 		4054DF81283EDE6F00E781B6 /* UserRegisterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DF80283EDE6F00E781B6 /* UserRegisterData.swift */; };
 		4054DF83283EDE8300E781B6 /* NewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DF82283EDE8300E781B6 /* NewUser.swift */; };
 		4054DF85283EDF0C00E781B6 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DF84283EDF0C00E781B6 /* SignUpViewModel.swift */; };
@@ -45,6 +47,7 @@
 		F678B937285A4071007520AB /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F678B936285A4071007520AB /* CustomLabel.swift */; };
 		F678B939285A440D007520AB /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F678B938285A440D007520AB /* CustomButton.swift */; };
 		F678B93B285A6443007520AB /* CustomImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F678B93A285A6443007520AB /* CustomImage.swift */; };
+		F692AD8D285D87BA00CF0F35 /* Test_Signup_ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F692AD8C285D87BA00CF0F35 /* Test_Signup_ViewModel.swift */; };
 		F6BC67C7284E9BC5006FB210 /* NewsMock.json in Resources */ = {isa = PBXBuildFile; fileRef = F6BC67C6284E9BC5006FB210 /* NewsMock.json */; };
 		F6C342C22845BF2D005F877F /* NewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C342C12845BF2D005F877F /* NewsResponse.swift */; };
 		F6C342C42845C18E005F877F /* NewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C342C32845C18E005F877F /* NewsService.swift */; };
@@ -84,10 +87,12 @@
 		03D392E92857604B0004CB10 /* TestimonialsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestimonialsCell.swift; sourceTree = "<group>"; };
 		03D392EC285760AC0004CB10 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		19DC9E1E40C36079E44F490A /* Pods_SwiftTemplate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftTemplate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		40364FCB285FB72900180F15 /* ContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
 		403C21AE284AD29900026635 /* ContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerController.swift; sourceTree = "<group>"; };
 		403C21B0284AD2A400026635 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		403C21C3284BD07800026635 /* MenuOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOption.swift; sourceTree = "<group>"; };
 		403C21C5284BD09F00026635 /* MenuOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOptionCell.swift; sourceTree = "<group>"; };
+		4040EADC285CF858006669E7 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		4054DF80283EDE6F00E781B6 /* UserRegisterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterData.swift; sourceTree = "<group>"; };
 		4054DF82283EDE8300E781B6 /* NewUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUser.swift; sourceTree = "<group>"; };
 		4054DF84283EDF0C00E781B6 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
@@ -110,6 +115,7 @@
 		F678B936285A4071007520AB /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		F678B938285A440D007520AB /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		F678B93A285A6443007520AB /* CustomImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImage.swift; sourceTree = "<group>"; };
+		F692AD8C285D87BA00CF0F35 /* Test_Signup_ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_Signup_ViewModel.swift; sourceTree = "<group>"; };
 		F6BC67C6284E9BC5006FB210 /* NewsMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = NewsMock.json; sourceTree = "<group>"; };
 		F6C342C12845BF2D005F877F /* NewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsResponse.swift; sourceTree = "<group>"; };
 		F6C342C32845C18E005F877F /* NewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsService.swift; sourceTree = "<group>"; };
@@ -211,10 +217,11 @@
 			isa = PBXGroup;
 			children = (
 				03D392E028575D730004CB10 /* Onboarding */,
-				F6C342BC2845BE72005F877F /* Home */,
 				F6EDEF202845236C00BB49B9 /* Login */,
-				F62BC7B7284FB15B006C52B3 /* Nosotros */,
 				0394793C283ECC47000E75C8 /* Signup */,
+				F6C342BC2845BE72005F877F /* Home */,
+				F62BC7B7284FB15B006C52B3 /* Nosotros */,
+				4040EADB285CF838006669E7 /* Contact */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -243,6 +250,31 @@
 				54065947B66C7BED0004E9F4 /* Pods-SwiftTemplate.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		40364FCD285FB72E00180F15 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				40364FCB285FB72900180F15 /* ContactViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4040EADA285CF7E9006669E7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4040EADC285CF858006669E7 /* ContactViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4040EADB285CF838006669E7 /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				4040EADA285CF7E9006669E7 /* View */,
+				40364FCD285FB72E00180F15 /* ViewModel */,
+			);
+			path = Contact;
 			sourceTree = "<group>";
 		};
 		4050AAA7284D9ED3004B16B1 /* SideMenu */ = {
@@ -417,6 +449,7 @@
 				F649B797284860D100541235 /* Test_Home_ViewModel.swift */,
 				F66C6BE8284DAEAE00E21542 /* MockNewsServiceSuccess.swift */,
 				F66C6BEA284DBE4A00E21542 /* MockNewsServiceFail.swift */,
+				F692AD8C285D87BA00CF0F35 /* Test_Signup_ViewModel.swift */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -632,6 +665,7 @@
 			files = (
 				03947942283ECC47000E75C8 /* SignupViewController.swift in Sources */,
 				033B7248285880FC0090EEED /* WelcomeViewModel.swift in Sources */,
+				4040EADD285CF858006669E7 /* ContactViewController.swift in Sources */,
 				03D392EB2857604B0004CB10 /* TestimonialsCell.swift in Sources */,
 				403C21B1284AD2A400026635 /* MenuController.swift in Sources */,
 				F62BC7BD284FB1D2006C52B3 /* NosotrosViewController.swift in Sources */,
@@ -647,6 +681,7 @@
 				F678B93B285A6443007520AB /* CustomImage.swift in Sources */,
 				403C21C4284BD07800026635 /* MenuOption.swift in Sources */,
 				403C21AF284AD29900026635 /* ContainerController.swift in Sources */,
+				40364FCC285FB72900180F15 /* ContactViewModel.swift in Sources */,
 				033B724A285881310090EEED /* WelcomeModel.swift in Sources */,
 				03947947283ECCBE000E75C8 /* Extensions.swift in Sources */,
 				F678B939285A440D007520AB /* CustomButton.swift in Sources */,
@@ -679,6 +714,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F66C6BEB284DBE4A00E21542 /* MockNewsServiceFail.swift in Sources */,
+				F692AD8D285D87BA00CF0F35 /* Test_Signup_ViewModel.swift in Sources */,
 				F66C6BE9284DAEAE00E21542 /* MockNewsServiceSuccess.swift in Sources */,
 				F6EDEF1F2845227100BB49B9 /* Test_API_Login.swift in Sources */,
 				F649B798284860D100541235 /* Test_Home_ViewModel.swift in Sources */,

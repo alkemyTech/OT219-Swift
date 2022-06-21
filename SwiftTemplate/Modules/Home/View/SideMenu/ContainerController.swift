@@ -90,7 +90,8 @@ class ContainerController: UIViewController {
         case .Testimonios:
             showToast(message: "Testimonios", font: UIFont.systemFont(ofSize: 20))
         case .Contacto:
-            showToast(message: "Contacto", font: UIFont.systemFont(ofSize: 20))
+            let contactoViewController = ContactViewController()
+            self.navigationController?.pushViewController(contactoViewController, animated: true)
         case .Contribuye:
             showToast(message: "Contribuye", font: UIFont.systemFont(ofSize: 20))
         }
