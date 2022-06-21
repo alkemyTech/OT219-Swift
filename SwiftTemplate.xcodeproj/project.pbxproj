@@ -18,10 +18,12 @@
 		03D392EA2857604B0004CB10 /* TestimonialsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03D392E82857604B0004CB10 /* TestimonialsCell.xib */; };
 		03D392EB2857604B0004CB10 /* TestimonialsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D392E92857604B0004CB10 /* TestimonialsCell.swift */; };
 		03D392ED285760AC0004CB10 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D392EC285760AC0004CB10 /* Constants.swift */; };
+		40364FCC285FB72900180F15 /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40364FCB285FB72900180F15 /* ContactViewModel.swift */; };
 		403C21AF284AD29900026635 /* ContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403C21AE284AD29900026635 /* ContainerController.swift */; };
 		403C21B1284AD2A400026635 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403C21B0284AD2A400026635 /* MenuController.swift */; };
 		403C21C4284BD07800026635 /* MenuOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403C21C3284BD07800026635 /* MenuOption.swift */; };
 		403C21C6284BD09F00026635 /* MenuOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403C21C5284BD09F00026635 /* MenuOptionCell.swift */; };
+		4040EADD285CF858006669E7 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4040EADC285CF858006669E7 /* ContactViewController.swift */; };
 		4054DF81283EDE6F00E781B6 /* UserRegisterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DF80283EDE6F00E781B6 /* UserRegisterData.swift */; };
 		4054DF83283EDE8300E781B6 /* NewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DF82283EDE8300E781B6 /* NewUser.swift */; };
 		4054DF85283EDF0C00E781B6 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054DF84283EDF0C00E781B6 /* SignUpViewModel.swift */; };
@@ -82,10 +84,12 @@
 		03D392E92857604B0004CB10 /* TestimonialsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestimonialsCell.swift; sourceTree = "<group>"; };
 		03D392EC285760AC0004CB10 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		19DC9E1E40C36079E44F490A /* Pods_SwiftTemplate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftTemplate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		40364FCB285FB72900180F15 /* ContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
 		403C21AE284AD29900026635 /* ContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerController.swift; sourceTree = "<group>"; };
 		403C21B0284AD2A400026635 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		403C21C3284BD07800026635 /* MenuOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOption.swift; sourceTree = "<group>"; };
 		403C21C5284BD09F00026635 /* MenuOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOptionCell.swift; sourceTree = "<group>"; };
+		4040EADC285CF858006669E7 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		4054DF80283EDE6F00E781B6 /* UserRegisterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterData.swift; sourceTree = "<group>"; };
 		4054DF82283EDE8300E781B6 /* NewUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUser.swift; sourceTree = "<group>"; };
 		4054DF84283EDF0C00E781B6 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
@@ -207,10 +211,11 @@
 			isa = PBXGroup;
 			children = (
 				03D392E028575D730004CB10 /* Onboarding */,
-				F6C342BC2845BE72005F877F /* Home */,
 				F6EDEF202845236C00BB49B9 /* Login */,
-				F62BC7B7284FB15B006C52B3 /* Nosotros */,
 				0394793C283ECC47000E75C8 /* Signup */,
+				F6C342BC2845BE72005F877F /* Home */,
+				F62BC7B7284FB15B006C52B3 /* Nosotros */,
+				4040EADB285CF838006669E7 /* Contact */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -239,6 +244,31 @@
 				54065947B66C7BED0004E9F4 /* Pods-SwiftTemplate.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		40364FCD285FB72E00180F15 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				40364FCB285FB72900180F15 /* ContactViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4040EADA285CF7E9006669E7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4040EADC285CF858006669E7 /* ContactViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4040EADB285CF838006669E7 /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				4040EADA285CF7E9006669E7 /* View */,
+				40364FCD285FB72E00180F15 /* ViewModel */,
+			);
+			path = Contact;
 			sourceTree = "<group>";
 		};
 		4050AAA7284D9ED3004B16B1 /* SideMenu */ = {
@@ -618,6 +648,7 @@
 			files = (
 				03947942283ECC47000E75C8 /* SignupViewController.swift in Sources */,
 				033B7248285880FC0090EEED /* WelcomeViewModel.swift in Sources */,
+				4040EADD285CF858006669E7 /* ContactViewController.swift in Sources */,
 				03D392EB2857604B0004CB10 /* TestimonialsCell.swift in Sources */,
 				403C21B1284AD2A400026635 /* MenuController.swift in Sources */,
 				F62BC7BD284FB1D2006C52B3 /* NosotrosViewController.swift in Sources */,
@@ -632,6 +663,7 @@
 				4054DF89283EE18F00E781B6 /* SignUpManager.swift in Sources */,
 				403C21C4284BD07800026635 /* MenuOption.swift in Sources */,
 				403C21AF284AD29900026635 /* ContainerController.swift in Sources */,
+				40364FCC285FB72900180F15 /* ContactViewModel.swift in Sources */,
 				033B724A285881310090EEED /* WelcomeModel.swift in Sources */,
 				03947947283ECCBE000E75C8 /* Extensions.swift in Sources */,
 				4054DFAB283FEE9000E781B6 /* ServiceManagerSingleton.swift in Sources */,
@@ -860,7 +892,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N5B5236N46;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sancricca.Test-API-Login";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -879,7 +911,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N5B5236N46;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sancricca.Test-API-Login";
 				PRODUCT_NAME = "$(TARGET_NAME)";
