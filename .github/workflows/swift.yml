@@ -4,9 +4,11 @@ on:
 
   push:
     branches:
+      - main
       - develop
   pull_request:
     branches:
+      - main
       - develop
 jobs:
   Run_workspace_Tests:
@@ -18,6 +20,6 @@ jobs:
     - name: Select Xcode
       run: sudo xcode-select -switch /Applications/Xcode_13.2.app && /usr/bin/xcodebuild -version
     - name: Run unit tests
-      run: xcodebuild test -scheme SwiftTemplate -project SwiftTemplate.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.0' | xcpretty && exit ${PIPESTATUS[0]}
+      run: xcodebuild test -scheme SwiftTemplate -project SwiftTemplate.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.0' | xcpretty && exit ${PIPESTATUS[0]}
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1.2.1
