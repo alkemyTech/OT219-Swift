@@ -15,12 +15,13 @@ struct NewsService: NewsFetching {
     
     static let shared = NewsService()
     
-    let baseURL = "https://ongapi.alkemy.org/"
-    let endpointNews = "api/news"
-    //private let baseURL = ProcessInfo.processInfo.environment["baseURL"]!
-    //private let endpointNews = ProcessInfo.processInfo.environment["endpoint.News"]!
+
+    private let baseURL = ProcessInfo.processInfo.environment["baseURL"] ?? "https://ongapi.alkemy.org/"
+    private let endpointNews = ProcessInfo.processInfo.environment["endpoint.News"] ?? "api/news"
     
     
+ 
+
     func fetchNews(onComplete: @escaping ([News]) -> (), onError: @escaping (String) -> ()){
         ApiManager.shared.get(url: "\(baseURL)\(endpointNews)") { response in
             switch response{
