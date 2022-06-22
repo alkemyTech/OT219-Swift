@@ -44,6 +44,9 @@
 		F66A1739283DCF6A0064DD56 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		F66C6BE9284DAEAE00E21542 /* MockNewsServiceSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66C6BE8284DAEAE00E21542 /* MockNewsServiceSuccess.swift */; };
 		F66C6BEB284DBE4A00E21542 /* MockNewsServiceFail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66C6BEA284DBE4A00E21542 /* MockNewsServiceFail.swift */; };
+		F678B937285A4071007520AB /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F678B936285A4071007520AB /* CustomLabel.swift */; };
+		F678B939285A440D007520AB /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F678B938285A440D007520AB /* CustomButton.swift */; };
+		F678B93B285A6443007520AB /* CustomImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F678B93A285A6443007520AB /* CustomImage.swift */; };
 		F692AD8D285D87BA00CF0F35 /* Test_Signup_ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F692AD8C285D87BA00CF0F35 /* Test_Signup_ViewModel.swift */; };
 		F6BC67C7284E9BC5006FB210 /* NewsMock.json in Resources */ = {isa = PBXBuildFile; fileRef = F6BC67C6284E9BC5006FB210 /* NewsMock.json */; };
 		F6C342C22845BF2D005F877F /* NewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C342C12845BF2D005F877F /* NewsResponse.swift */; };
@@ -109,6 +112,9 @@
 		F66387F82846AE8F00E078BF /* NewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCollectionViewCell.swift; sourceTree = "<group>"; };
 		F66C6BE8284DAEAE00E21542 /* MockNewsServiceSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNewsServiceSuccess.swift; sourceTree = "<group>"; };
 		F66C6BEA284DBE4A00E21542 /* MockNewsServiceFail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNewsServiceFail.swift; sourceTree = "<group>"; };
+		F678B936285A4071007520AB /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
+		F678B938285A440D007520AB /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		F678B93A285A6443007520AB /* CustomImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImage.swift; sourceTree = "<group>"; };
 		F692AD8C285D87BA00CF0F35 /* Test_Signup_ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_Signup_ViewModel.swift; sourceTree = "<group>"; };
 		F6BC67C6284E9BC5006FB210 /* NewsMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = NewsMock.json; sourceTree = "<group>"; };
 		F6C342C12845BF2D005F877F /* NewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsResponse.swift; sourceTree = "<group>"; };
@@ -408,6 +414,7 @@
 		F6C342BF2845BE8D005F877F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F6EDAC392859846B00098546 /* CustomViews */,
 				F649B7912847CF5700541235 /* HomeViewController.swift */,
 				4050AAA7284D9ED3004B16B1 /* SideMenu */,
 				F66387F52846865800E078BF /* News */,
@@ -423,6 +430,16 @@
 				40DED4402854075E004BD580 /* TestimonialsService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		F6EDAC392859846B00098546 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				F678B936285A4071007520AB /* CustomLabel.swift */,
+				F678B938285A440D007520AB /* CustomButton.swift */,
+				F678B93A285A6443007520AB /* CustomImage.swift */,
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 		F6EDEF162845225B00BB49B9 /* Test */ = {
@@ -661,11 +678,13 @@
 				03D392ED285760AC0004CB10 /* Constants.swift in Sources */,
 				F66A1739283DCF6A0064DD56 /* (null) in Sources */,
 				4054DF89283EE18F00E781B6 /* SignUpManager.swift in Sources */,
+				F678B93B285A6443007520AB /* CustomImage.swift in Sources */,
 				403C21C4284BD07800026635 /* MenuOption.swift in Sources */,
 				403C21AF284AD29900026635 /* ContainerController.swift in Sources */,
 				40364FCC285FB72900180F15 /* ContactViewModel.swift in Sources */,
 				033B724A285881310090EEED /* WelcomeModel.swift in Sources */,
 				03947947283ECCBE000E75C8 /* Extensions.swift in Sources */,
+				F678B939285A440D007520AB /* CustomButton.swift in Sources */,
 				4054DFAB283FEE9000E781B6 /* ServiceManagerSingleton.swift in Sources */,
 				F649B7962847FF4700541235 /* SeeMoreCollectionViewCell.swift in Sources */,
 				F649B7922847CF5700541235 /* HomeViewController.swift in Sources */,
@@ -679,6 +698,7 @@
 				03398C6027DFDFCC001BC793 /* AppDelegate.swift in Sources */,
 				40DED4412854075E004BD580 /* TestimonialsService.swift in Sources */,
 				F6EDEF332845236C00BB49B9 /* LoginViewModel.swift in Sources */,
+				F678B937285A4071007520AB /* CustomLabel.swift in Sources */,
 				F66387F22846791000E078BF /* HomeViewModel.swift in Sources */,
 				F66387F92846AE8F00E078BF /* NewsCollectionViewCell.swift in Sources */,
 				F6EDEF342845236C00BB49B9 /* LoginUser.swift in Sources */,
