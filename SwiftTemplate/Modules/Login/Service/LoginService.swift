@@ -31,6 +31,7 @@ struct LoginService {
                         let response = try decoder.decode(LoginUserResponse.self, from: data)
                         if response.success {
                             onComplete(response.data.token)
+                            TrackerAnalytics.trackLoginUser(email)
                         }else{
                             onError(ApiError.loginError.errorDescription!)
                         }
@@ -42,6 +43,7 @@ struct LoginService {
                 }
             case .failure(let error):
                 onError(error.localizedDescription)
+                TrackerAnalytics.trackLoginUserFail(error: error.localizedDescription)
             }
         }
     }
