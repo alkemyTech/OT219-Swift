@@ -194,22 +194,30 @@ class SignupViewController: UIViewController {
         confirmPasswordTextField.addTarget(self, action: #selector(self.validateSamePassword), for: .allEditingEvents)
         
         signupButton.addTarget(self, action: #selector(self.registerUser), for: .touchUpInside)
+        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+        
     }
     
     @objc func keyboardAppear(notification: NSNotification){
         if !isKeyboardExpanded{
-            self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.scrollView.frame.height + 200)
-            isKeyboardExpanded = true
+        guard let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
+             let keyboardHeight = keyboardFrame.cgRectValue.height
+             let bottomSpace = self.scrollView.frame.height - (signupButton.frame.origin.y + signupButton.frame.height)
+             self.scrollView.frame.origin.y += keyboardHeight - bottomSpace + 10
+             isKeyboardExpanded = true
         }
     }
-    
     @objc func keyboardDisappear(){
         if isKeyboardExpanded {
-            self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.scrollView.frame.height - 200)
+            self.scrollView.frame.origin.y = 0
             isKeyboardExpanded = false
         }
     }
     
+    @objc func hideKeyboard(){
+        self.view.endEditing(true)
+    }
     @objc func validateEmail(){
         viewModel?.validateEmail(value: emailTextField.text)
     }
