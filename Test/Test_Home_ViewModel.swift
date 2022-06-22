@@ -20,6 +20,20 @@ class Test_Home_ViewModel: XCTestCase {
         sut = nil
     }
 
+    //MARK: - Welcome
+    func test_LookDescriptionWelcomeData_NotNil(){
+        sut = HomeViewModel()
+        let data = sut.getDescriptionWelcome()
+        XCTAssertNotNil(data)
+    }
+
+    func test_LookImagenWelcomeData_NotNil(){
+        sut = HomeViewModel()
+        let data = sut.getImageWelcome()
+        XCTAssertNotNil(data)
+    }
+
+    //MARK: - News
     func test_HomeViewModel_GetsNewsData_ShouldReturnData(){
         let mock = MockNewsServiceSuccess()
         sut = HomeViewModel(newsService: mock)
@@ -57,4 +71,28 @@ class Test_Home_ViewModel: XCTestCase {
         
     }
 
+    //MARK: - Testimonials
+    func test_TestimonialsService_ShouldReturnData(){
+
+        let mock = MockTestimonialsSuccess()
+        sut = HomeViewModel(testimonio: mock)
+         
+        sut.testimonialService.fetchTestimonials { testimonials in
+            XCTAssertTrue(testimonials.count > 0)
+        } onError: { error in
+            XCTAssertEqual(error, "")
+        }
+    }
+    
+    func test_TestimonialsService_ShouldReturnError(){
+        let mock = MockTestimonialsFail()
+        sut = HomeViewModel( testimonio: mock)
+        
+        sut.testimonialService.fetchTestimonials { testimonials in
+            XCTAssertNil(testimonials)
+            
+        } onError: { error in
+            XCTAssertEqual(error, "Testimonials data is not available")
+        }
+    }
 }
