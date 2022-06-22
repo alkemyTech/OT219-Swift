@@ -7,7 +7,7 @@ target 'SwiftTemplate' do
 
   # Pods for SwiftTemplate
   pod 'Alamofire', '~> 5.4'
-  pod 'FirebaseAnalytics'
-  pod 'Firebase/Core'
-  pod 'Firebase/Crashlytics'
+  pod 'FirebaseAnalytics', '~> 9.1.0'
+  pod 'Firebase/Core', '~> 9.1.0'
+  pod 'Firebase/Crashlytics', '~> 9.1.0'
 end
