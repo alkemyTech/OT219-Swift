@@ -46,10 +46,7 @@ class Test_Home_ViewModel: XCTestCase {
             XCTAssertTrue(error.isEmpty)
             expectation.fulfill()
         }
-        
         wait(for: [expectation], timeout: 3)
-        
-
     }
     
     func test_HomeViewModel_GetsNewsData_ShouldShowError(){
@@ -64,9 +61,7 @@ class Test_Home_ViewModel: XCTestCase {
         } onError: { error in
             XCTAssertEqual(error, "News data is not available")
             expectation.fulfill()
-        
         }
-
         wait(for: [expectation], timeout: 5)
         
     }
