@@ -148,7 +148,12 @@ class ContactViewController: UIViewController {
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
     }
-
+    
+    func clearText() {
+        self.fullnameTextfield.text?.removeAll()
+        self.emailTextField.text?.removeAll()
+        self.msgTextField.text.removeAll()
+    }
     
     @objc func sendMessage() {
         viewModel?.send(name: fullnameTextfield.text!, email: emailTextField.text!, message: msgTextField.text!)
@@ -238,11 +243,16 @@ extension ContactViewController {
 //MARK: - ContactViewModelDelegate
 extension ContactViewController: ContactViewModelDelegate {
     func sendMessageSuccess() {
-        
+        let alert = UIAlertController(title: "Mensaje enviado", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {(action: UIAlertAction!) in
+            self.clearText()
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
+
     
     func sendMessageError() {
-        
+ 
     }
     
     func activateButton() {
