@@ -14,75 +14,44 @@ class NosotrosViewController: UIViewController {
     
     weak var delegate: HomeViewControllerDelegate?
     
-    private var nosotrosHeader: UILabel = {
-        let label = UILabel()
-        label.text = "¡Nuestro staff!"
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        label.textColor = .black
+    lazy var viewModel: HomeViewModel = {
+        let homeViewModel = HomeViewModel()
+        return homeViewModel
+    }()
+    
+    private var logoImage: CustomImage = {
+        let image = CustomImage(imageName: HomeViewModelImagesNames.logoONG, mode: .scaleAspectFit)
+        return image
+    }()
+    
+    private var nosotrosHeader: CustomLabel = {
+        let label = CustomLabel(label: HomeViewModelLabels.nosotrosHeader, fontSize: 20, fontWeight: .bold)
         return label
     }()
     
-    private var logoImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "LOGO-SOMOS MAS")
-        return imageView
+    private var profileImageNosotros: CustomImage = {
+        let image = CustomImage(imageName: HomeViewModelImagesNames.profileImageNosotros, mode: .scaleAspectFill, radius: 10)
+        return image
     }()
-    
-    private var profileImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "profilePic")
-        imageView.layer.cornerRadius = 20
-        return imageView
-    }()
-    
-    private var serParteButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.tintColor = UIColor.white
-        button.setTitle("¡Quiero ser parte!", for: .normal)
-        button.backgroundColor = UIColor(named: "ButtonColor")
-        button.setDimensions(height: 50, width: 200)
-        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
-        button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
-        button.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        button.layer.shadowOpacity = 1.0
-        button.layer.shadowRadius = 0.0
-        button.layer.masksToBounds = false
-        button.layer.cornerRadius = 10.0
-        return button
-    }()
-    
-    private var nameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Roberto Martinez"
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        label.textColor = .black
+
+    private var nameLabelNosotros: CustomLabel = {
+        let label = CustomLabel(label: HomeViewModelLabels.nameLabelNosotros, fontSize: 20, fontWeight: .bold)
         return label
     }()
     
-    private var rolLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Coordinador"
-        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
-        label.textColor = .black
+    private var rolLabelNosotros: CustomLabel = {
+        let label = CustomLabel(label: HomeViewModelLabels.rolLabelNosotros, fontSize: 20, fontWeight: .regular)
         return label
     }()
     
-    private var captionLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: .max))
-        label.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tristique ex massa, sit amet viverra nisi porta eu. Aliquam erat volutpat. Nulla vel aliquet enim. Vivamus aliquet nibh nec magna volutpat"
-        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = .black
-        label.numberOfLines = 0
+    private var captionLabelNosotros: CustomLabel = {
+        let label = CustomLabel(label: HomeViewModelLabels.captionLabelNosotros, fontSize: 16, fontWeight: .regular, labelLines: 0)
         label.lineBreakMode = .byWordWrapping
         label.sizeToFit()
         return label
     }()
     
-    lazy var collectionView: UICollectionView = {
+    lazy var collectionViewNosotros: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -116,6 +85,12 @@ class NosotrosViewController: UIViewController {
         image.image = UIImage(systemName: "arrow.right.circle.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal)
         return image
     }()
+    
+    private var serParteNosotrosButton: CustomButton = {
+        let button = CustomButton(titleLabel: HomeViewModelButtonNames.serParteNosotrosButton, width: 250)
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
+        return button
+    }()
 
     
     //MARK: - Lifecycle
@@ -125,14 +100,16 @@ class NosotrosViewController: UIViewController {
 
         view.backgroundColor = .white
         
+        showToast(message: "Nosotros", font: UIFont.systemFont(ofSize: 20))
+        
         view.addSubview(logoImage)
         view.addSubview(nosotrosHeader)
-        view.addSubview(serParteButton)
-        view.addSubview(profileImage)
-        view.addSubview(nameLabel)
-        view.addSubview(rolLabel)
-        view.addSubview(captionLabel)
-        view.addSubview(collectionView)
+        view.addSubview(serParteNosotrosButton)
+        view.addSubview(profileImageNosotros)
+        view.addSubview(nameLabelNosotros)
+        view.addSubview(rolLabelNosotros)
+        view.addSubview(captionLabelNosotros)
+        view.addSubview(collectionViewNosotros)
         view.addSubview(pageControl)
         view.addSubview(leftArrowImage)
         view.addSubview(rightArrowImage)
@@ -144,26 +121,26 @@ class NosotrosViewController: UIViewController {
         nosotrosHeader.anchor(top: logoImage.bottomAnchor)
         nosotrosHeader.centerX(inView: view)
         
-        profileImage.anchor(top: nosotrosHeader.bottomAnchor, paddingTop: 12)
-        profileImage.setDimensions(height: 200, width: 150)
-        profileImage.centerX(inView: view)
+        profileImageNosotros.anchor(top: nosotrosHeader.bottomAnchor, paddingTop: 12)
+        profileImageNosotros.setDimensions(height: 200, width: 150)
+        profileImageNosotros.centerX(inView: view)
         
-        nameLabel.anchor(top: profileImage.bottomAnchor, left: view.leftAnchor, paddingTop: 12, paddingLeft: 12)
+        nameLabelNosotros.anchor(top: profileImageNosotros.bottomAnchor, left: view.leftAnchor, paddingTop: 12, paddingLeft: 12)
         
-        rolLabel.anchor(top: nameLabel.bottomAnchor, left: view.leftAnchor, paddingTop: 2, paddingLeft: 12)
+        rolLabelNosotros.anchor(top: nameLabelNosotros.bottomAnchor, left: view.leftAnchor, paddingTop: 2, paddingLeft: 12)
         
-        captionLabel.anchor(top: rolLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 12, paddingLeft: 12, paddingRight: 12)
+        captionLabelNosotros.anchor(top: rolLabelNosotros.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 12, paddingLeft: 12, paddingRight: 12)
         
-        collectionView.anchor(top: captionLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 12, paddingLeft: 12, paddingRight: 12)
-        collectionView.setHeight(100)
+        collectionViewNosotros.anchor(top: captionLabelNosotros.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 12, paddingLeft: 12, paddingRight: 12)
+        collectionViewNosotros.setHeight(100)
         
-        pageControl.anchor(top: collectionView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor)
+        pageControl.anchor(top: collectionViewNosotros.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor)
         pageControl.centerX(inView: view)
         
-        serParteButton.anchor(top: pageControl.bottomAnchor, left: view.leftAnchor, paddingTop: 20, paddingLeft: 12)
+        serParteNosotrosButton.anchor(top: pageControl.bottomAnchor, left: view.leftAnchor, paddingTop: 20, paddingLeft: 12)
         
-        leftArrowImage.centerY(inView: collectionView)
-        rightArrowImage.centerY(inView: collectionView)
+        leftArrowImage.centerY(inView: collectionViewNosotros)
+        rightArrowImage.centerY(inView: collectionViewNosotros)
         rightArrowImage.anchor(right: view.rightAnchor)
         
         configureNavigationBar()
@@ -173,21 +150,41 @@ class NosotrosViewController: UIViewController {
     //MARK: - Helpers
     
     @objc func pageControlTapHandler(sender: UIPageControl){
-        collectionView.scrollToItem(at: IndexPath(row: sender.currentPage, section: 0), at: .left, animated: true)
+        collectionViewNosotros.scrollToItem(at: IndexPath(row: sender.currentPage, section: 0), at: .left, animated: true)
     }
     
     func configureNavigationBar() {
+        navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.barTintColor = .darkGray
         navigationController?.navigationBar.barStyle = .black
         navigationItem.title = "Nosotros"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenuToggle))
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
+
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenuToggle))
     }
     
     @objc func handleMenuToggle() {
         delegate?.handleMenuToggle(forMenuOption: nil)
     }
     
-
+    func showToast(message : String, font: UIFont) {
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 90, y: self.view.frame.size.height-100, width: 180, height: 42))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        toastLabel.textColor = UIColor.white
+        toastLabel.font = font
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        toastLabel.textAlignment = .center;
+        UIView.animate(withDuration: 2.0, delay: 0, options: .curveEaseInOut, animations: {
+             toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
+    }
 }
 
 extension NosotrosViewController: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
