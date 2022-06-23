@@ -19,10 +19,10 @@ protocol SignUpViewModelDelegate: AnyObject {
 
 class SignUpViewModel {
     
-    private var nameValidation: Bool = false
-    private var emailValidation: Bool = false
-    private var passwordValidation : Bool = false
-    private var confPasswordValidation : Bool = false
+    var nameValidation: Bool = false
+    var emailValidation: Bool = false
+    var passwordValidation : Bool = false
+    var confPasswordValidation : Bool = false
     
     var signUpManager = SignUpManager()
     weak var delegate: SignUpViewModelDelegate?
@@ -31,7 +31,7 @@ class SignUpViewModel {
         let user = NewUser(name: name, email: email, password: pass)
         signUpManager.registerUser(user: user) { response in
             self.delegate?.userRegisterSuccess()
-        } didFail: {
+        } didFail: {_ in 
             self.delegate?.userRegisterError()
         }
     }
@@ -54,26 +54,29 @@ extension SignUpViewModel{
 
     //MARK: - ValidationName
     func validateName(value: String?){
-        if let nameValue = value{
-            validationNameCharacters(value: nameValue)
-            if nameValue.count < 3{
-                let message = "The name must have more that 2 characters"
-                self.delegate?.showAlertsTextFields(messages: message)
-                nameValidation = false
-            }else{
-                nameValidation = true
-            }
+        guard let value = value else {
+            return
         }
-        showButtonRegister()
+        if value.count < 3 {
+            let message = "The name must have more that 2 characters"
+            self.delegate?.showAlertsTextFields(messages: message)
+        }
+        if validationNameCharacters(value: value) {
+            nameValidation = true
+            showButtonRegister()
+        }
+
     }
 
-    func validationNameCharacters(value: String){
+    func validationNameCharacters(value: String) -> Bool{
         let decimalCharters = CharacterSet.decimalDigits
         let decimalRange = value.rangeOfCharacter(from: decimalCharters)
         if decimalRange != nil{
             let message = "Plase don't used number un your name"
             self.delegate?.showAlertsTextFields(messages: message)
+            return false
         }
+        return true
     }
 
     //MARK: - Validation Email

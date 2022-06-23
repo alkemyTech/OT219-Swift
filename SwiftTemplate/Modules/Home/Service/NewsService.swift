@@ -15,10 +15,11 @@ struct NewsService: NewsFetching {
     
     static let shared = NewsService()
     
-    private let baseURL = ProcessInfo.processInfo.environment["baseURL"]!
-    private let endpointNews = ProcessInfo.processInfo.environment["endpoint.News"]!
+
+    private let baseURL = ProcessInfo.processInfo.environment["baseURL"] ?? "https://ongapi.alkemy.org/"
+    private let endpointNews = ProcessInfo.processInfo.environment["endpoint.News"] ?? "api/news"
     
-    
+
     func fetchNews(onComplete: @escaping ([News]) -> (), onError: @escaping (String) -> ()){
         ApiManager.shared.get(url: "\(baseURL)\(endpointNews)") { response in
             switch response{
@@ -38,8 +39,9 @@ struct NewsService: NewsFetching {
                 }catch{
                     onError(ApiError.noNewsData.errorDescription!)
                 }
-            case .failure(_):
+            case .failure(let error):
                 onError(ApiError.noNewsData.errorDescription!)
+                TrackerAnalytics.trackErrorNewsSeccion(error: error.localizedDescription)
             }
         }
     }

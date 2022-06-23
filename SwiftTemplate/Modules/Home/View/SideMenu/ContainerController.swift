@@ -14,9 +14,15 @@ class ContainerController: UIViewController {
     var isExpanded = false
     
     //MARK: - Init
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        self.navigationItem.setHidesBackButton(true, animated: false)
         configureHomeController()
     }
     
@@ -77,13 +83,15 @@ class ContainerController: UIViewController {
         case .Inicio:
             showToast(message: "Inicio", font: UIFont.systemFont(ofSize: 20))
         case .Nosotros:
-            showToast(message: "Nosotros", font: UIFont.systemFont(ofSize: 20))
+            let nosotrosViewController = NosotrosViewController()
+            self.navigationController?.pushViewController(nosotrosViewController, animated: true)
         case .Novedades:
             showToast(message: "Novedades", font: UIFont.systemFont(ofSize: 20))
         case .Testimonios:
             showToast(message: "Testimonios", font: UIFont.systemFont(ofSize: 20))
         case .Contacto:
-            showToast(message: "Contacto", font: UIFont.systemFont(ofSize: 20))
+            let contactoViewController = ContactViewController()
+            self.navigationController?.pushViewController(contactoViewController, animated: true)
         case .Contribuye:
             showToast(message: "Contribuye", font: UIFont.systemFont(ofSize: 20))
         }
