@@ -21,6 +21,7 @@
 		090369412860B8D4002D90E6 /* MockTestimonialsSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090369402860B8B9002D90E6 /* MockTestimonialsSuccess.swift */; };
 		090369432860B8ED002D90E6 /* MockTestimonialsFail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090369422860B8ED002D90E6 /* MockTestimonialsFail.swift */; };
 		090369472860B941002D90E6 /* TestimonialsMock.json in Resources */ = {isa = PBXBuildFile; fileRef = 090369462860B941002D90E6 /* TestimonialsMock.json */; };
+		090369492864EDE2002D90E6 /* SpinnerLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090369482864EDE2002D90E6 /* SpinnerLoading.swift */; };
 		40364FCC285FB72900180F15 /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40364FCB285FB72900180F15 /* ContactViewModel.swift */; };
 		403C21AF284AD29900026635 /* ContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403C21AE284AD29900026635 /* ContainerController.swift */; };
 		403C21B1284AD2A400026635 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403C21B0284AD2A400026635 /* MenuController.swift */; };
@@ -94,6 +95,7 @@
 		090369402860B8B9002D90E6 /* MockTestimonialsSuccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockTestimonialsSuccess.swift; sourceTree = "<group>"; };
 		090369422860B8ED002D90E6 /* MockTestimonialsFail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockTestimonialsFail.swift; sourceTree = "<group>"; };
 		090369462860B941002D90E6 /* TestimonialsMock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestimonialsMock.json; sourceTree = "<group>"; };
+		090369482864EDE2002D90E6 /* SpinnerLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerLoading.swift; sourceTree = "<group>"; };
 		19DC9E1E40C36079E44F490A /* Pods_SwiftTemplate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftTemplate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40364FCB285FB72900180F15 /* ContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
 		403C21AE284AD29900026635 /* ContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerController.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				F6EDEF412845238300BB49B9 /* ApiError.swift */,
 				03947946283ECCBE000E75C8 /* Extensions.swift */,
 				F6725D8D28621B2B00BA88B7 /* TrackerAnalytics.swift */,
+				090369482864EDE2002D90E6 /* SpinnerLoading.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -729,6 +732,7 @@
 				F649B7922847CF5700541235 /* HomeViewController.swift in Sources */,
 				4054DF83283EDE8300E781B6 /* NewUser.swift in Sources */,
 				F6EDEF402845236C00BB49B9 /* LoginService.swift in Sources */,
+				090369492864EDE2002D90E6 /* SpinnerLoading.swift in Sources */,
 				F6C342C22845BF2D005F877F /* NewsResponse.swift in Sources */,
 				F6C342C42845C18E005F877F /* NewsService.swift in Sources */,
 				4054DF81283EDE6F00E781B6 /* UserRegisterData.swift in Sources */,

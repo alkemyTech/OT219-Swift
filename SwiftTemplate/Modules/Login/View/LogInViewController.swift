@@ -12,6 +12,8 @@ class LogInViewController: UIViewController {
     //MARK: - Properties
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passTextField: UITextField!
+
+    @IBOutlet weak var spinnerLoading: UIActivityIndicatorView!
     
     lazy var viewModel: LoginViewModel = {
         let loginViewModel = LoginViewModel()
@@ -24,6 +26,7 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "LogIn"
+        setupView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,11 +39,29 @@ class LogInViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
+    //MARK: - setupView
+    func setupView(){
+        spinnerLoading.isHidden = true
+    }
+    
+    func showSpinner(){
+        spinnerLoading.isHidden = false
+        spinnerLoading.startAnimating()
+    }
+    
+    func hiddenSpinner(){
+        spinnerLoading.isHidden = true
+        spinnerLoading.stopAnimating()
+    }
+    
     @IBAction func navigateToHome(_ sender: Any) {
+        showSpinner()
         guard let email = emailTextField.text else {return}
         guard let pass = passTextField.text else {return}
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            self?.viewModel.login(email: email, pass: pass)
+
+        DispatchQueue.main.async {
+            self.viewModel.login(email: email, pass: pass)
+            self.hiddenSpinner()
         }
     }
     
@@ -53,6 +74,8 @@ class LogInViewController: UIViewController {
 //MARK: - LoginViewModelDelegate
 
 extension LogInViewController: LoginViewModelDelegate{
+
+    
     func didSuccessUserLogin() {
         let homeViewController = ContainerController()
         self.navigationController?.pushViewController(homeViewController, animated: true)

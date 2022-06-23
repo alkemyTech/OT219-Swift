@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="emailTextField" destination="xce-Nf-Gl0" id="GFh-SQ-hdk"/>
                 <outlet property="passTextField" destination="NV7-91-lpB" id="3xL-Bg-14W"/>
+                <outlet property="spinnerLoading" destination="Kro-7v-JiP" id="yAa-p8-btI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -37,7 +38,7 @@
                         <constraint firstAttribute="height" constant="40" id="AB1-zN-0qZ"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gr-Vx-cJw">
                     <rect key="frame" x="20" y="640" width="374" height="44"/>
@@ -62,6 +63,9 @@
                         <action selector="navigateToSignUp:" destination="-1" eventType="touchUpInside" id="EVI-DE-2xE"/>
                     </connections>
                 </button>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Kro-7v-JiP">
+                    <rect key="frame" x="197" y="438" width="20" height="20"/>
+                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -71,18 +75,20 @@
                 <constraint firstItem="NV7-91-lpB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="A6I-Hq-bAc"/>
                 <constraint firstItem="xce-Nf-Gl0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Bjt-zw-qod"/>
                 <constraint firstItem="ZV7-cg-8D9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="FIC-ZA-odc"/>
+                <constraint firstItem="Kro-7v-JiP" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="FpE-5g-AuQ"/>
                 <constraint firstItem="0gr-Vx-cJw" firstAttribute="top" secondItem="NV7-91-lpB" secondAttribute="bottom" constant="31" id="K02-gJ-wT8"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NV7-91-lpB" secondAttribute="trailing" constant="20" id="Lp0-bu-1UV"/>
                 <constraint firstItem="qEb-e2-i8Q" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="205" id="X2G-wC-cLW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0gr-Vx-cJw" secondAttribute="trailing" constant="20" id="XTN-n1-ZMs"/>
                 <constraint firstItem="qEb-e2-i8Q" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="87" id="f7S-1T-hj9"/>
                 <constraint firstItem="ZV7-cg-8D9" firstAttribute="top" secondItem="0gr-Vx-cJw" secondAttribute="bottom" constant="8" symbolic="YES" id="fl2-sc-NVD"/>
+                <constraint firstItem="Kro-7v-JiP" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="fuj-tz-GND"/>
                 <constraint firstItem="xce-Nf-Gl0" firstAttribute="top" secondItem="qEb-e2-i8Q" secondAttribute="bottom" constant="59" id="lzb-e5-2gn"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qEb-e2-i8Q" secondAttribute="trailing" constant="87" id="sB0-sZ-6wn"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ZV7-cg-8D9" secondAttribute="trailing" constant="20" id="sfD-2V-AEh"/>
                 <constraint firstItem="NV7-91-lpB" firstAttribute="top" secondItem="xce-Nf-Gl0" secondAttribute="bottom" constant="21" id="vJE-GM-8u6"/>
             </constraints>
-            <point key="canvasLocation" x="133" y="12"/>
+            <point key="canvasLocation" x="131.8840579710145" y="11.383928571428571"/>
         </view>
     </objects>
     <resources>
