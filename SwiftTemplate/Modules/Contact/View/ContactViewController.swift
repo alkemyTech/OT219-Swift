@@ -142,8 +142,16 @@ class ContactViewController: UIViewController {
         scrollView.addSubview(sendMessageButton)
         sendMessageButton.anchor(top: msgTextField.bottomAnchor, left: scrollView.leftAnchor, paddingTop: 30, paddingLeft: 20)
         configurationButton()
+        sendMessageButton.addTarget(self, action: #selector(self.sendMessage), for: .touchUpInside)
+
+        
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+    }
+
+    
+    @objc func sendMessage() {
+        viewModel?.send(name: fullnameTextfield.text!, email: emailTextField.text!, message: msgTextField.text!)
     }
     
     func configurationButton(){
@@ -229,6 +237,14 @@ extension ContactViewController {
 
 //MARK: - ContactViewModelDelegate
 extension ContactViewController: ContactViewModelDelegate {
+    func sendMessageSuccess() {
+        
+    }
+    
+    func sendMessageError() {
+        
+    }
+    
     func activateButton() {
         sendMessageButton.backgroundColor = .systemBlue
         sendMessageButton.isEnabled = true

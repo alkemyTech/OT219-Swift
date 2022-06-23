@@ -11,6 +11,8 @@ protocol ContactViewModelDelegate: AnyObject {
     func activateButton()
     func desactivateButton()
     func showAlertsTextFields(messages: String)
+    func sendMessageSuccess()
+    func sendMessageError()
 }
 
 class ContactViewModel {
@@ -18,9 +20,18 @@ class ContactViewModel {
     private var emailValidation: Bool = false
     private var messageValidation: Bool = false
 
-    
     weak var delegate: ContactViewModelDelegate?
+    var contactServive = ContactService()
 
+    func send(name: String, email: String, message: String) {
+        let message = ContactMessage(name: name, email: email, message: message)
+        contactServive.postMessage(message: message) { response in
+            self.delegate?.sendMessageSuccess()
+        } didFail: {
+            self.delegate?.sendMessageError()
+        }
+    }
+    
     func validateName(value: String?){
         if let nameValue = value {
             validationNameCharacters(value: nameValue)
