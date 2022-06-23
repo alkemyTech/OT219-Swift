@@ -31,7 +31,7 @@ class SignUpViewModel {
         let user = NewUser(name: name, email: email, password: pass)
         signUpManager.registerUser(user: user) { response in
             self.delegate?.userRegisterSuccess()
-        } didFail: {
+        } didFail: {_ in 
             self.delegate?.userRegisterError()
         }
     }

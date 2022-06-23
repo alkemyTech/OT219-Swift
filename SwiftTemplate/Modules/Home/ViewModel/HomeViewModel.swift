@@ -120,3 +120,29 @@ extension HomeViewModel {
         return testimonials.count
     }
 }
+
+//MARK: - Label & Images
+
+struct HomeViewModelLabels {
+    static let welcomeTitle = "Hola! Bienvenidx"
+    static let welcomeHeader = "Welcome"
+    static let newsHeader = "News"
+    static let nosotrosHeader = "¡Nuestro staff!"
+    static let nameLabelNosotros = "Roberto Martinez"
+    static let rolLabelNosotros = "Coordinador"
+    static let captionLabelNosotros = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tristique ex massa, sit amet viverra nisi porta eu. Aliquam erat volutpat. Nulla vel aliquet enim. Vivamus aliquet nibh nec magna volutpat"
+    static let testimonialsHeader = "Testimoniales"
+}
+
+struct HomeViewModelImagesNames {
+    static let logoONG = "LOGO-SOMOS MAS"
+    static let welcomeImageView = "ong"
+    static let profileImageNosotros = "profilePic"
+}
+
+struct HomeViewModelButtonNames {
+    static let contactButton = "Contactanos"
+    static let serParteButtonNews = "¡Quiero ser parte!"
+    static let serParteNosotrosButton = "¡Ver todos los miembros!"
+    static let verTestimoniosButton = "Ver todos los testimonios"
+}
