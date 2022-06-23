@@ -97,6 +97,19 @@ class ContactViewController: UIViewController {
         return label
     }()
     
+    private let loadingView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 6
+        view.setWidth(100)
+        view.setHeight(100)
+        return view
+    }()
+    
+    private let spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        return spinner
+    }()
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -144,18 +157,20 @@ class ContactViewController: UIViewController {
         configurationButton()
         sendMessageButton.addTarget(self, action: #selector(self.sendMessage), for: .touchUpInside)
 
+        //Spinner
+        scrollView.addSubview(loadingView)
+        loadingView.anchor(top: sendMessageButton.bottomAnchor)
+        loadingView.centerX(inView: scrollView)
         
+        loadingView.addSubview(spinner)
+        spinner.centerX(inView: loadingView)
+        spinner.centerY(inView: loadingView)
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
     }
     
-    func clearText() {
-        self.fullnameTextfield.text?.removeAll()
-        self.emailTextField.text?.removeAll()
-        self.msgTextField.text.removeAll()
-    }
-    
     @objc func sendMessage() {
+        showSpinner()
         viewModel?.send(name: fullnameTextfield.text!, email: emailTextField.text!, message: msgTextField.text!)
     }
     
@@ -194,6 +209,13 @@ class ContactViewController: UIViewController {
         didChangeTextOrHideKeyboard = true
     }
     
+    func clearText() {
+        self.fullnameTextfield.text?.removeAll()
+        self.emailTextField.text?.removeAll()
+        self.msgTextField.text.removeAll()
+    }
+    
+    //Validate helpers
     @objc func validateEmail() {
         viewModel?.validateEmail(value: emailTextField.text)
     }
@@ -204,6 +226,17 @@ class ContactViewController: UIViewController {
     
     @objc func validateMessage() {
         viewModel?.validateMessage(value: msgTextField.text)
+    }
+    
+    //Spinner helpers
+    private func showSpinner() {
+        spinner.startAnimating()
+        loadingView.isHidden = false
+    }
+
+    private func hideSpinner() {
+        spinner.stopAnimating()
+        loadingView.isHidden = true
     }
 }
 
@@ -243,6 +276,7 @@ extension ContactViewController {
 //MARK: - ContactViewModelDelegate
 extension ContactViewController: ContactViewModelDelegate {
     func sendMessageSuccess() {
+        hideSpinner()
         let alert = UIAlertController(title: "Mensaje enviado", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {(action: UIAlertAction!) in
             self.clearText()
@@ -252,7 +286,7 @@ extension ContactViewController: ContactViewModelDelegate {
 
     
     func sendMessageError() {
- 
+        hideSpinner()
     }
     
     func activateButton() {
