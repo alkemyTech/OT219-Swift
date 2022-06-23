@@ -213,6 +213,7 @@ class ContactViewController: UIViewController {
         self.fullnameTextfield.text?.removeAll()
         self.emailTextField.text?.removeAll()
         self.msgTextField.text.removeAll()
+        placeholderLabel.isHidden = false
     }
     
     //Validate helpers
@@ -226,6 +227,10 @@ class ContactViewController: UIViewController {
     
     @objc func validateMessage() {
         viewModel?.validateMessage(value: msgTextField.text)
+    }
+    
+    @objc func showAlertMessage() {
+        viewModel?.showAlertMessage(value: msgTextField.text)
     }
     
     //Spinner helpers
@@ -243,11 +248,12 @@ class ContactViewController: UIViewController {
 //MARK: - UITextViewDelegate
 extension ContactViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
+        validateMessage()
         placeholderLabel.isHidden = !textView.text.isEmpty
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        validateMessage()
+        showAlertMessage()
     }
 }
 

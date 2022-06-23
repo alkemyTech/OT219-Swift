@@ -49,8 +49,6 @@ class ContactViewModel {
     func validateMessage(value: String?) {
         if let message = value {
             if message.count < 10 {
-                let message = "The message must have more than 10 characters"
-                self.delegate?.showAlertsTextFields(messages: message)
                 messageValidation = false
             } else {
                 messageValidation = true
@@ -59,6 +57,18 @@ class ContactViewModel {
         showButtonRegister()
     }
     
+    func showAlertMessage(value: String?) {
+        if let message = value {
+            if message.count < 10 {
+                let message = "The message must have more than 10 characters"
+                self.delegate?.showAlertsTextFields(messages: message)
+                messageValidation = false
+            } else {
+                messageValidation = true
+            }
+        }
+    }
+
     func validateEmail(value: String?){
         if let emailValue = value{
             let regularExpresion = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
