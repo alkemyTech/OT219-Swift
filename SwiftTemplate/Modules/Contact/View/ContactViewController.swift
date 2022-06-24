@@ -97,14 +97,6 @@ class ContactViewController: UIViewController {
         return label
     }()
     
-    private let loadingView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 6
-        view.setWidth(100)
-        view.setHeight(100)
-        return view
-    }()
-    
     private let spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView()
         return spinner
@@ -158,13 +150,9 @@ class ContactViewController: UIViewController {
         sendMessageButton.addTarget(self, action: #selector(self.sendMessage), for: .touchUpInside)
 
         //Spinner
-        scrollView.addSubview(loadingView)
-        loadingView.anchor(top: sendMessageButton.bottomAnchor)
-        loadingView.centerX(inView: scrollView)
-        
-        loadingView.addSubview(spinner)
-        spinner.centerX(inView: loadingView)
-        spinner.centerY(inView: loadingView)
+        view.addSubview(spinner)
+        spinner.centerX(inView: view)
+        spinner.centerY(inView: view)
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
     }
@@ -236,12 +224,10 @@ class ContactViewController: UIViewController {
     //Spinner helpers
     private func showSpinner() {
         spinner.startAnimating()
-        loadingView.isHidden = false
     }
 
     private func hideSpinner() {
         spinner.stopAnimating()
-        loadingView.isHidden = true
     }
 }
 
