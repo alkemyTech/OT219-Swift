@@ -15,6 +15,7 @@ protocol SignUpViewModelDelegate: AnyObject {
     func desactivateButton()
     func labelPasswordShow()
     func labelPasswordNotShow()
+    
 }
 
 class SignUpViewModel {

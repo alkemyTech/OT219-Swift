@@ -120,6 +120,12 @@ class SignupViewController: UIViewController {
         return button
     }()
     
+    private let spinnerloading : UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.color = .systemRed
+        return spinner
+    }()
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -131,15 +137,6 @@ class SignupViewController: UIViewController {
         setupObserverKeyboard()
   
         configurationButton()
-//
-//        lazy var viewModel: SignUpViewModel = {
-//            let signUpViewModel = SignUpViewModel()
-//            signUpViewModel.delegate = self
-//            return signUpViewModel
-//        }()
-        
-        //Call this function when user press register button IBAction 
-//        viewModel.register(name: "String", email: "String", pass: "String")
     }
 
     //MARK: - Helpers
@@ -153,12 +150,15 @@ class SignupViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
         
-        
         scrollView.addSubview(logoImage)
+        
         logoImage.centerX(inView: scrollView)
         logoImage.setDimensions(height: 80, width: 120)
         logoImage.anchor(top: scrollView.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
         
+        scrollView.addSubview(spinnerloading)
+        spinnerloading.centerX(inView: scrollView)
+        spinnerloading.centerY(inView: scrollView)
         
         let stack = UIStackView(arrangedSubviews: [emailTextField,fullnameTextfield, passwordTextField ,reEnterPasswordTextField, labelSamePassword,signupButton])
         stack.axis = .vertical
@@ -172,6 +172,16 @@ class SignupViewController: UIViewController {
         alreadyHaveAccountButton.centerX(inView: scrollView)
         alreadyHaveAccountButton.anchor(bottom: scrollView.safeAreaLayoutGuide.bottomAnchor)
     
+    }
+    
+    private func showSpinner(){
+        spinnerloading.isHidden = false
+        spinnerloading.startAnimating()
+    }
+    
+    private func hiddenSpinner(){
+        spinnerloading.isHidden = true
+        spinnerloading.stopAnimating()
     }
     
     private func setupGradientLayer(){
@@ -224,10 +234,16 @@ class SignupViewController: UIViewController {
     }
     
     @objc func registerUser(){
-        viewModel.register(name: fullnameTextfield.text!, email: emailTextField.text!, pass: passwordTextField.text!)
+        showSpinner()
+        DispatchQueue.main.async {
+            self.viewModel.register(name: self.fullnameTextfield.text!, email: self.emailTextField.text!, pass: self.passwordTextField.text!)
+            self.hiddenSpinner()
+        }
     }
+    
 }
 
+//MARK: - SignUpViewModelDelegate
 extension SignupViewController: SignUpViewModelDelegate {
     func desactivateButton() {
         signupButton.isEnabled = false

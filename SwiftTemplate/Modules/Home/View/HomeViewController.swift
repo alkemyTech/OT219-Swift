@@ -9,6 +9,7 @@ protocol HomeViewControllerDelegate: AnyObject {
     func handleMenuToggle(forMenuOption menuOption: MenuOption?)
 }
 
+
 class HomeViewController: UIViewController {
     
     //MARK: - Properties
@@ -48,6 +49,11 @@ class HomeViewController: UIViewController {
         return image
     }()
     
+    private  var spinnerLoading : UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.color = .systemRed
+        return spinner
+    }()
     //MARK: - Welcome props
     
     private var welcomeImageView: CustomImage = {
@@ -201,13 +207,9 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         configureNavigationBar()
         setupView()
-        didGetWelcomeData()
         
-
-        //ViewModel
-        viewModel.getTestimonialsData()
-        viewModel.getNewsData()
-        viewModel.startTimer()
+        getAllData()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -221,7 +223,12 @@ class HomeViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(containerView)
 
-
+        scrollView.addSubview(spinnerLoading)
+        
+        spinnerLoading.centerX(inView: scrollView)
+        spinnerLoading.centerY(inView: scrollView)
+        
+        
         containerView.addSubview(logoView)
         logoView.anchor(top: containerView.safeAreaLayoutGuide.topAnchor)
         logoView.setHeight(90)
@@ -305,6 +312,19 @@ class HomeViewController: UIViewController {
         testimonialsTableView.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    func getAllData(){
+        showSpinner()
+        DispatchQueue.main.async {
+            self.didGetWelcomeData()
+            //ViewModel
+            self.viewModel.getTestimonialsData()
+            self.viewModel.getNewsData()
+            self.viewModel.startTimer()
+            self.hiddenSpinner()
+        }
+        
+    }
+    
     @objc func pageControlTapHandler(sender: UIPageControl){
         collectionViewNosotros.scrollToItem(at: IndexPath(row: sender.currentPage, section: 0), at: .left, animated: true)
     }
@@ -334,6 +354,16 @@ class HomeViewController: UIViewController {
         alert.addAction(actionCancel)
         
         present(alert, animated: true)
+    }
+    //MARK: - setup Spinner
+    func showSpinner() {
+        spinnerLoading.isHidden = false
+        spinnerLoading.startAnimating()
+    }
+    
+    func hiddenSpinner() {
+        spinnerLoading.stopAnimating()
+        spinnerLoading.isHidden = true
     }
 }
 
@@ -435,6 +465,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 //MARK: - Delegate
 
 extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
+
+    
     // Welcome
     func didGetWelcomeData() {
         self.welcomeDescription.text = viewModel.getDescriptionWelcome()
