@@ -21,11 +21,6 @@ protocol TimerNewsUpdate: AnyObject {
     func updateImageView(at index:Int)
 }
 
-protocol SpinnerLoadDelegate: AnyObject {
-    func showSpinner()
-    func hiddenSpinner()
-}
-
 class HomeViewModel {
     weak var delegate: HomeViewModelDelegate?
     weak var delegateTimer: TimerNewsUpdate?
