@@ -492,13 +492,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case newsCollectionView:
-            return viewModel.getNewsCount()
+            return min(viewModel.getNewsCount(), 4)
         case collectionViewNosotros:
             return 10
         default:
             break
         }
-        return viewModel.getNewsCount()
+        return min(viewModel.getNewsCount(), 4)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -545,6 +545,7 @@ extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
             self?.showWelcomeSection()
             self?.showNosotrosSection()
             self?.showTestimonialsSection()
+            self?.viewModel.startTimer()
         }
     }
     

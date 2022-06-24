@@ -85,7 +85,7 @@ class HomeViewModel {
     }
     
     func startTimer(){
-        timer = Timer.scheduledTimer(timeInterval: 5.5, target: self, selector: #selector(moveNextIndex), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveNextIndex), userInfo: nil, repeats: true)
     }
     
     func stopTimer(){
