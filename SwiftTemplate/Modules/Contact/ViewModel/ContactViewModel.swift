@@ -93,6 +93,13 @@ class ContactViewModel {
         }
     }
     
+    func resetButtonRegister() {
+        nameValidation = false
+        emailValidation = false
+        messageValidation = false
+        self.delegate?.desactivateButton()
+    }
+    
     func showButtonRegister(){
         if nameValidation && emailValidation && messageValidation {
             self.delegate?.activateButton()

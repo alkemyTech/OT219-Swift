@@ -160,6 +160,7 @@ class ContactViewController: UIViewController {
     @objc func sendMessage() {
         showSpinner()
         viewModel?.send(name: fullnameTextfield.text!, email: emailTextField.text!, message: msgTextField.text!)
+        configurationButton()
     }
     
     func configurationButton(){
@@ -272,6 +273,7 @@ extension ContactViewController: ContactViewModelDelegate {
         let alert = UIAlertController(title: "Mensaje enviado", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {(action: UIAlertAction!) in
             self.clearText()
+            self.viewModel?.resetButtonRegister()
         }))
         self.present(alert, animated: true, completion: nil)
     }
