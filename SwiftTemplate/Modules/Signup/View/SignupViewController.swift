@@ -41,7 +41,7 @@ class SignupViewController: UIViewController {
          return imageView
      }()
     
-    private let emailTextField: UITextField = {
+    private lazy var emailTextField: UITextField = {
         let spacer = UIView()
         spacer.setDimensions(height: 40, width: 12)
         
@@ -52,11 +52,12 @@ class SignupViewController: UIViewController {
         textField.textColor = .black
         textField.keyboardType = .emailAddress
         textField.placeholder = "Email"
+        textField.delegate = self
         textField.setHeight(40)
         return textField
     }()
     
-    private let fullnameTextfield: UITextField = {
+    private lazy var fullnameTextfield: UITextField = {
         let spacer = UIView()
         spacer.setDimensions(height: 40, width: 12)
         
@@ -66,11 +67,12 @@ class SignupViewController: UIViewController {
         textField.borderStyle = .roundedRect
         textField.textColor = .black
         textField.setHeight(40)
+        textField.delegate = self
         textField.placeholder = "Fullname"
         return textField
     }()
     
-    private let passwordTextField: UITextField = {
+    private lazy var passwordTextField: UITextField = {
         let spacer = UIView()
         spacer.setDimensions(height: 40, width: 12)
         
@@ -82,10 +84,11 @@ class SignupViewController: UIViewController {
         textField.isSecureTextEntry = true
         textField.setHeight(40)
         textField.placeholder = "Password"
+        textField.delegate = self
         return textField
     }()
     
-    private let confirmPasswordTextField: UITextField = {
+    private lazy var confirmPasswordTextField: UITextField = {
         let spacer = UIView()
         spacer.setDimensions(height: 40, width: 12)
         
@@ -97,6 +100,7 @@ class SignupViewController: UIViewController {
         textField.isSecureTextEntry = true
         textField.placeholder = "Confirm Password"
         textField.setHeight(40)
+        textField.delegate = self
         return textField
     }()
     
@@ -181,9 +185,6 @@ class SignupViewController: UIViewController {
     }
     
     func setupObserverKeyboard(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         emailTextField.addTarget(self, action: #selector(self.validateEmail), for: UIControl.Event.editingDidEnd)
         
@@ -195,29 +196,8 @@ class SignupViewController: UIViewController {
         
         signupButton.addTarget(self, action: #selector(self.registerUser), for: .touchUpInside)
         
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
-        
     }
-    
-    @objc func keyboardAppear(notification: NSNotification){
-        if !isKeyboardExpanded{
-        guard let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
-             let keyboardHeight = keyboardFrame.cgRectValue.height
-             let bottomSpace = self.scrollView.frame.height - (signupButton.frame.origin.y + signupButton.frame.height)
-             self.scrollView.frame.origin.y += keyboardHeight - bottomSpace + 10
-             isKeyboardExpanded = true
-        }
-    }
-    @objc func keyboardDisappear(){
-        if isKeyboardExpanded {
-            self.scrollView.frame.origin.y = 0
-            isKeyboardExpanded = false
-        }
-    }
-    
-    @objc func hideKeyboard(){
-        self.view.endEditing(true)
-    }
+
     @objc func validateEmail(){
         viewModel?.validateEmail(value: emailTextField.text)
     }
@@ -239,6 +219,25 @@ class SignupViewController: UIViewController {
         signupButton.endEditing(true)
     }
 }
+
+//MARK: - TextField Delegate
+
+extension SignupViewController: UITextFieldDelegate{
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == passwordTextField || textField == confirmPasswordTextField {
+            self.scrollView.frame.origin.y -= 200
+        }
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == passwordTextField || textField == confirmPasswordTextField {
+            self.scrollView.frame.origin.y = 0
+        }
+    }
+}
+
+//MARK: - Signup Delegate
 
 extension SignupViewController: SignUpViewModelDelegate {
     func desactivateButton() {
