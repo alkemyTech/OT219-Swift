@@ -34,7 +34,6 @@ class HomeViewModel {
     private var currentCellIndex = 0
     
     private var isServiceNewsAvailable = false
-    //private var isServiceSlidesAvailable = false
     private var isServiceTestimonialAvailable = false
     
     // MARK: - Welcome methods
