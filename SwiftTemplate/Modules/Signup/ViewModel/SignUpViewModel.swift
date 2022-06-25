@@ -15,7 +15,8 @@ protocol SignUpViewModelDelegate: AnyObject {
     func desactivateButton()
     func labelPasswordShow()
     func labelPasswordNotShow()
-    
+    func showingSpinner()
+    func hiddenSpinner()
 }
 
 class SignUpViewModel {
@@ -29,11 +30,14 @@ class SignUpViewModel {
     weak var delegate: SignUpViewModelDelegate?
     
     func register(name: String, email: String, pass: String) {
+        self.delegate?.showingSpinner()
         let user = NewUser(name: name, email: email, password: pass)
         signUpManager.registerUser(user: user) { response in
             self.delegate?.userRegisterSuccess()
+            self.delegate?.hiddenSpinner()
         } didFail: {_ in 
             self.delegate?.userRegisterError()
+            self.delegate?.hiddenSpinner()
         }
     }
 }

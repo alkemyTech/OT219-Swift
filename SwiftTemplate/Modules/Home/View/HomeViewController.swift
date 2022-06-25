@@ -52,6 +52,7 @@ class HomeViewController: UIViewController {
     private  var spinnerLoading : UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView()
         spinner.color = .systemRed
+        spinner.style = .large
         return spinner
     }()
     //MARK: - Welcome props
@@ -208,7 +209,11 @@ class HomeViewController: UIViewController {
         configureNavigationBar()
         setupView()
         
-        getAllData()
+        didGetWelcomeData()
+        //ViewModel
+        viewModel.getTestimonialsData()
+        viewModel.getNewsData()
+        viewModel.startTimer()
         
     }
     
@@ -312,19 +317,6 @@ class HomeViewController: UIViewController {
         testimonialsTableView.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func getAllData(){
-        showSpinner()
-        DispatchQueue.main.async {
-            self.didGetWelcomeData()
-            //ViewModel
-            self.viewModel.getTestimonialsData()
-            self.viewModel.getNewsData()
-            self.viewModel.startTimer()
-            self.hiddenSpinner()
-        }
-        
-    }
-    
     @objc func pageControlTapHandler(sender: UIPageControl){
         collectionViewNosotros.scrollToItem(at: IndexPath(row: sender.currentPage, section: 0), at: .left, animated: true)
     }
@@ -356,15 +348,15 @@ class HomeViewController: UIViewController {
         present(alert, animated: true)
     }
     //MARK: - setup Spinner
-    func showSpinner() {
-        spinnerLoading.isHidden = false
-        spinnerLoading.startAnimating()
-    }
-    
-    func hiddenSpinner() {
-        spinnerLoading.stopAnimating()
-        spinnerLoading.isHidden = true
-    }
+//    func showSpinner() {
+//        spinnerLoading.isHidden = false
+//        spinnerLoading.startAnimating()
+//    }
+//
+//    func hiddenSpinner() {
+//        spinnerLoading.stopAnimating()
+//        spinnerLoading.isHidden = true
+//    }
 }
 
 //MARK: - TableView Delegate, Datasource
@@ -465,7 +457,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 //MARK: - Delegate
 
 extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
-
     
     // Welcome
     func didGetWelcomeData() {
@@ -518,5 +509,16 @@ extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
         DispatchQueue.main.async { [weak self] in
             self?.showMessageError(message: error)
         }
+    }
+    
+//    Spinner
+    func showSpinner() {
+        spinnerLoading.isHidden = false
+        spinnerLoading.startAnimating()
+    }
+    
+    func hiddeSpinner() {
+        spinnerLoading.isHidden = true
+        spinnerLoading.stopAnimating()
     }
 }

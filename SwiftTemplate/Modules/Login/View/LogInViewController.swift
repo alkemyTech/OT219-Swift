@@ -44,24 +44,12 @@ class LogInViewController: UIViewController {
         spinnerLoading.isHidden = true
     }
     
-    func showSpinner(){
-        spinnerLoading.isHidden = false
-        spinnerLoading.startAnimating()
-    }
-    
-    func hiddenSpinner(){
-        spinnerLoading.isHidden = true
-        spinnerLoading.stopAnimating()
-    }
     
     @IBAction func navigateToHome(_ sender: Any) {
-        showSpinner()
         guard let email = emailTextField.text else {return}
         guard let pass = passTextField.text else {return}
-
         DispatchQueue.main.async {
             self.viewModel.login(email: email, pass: pass)
-            self.hiddenSpinner()
         }
     }
     
@@ -73,9 +61,8 @@ class LogInViewController: UIViewController {
 
 //MARK: - LoginViewModelDelegate
 
-extension LogInViewController: LoginViewModelDelegate{
+extension LogInViewController: LoginViewModelDelegate { 
 
-    
     func didSuccessUserLogin() {
         let homeViewController = ContainerController()
         self.navigationController?.pushViewController(homeViewController, animated: true)
@@ -86,4 +73,17 @@ extension LogInViewController: LoginViewModelDelegate{
         alert.addAction(UIAlertAction(title: "Aceptar", style: .cancel))
         present(alert, animated: true)
     }
+    
+    func showSpinner(){
+        spinnerLoading.isHidden = false
+        spinnerLoading.startAnimating()
+    }
+    
+    func hiddenSpinner(){
+        spinnerLoading.isHidden = true
+        spinnerLoading.stopAnimating()
+    }
+
 }
+
+

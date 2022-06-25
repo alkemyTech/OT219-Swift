@@ -123,6 +123,7 @@ class SignupViewController: UIViewController {
     private let spinnerloading : UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView()
         spinner.color = .systemRed
+        spinner.style = .large
         return spinner
     }()
     
@@ -172,16 +173,6 @@ class SignupViewController: UIViewController {
         alreadyHaveAccountButton.centerX(inView: scrollView)
         alreadyHaveAccountButton.anchor(bottom: scrollView.safeAreaLayoutGuide.bottomAnchor)
     
-    }
-    
-    private func showSpinner(){
-        spinnerloading.isHidden = false
-        spinnerloading.startAnimating()
-    }
-    
-    private func hiddenSpinner(){
-        spinnerloading.isHidden = true
-        spinnerloading.stopAnimating()
     }
     
     private func setupGradientLayer(){
@@ -234,17 +225,23 @@ class SignupViewController: UIViewController {
     }
     
     @objc func registerUser(){
-        showSpinner()
-        DispatchQueue.main.async {
             self.viewModel.register(name: self.fullnameTextfield.text!, email: self.emailTextField.text!, pass: self.passwordTextField.text!)
-            self.hiddenSpinner()
-        }
     }
     
 }
 
 //MARK: - SignUpViewModelDelegate
 extension SignupViewController: SignUpViewModelDelegate {
+    func showingSpinner(){
+        spinnerloading.isHidden = false
+        spinnerloading.startAnimating()
+    }
+    
+    func hiddenSpinner(){
+        spinnerloading.isHidden = true
+        spinnerloading.stopAnimating()
+    }
+    
     func desactivateButton() {
         signupButton.isEnabled = false
         signupButton.backgroundColor = .gray

@@ -14,7 +14,8 @@ protocol HomeViewModelDelegate: AnyObject {
     func didFailGettingTestimonialsData(error: String)
     func didGetWelcomeData()
     func didFailGettingWelcomeData(error: String)
-    
+    func showSpinner()
+    func hiddeSpinner()
 }
 
 protocol TimerNewsUpdate: AnyObject {
@@ -60,12 +61,15 @@ class HomeViewModel {
     }
     
     func getNewsData(){
+        self.delegate?.showSpinner()
         DispatchQueue.global().async { [weak self] in
             self?.newsService.fetchNews { news in
                 self?.news = news
                 self?.getNewsCount() == 0 ? self?.delegate?.didFailGettingNewsData(error: ApiError.noNewsData.errorDescription!) : self?.delegate?.didGetNewsData()
+                self?.delegate?.hiddeSpinner()
             } onError: { error in
                 self?.delegate?.didFailGettingNewsData(error: error)
+                self?.delegate?.hiddeSpinner()
             }
         }
     }
@@ -105,12 +109,15 @@ class HomeViewModel {
 extension HomeViewModel {
     
     func getTestimonialsData() {
+        self.delegate?.showSpinner()
         DispatchQueue.global().async {
             self.testimonialService.fetchTestimonials { [weak self] testimonials in
                 self?.testimonials = testimonials
                 self?.getTestimonialsCount() == 0 ? self?.delegate?.didFailGettingTestimonialsData(error: ApiError.noTestimonialsData.errorDescription!) : self?.delegate?.didGetTestimonialsData()
+                self?.delegate?.hiddeSpinner()
             } onError: { [weak self] error in
                 self?.delegate?.didFailGettingTestimonialsData(error: error)
+                self?.delegate?.hiddeSpinner()
             }
         }
     }

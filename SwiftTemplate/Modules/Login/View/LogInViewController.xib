@@ -64,8 +64,8 @@
                         <action selector="navigateToSignUp:" destination="-1" eventType="touchUpInside" id="EVI-DE-2xE"/>
                     </connections>
                 </button>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Kro-7v-JiP">
-                    <rect key="frame" x="197" y="438" width="20" height="20"/>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Kro-7v-JiP">
+                    <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
                     <color key="color" systemColor="systemRedColor"/>
                 </activityIndicatorView>
             </subviews>
