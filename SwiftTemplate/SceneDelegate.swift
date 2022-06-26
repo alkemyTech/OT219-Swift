@@ -17,17 +17,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
 
-        if userSessionRepository.validateCurrentUser(){
-            let homeViewController = ContainerController()
-            let navigationController = UINavigationController(rootViewController: homeViewController)
-            window?.rootViewController = navigationController
-            window?.makeKeyAndVisible()
-        }else {
-            let LoginViewController = LogInViewController()
+//        if userSessionRepository.validateCurrentUser(){
+//            let homeViewController = ContainerController()
+//            let navigationController = UINavigationController(rootViewController: homeViewController)
+//            window?.rootViewController = navigationController
+//            window?.makeKeyAndVisible()
+//        }else {
+            let LoginViewController = LoginViewController()
             let navigationController = UINavigationController(rootViewController: LoginViewController)
             window?.rootViewController = navigationController
             window?.makeKeyAndVisible()
-        }
+//        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
