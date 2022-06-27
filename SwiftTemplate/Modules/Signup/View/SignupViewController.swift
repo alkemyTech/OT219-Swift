@@ -14,6 +14,7 @@ class SignupViewController: UIViewController {
     private lazy var viewModel: SignUpViewModel = {
         let viewModel = SignUpViewModel()
         viewModel.delegate = self
+        viewModel.delegateSpinner = self
         return viewModel
     }()
     
@@ -120,7 +121,7 @@ class SignupViewController: UIViewController {
         return button
     }()
     
-    private let spinnerloading : UIActivityIndicatorView = {
+    private let spinnerLoading : UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView()
         spinner.color = .systemRed
         spinner.style = .large
@@ -138,6 +139,7 @@ class SignupViewController: UIViewController {
         setupObserverKeyboard()
   
         configurationButton()
+        
     }
 
     //MARK: - Helpers
@@ -157,9 +159,9 @@ class SignupViewController: UIViewController {
         logoImage.setDimensions(height: 80, width: 120)
         logoImage.anchor(top: scrollView.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
         
-        scrollView.addSubview(spinnerloading)
-        spinnerloading.centerX(inView: scrollView)
-        spinnerloading.centerY(inView: scrollView)
+        scrollView.addSubview(spinnerLoading)
+        spinnerLoading.centerX(inView: scrollView)
+        spinnerLoading.centerY(inView: scrollView)
         
         let stack = UIStackView(arrangedSubviews: [emailTextField,fullnameTextfield, passwordTextField ,reEnterPasswordTextField, labelSamePassword,signupButton])
         stack.axis = .vertical
@@ -231,15 +233,15 @@ class SignupViewController: UIViewController {
 }
 
 //MARK: - SignUpViewModelDelegate
-extension SignupViewController: SignUpViewModelDelegate {
-    func showingSpinner(){
-        spinnerloading.isHidden = false
-        spinnerloading.startAnimating()
+extension SignupViewController: SignUpViewModelDelegate, SpinnerLoadingDelegate {
+    func showSpinner(){
+        spinnerLoading.isHidden = false
+        spinnerLoading.startAnimating()
     }
     
     func hiddenSpinner(){
-        spinnerloading.isHidden = true
-        spinnerloading.stopAnimating()
+        spinnerLoading.isHidden = true
+        spinnerLoading.stopAnimating()
     }
     
     func desactivateButton() {

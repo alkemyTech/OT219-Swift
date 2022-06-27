@@ -11,15 +11,16 @@ protocol HomeViewControllerDelegate: AnyObject {
 
 
 class HomeViewController: UIViewController {
+
     
     //MARK: - Properties
     weak var delegate: HomeViewControllerDelegate?
-    
 
     lazy var viewModel: HomeViewModel = {
         let homeViewModel = HomeViewModel()
         homeViewModel.delegate = self
         homeViewModel.delegateTimer = self
+        homeViewModel.delegateSpinner = self
         return homeViewModel
     }()
     
@@ -456,7 +457,17 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 //MARK: - Delegate
 
-extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
+extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate, SpinnerLoadingDelegate {
+    func showSpinner() {
+        spinnerLoading.isHidden = false
+        spinnerLoading.startAnimating()
+    }
+    
+    func hiddenSpinner() {
+        spinnerLoading.isHidden = true
+        spinnerLoading.stopAnimating()
+    }
+    
     
     // Welcome
     func didGetWelcomeData() {
@@ -511,14 +522,4 @@ extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
         }
     }
     
-//    Spinner
-    func showSpinner() {
-        spinnerLoading.isHidden = false
-        spinnerLoading.startAnimating()
-    }
-    
-    func hiddeSpinner() {
-        spinnerLoading.isHidden = true
-        spinnerLoading.stopAnimating()
-    }
 }

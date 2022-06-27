@@ -14,8 +14,6 @@ protocol HomeViewModelDelegate: AnyObject {
     func didFailGettingTestimonialsData(error: String)
     func didGetWelcomeData()
     func didFailGettingWelcomeData(error: String)
-    func showSpinner()
-    func hiddeSpinner()
 }
 
 protocol TimerNewsUpdate: AnyObject {
@@ -25,6 +23,7 @@ protocol TimerNewsUpdate: AnyObject {
 class HomeViewModel {
     weak var delegate: HomeViewModelDelegate?
     weak var delegateTimer: TimerNewsUpdate?
+    weak var delegateSpinner: SpinnerLoadingDelegate?
     private var sectionsTitles = ["News"]
     
     var news = [News]()
@@ -61,15 +60,15 @@ class HomeViewModel {
     }
     
     func getNewsData(){
-        self.delegate?.showSpinner()
+        self.delegateSpinner?.showSpinner()
         DispatchQueue.global().async { [weak self] in
             self?.newsService.fetchNews { news in
                 self?.news = news
                 self?.getNewsCount() == 0 ? self?.delegate?.didFailGettingNewsData(error: ApiError.noNewsData.errorDescription!) : self?.delegate?.didGetNewsData()
-                self?.delegate?.hiddeSpinner()
+                self?.delegateSpinner?.hiddenSpinner()
             } onError: { error in
                 self?.delegate?.didFailGettingNewsData(error: error)
-                self?.delegate?.hiddeSpinner()
+                self?.delegateSpinner?.hiddenSpinner()
             }
         }
     }
@@ -109,15 +108,15 @@ class HomeViewModel {
 extension HomeViewModel {
     
     func getTestimonialsData() {
-        self.delegate?.showSpinner()
+        self.delegateSpinner?.showSpinner()
         DispatchQueue.global().async {
             self.testimonialService.fetchTestimonials { [weak self] testimonials in
                 self?.testimonials = testimonials
                 self?.getTestimonialsCount() == 0 ? self?.delegate?.didFailGettingTestimonialsData(error: ApiError.noTestimonialsData.errorDescription!) : self?.delegate?.didGetTestimonialsData()
-                self?.delegate?.hiddeSpinner()
+                self?.delegateSpinner?.hiddenSpinner()
             } onError: { [weak self] error in
                 self?.delegate?.didFailGettingTestimonialsData(error: error)
-                self?.delegate?.hiddeSpinner()
+                self?.delegateSpinner?.hiddenSpinner()
             }
         }
     }
