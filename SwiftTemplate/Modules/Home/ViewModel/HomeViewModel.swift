@@ -14,6 +14,7 @@ protocol HomeViewModelDelegate: AnyObject {
     func didFailGettingTestimonialsData(error: String)
     func didGetWelcomeData()
     func didFailGettingWelcomeData(error: String)
+    func didFailAllServices()
 }
 
 protocol TimerNewsUpdate: AnyObject {
@@ -32,6 +33,9 @@ class HomeViewModel {
     private var timer : Timer?
     
     private var currentCellIndex = 0
+    
+    private var isServiceNewsAvailable = false
+    private var isServiceTestimonialAvailable = false
     
     // MARK: - Welcome methods
     
@@ -60,15 +64,13 @@ class HomeViewModel {
     }
     
     func getNewsData(){
-        self.delegateSpinner?.showSpinner()
         DispatchQueue.global().async { [weak self] in
             self?.newsService.fetchNews { news in
                 self?.news = news
                 self?.getNewsCount() == 0 ? self?.delegate?.didFailGettingNewsData(error: ApiError.noNewsData.errorDescription!) : self?.delegate?.didGetNewsData()
-                self?.delegateSpinner?.hiddenSpinner()
+                self?.delegate?.didGetNewsData()
             } onError: { error in
                 self?.delegate?.didFailGettingNewsData(error: error)
-                self?.delegateSpinner?.hiddenSpinner()
             }
         }
     }
@@ -86,7 +88,7 @@ class HomeViewModel {
     }
     
     func startTimer(){
-        timer = Timer.scheduledTimer(timeInterval: 5.5, target: self, selector: #selector(moveNextIndex), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveNextIndex), userInfo: nil, repeats: true)
     }
     
     func stopTimer(){
@@ -108,15 +110,13 @@ class HomeViewModel {
 extension HomeViewModel {
     
     func getTestimonialsData() {
-        self.delegateSpinner?.showSpinner()
         DispatchQueue.global().async {
             self.testimonialService.fetchTestimonials { [weak self] testimonials in
                 self?.testimonials = testimonials
                 self?.getTestimonialsCount() == 0 ? self?.delegate?.didFailGettingTestimonialsData(error: ApiError.noTestimonialsData.errorDescription!) : self?.delegate?.didGetTestimonialsData()
-                self?.delegateSpinner?.hiddenSpinner()
+                self?.delegate?.didGetTestimonialsData()
             } onError: { [weak self] error in
                 self?.delegate?.didFailGettingTestimonialsData(error: error)
-                self?.delegateSpinner?.hiddenSpinner()
             }
         }
     }
@@ -127,6 +127,60 @@ extension HomeViewModel {
     
     func getTestimonialsCount() -> Int{
         return testimonials.count
+    }
+}
+
+//MARK: - Get all Services
+extension HomeViewModel {
+    
+    
+    func getAllServices() {
+        self.delegateSpinner?.showSpinner()
+       let dispatchGroup = DispatchGroup()
+       
+        dispatchGroup.enter()
+        newsService.fetchNews { [weak self] news in
+            self?.news = news
+            self?.delegate?.didGetNewsData()
+            self?.isServiceNewsAvailable = true
+            self?.delegateSpinner?.hiddenSpinner()
+            
+            dispatchGroup.leave()
+        } onError: { [weak self] error in
+            self?.isServiceNewsAvailable = false
+            self?.delegateSpinner?.hiddenSpinner()
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.enter()
+        TestimonialsService.shared.fetchTestimonials { [weak self] testimonials in
+            self?.testimonials = testimonials
+            self?.delegate?.didGetTestimonialsData()
+            self?.isServiceTestimonialAvailable = true
+            self?.delegateSpinner?.hiddenSpinner()
+            dispatchGroup.leave()
+        } onError: { [weak self] error in
+            self?.isServiceTestimonialAvailable = false
+            self?.delegateSpinner?.hiddenSpinner()
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: DispatchQueue.global()) {
+            self.checkServiceAvailable()
+        }
+         
+    }
+
+    func checkServiceAvailable()  {
+        if !isServiceNewsAvailable && !isServiceTestimonialAvailable{
+            delegate?.didFailAllServices()
+            return
+        }else if !isServiceNewsAvailable {
+            delegate?.didFailGettingNewsData(error: ApiError.noNewsData.errorDescription!)
+            return
+        } else if !isServiceTestimonialAvailable {
+            delegate?.didFailGettingTestimonialsData(error: ApiError.noTestimonialsData.errorDescription!)
+        }
     }
 }
 
@@ -141,12 +195,14 @@ struct HomeViewModelLabels {
     static let rolLabelNosotros = "Coordinador"
     static let captionLabelNosotros = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tristique ex massa, sit amet viverra nisi porta eu. Aliquam erat volutpat. Nulla vel aliquet enim. Vivamus aliquet nibh nec magna volutpat"
     static let testimonialsHeader = "Testimoniales"
+    static let errorMessage = "Oops, something went wrong. Please try again!"
 }
 
 struct HomeViewModelImagesNames {
     static let logoONG = "LOGO-SOMOS MAS"
     static let welcomeImageView = "ong"
     static let profileImageNosotros = "profilePic"
+    static let errorImage = "ErrorIcon"
 }
 
 struct HomeViewModelButtonNames {
@@ -154,4 +210,5 @@ struct HomeViewModelButtonNames {
     static let serParteButtonNews = "¡Quiero ser parte!"
     static let serParteNosotrosButton = "¡Ver todos los miembros!"
     static let verTestimoniosButton = "Ver todos los testimonios"
+    static let errorButton = "Retry?"
 }
