@@ -37,6 +37,7 @@
 		40608FF3286287BC00A36FCA /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40608FF2286287BC00A36FCA /* ContactService.swift */; };
 		40608FF5286287C800A36FCA /* ContactData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40608FF4286287C800A36FCA /* ContactData.swift */; };
 		40608FFA286289D700A36FCA /* ContactMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40608FF9286289D700A36FCA /* ContactMessage.swift */; };
+		40881DA0286A017300B5E144 /* Test_Contact_ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40881D9F286A017300B5E144 /* Test_Contact_ViewModel.swift */; };
 		40DED4412854075E004BD580 /* TestimonialsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DED4402854075E004BD580 /* TestimonialsService.swift */; };
 		40DED443285407B9004BD580 /* TestimonialsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DED442285407B9004BD580 /* TestimonialsResponse.swift */; };
 		A6470E527C25B4694F07B987 /* Pods_SwiftTemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19DC9E1E40C36079E44F490A /* Pods_SwiftTemplate.framework */; };
@@ -114,6 +115,7 @@
 		40608FF2286287BC00A36FCA /* ContactService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
 		40608FF4286287C800A36FCA /* ContactData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactData.swift; sourceTree = "<group>"; };
 		40608FF9286289D700A36FCA /* ContactMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactMessage.swift; sourceTree = "<group>"; };
+		40881D9F286A017300B5E144 /* Test_Contact_ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_Contact_ViewModel.swift; sourceTree = "<group>"; };
 		40DED4402854075E004BD580 /* TestimonialsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestimonialsService.swift; sourceTree = "<group>"; };
 		40DED442285407B9004BD580 /* TestimonialsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestimonialsResponse.swift; sourceTree = "<group>"; };
 		54065947B66C7BED0004E9F4 /* Pods-SwiftTemplate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftTemplate.release.xcconfig"; path = "Target Support Files/Pods-SwiftTemplate/Pods-SwiftTemplate.release.xcconfig"; sourceTree = "<group>"; };
@@ -491,6 +493,7 @@
 				F66C6BE8284DAEAE00E21542 /* MockNewsServiceSuccess.swift */,
 				F66C6BEA284DBE4A00E21542 /* MockNewsServiceFail.swift */,
 				F692AD8C285D87BA00CF0F35 /* Test_Signup_ViewModel.swift */,
+				40881D9F286A017300B5E144 /* Test_Contact_ViewModel.swift */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -785,6 +788,7 @@
 				F692AD8D285D87BA00CF0F35 /* Test_Signup_ViewModel.swift in Sources */,
 				F66C6BE9284DAEAE00E21542 /* MockNewsServiceSuccess.swift in Sources */,
 				F6EDEF1F2845227100BB49B9 /* Test_API_Login.swift in Sources */,
+				40881DA0286A017300B5E144 /* Test_Contact_ViewModel.swift in Sources */,
 				F649B798284860D100541235 /* Test_Home_ViewModel.swift in Sources */,
 				090369412860B8D4002D90E6 /* MockTestimonialsSuccess.swift in Sources */,
 			);

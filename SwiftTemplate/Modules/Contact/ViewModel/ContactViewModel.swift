@@ -16,9 +16,9 @@ protocol ContactViewModelDelegate: AnyObject {
 }
 
 class ContactViewModel {
-    private var nameValidation: Bool = false
-    private var emailValidation: Bool = false
-    private var messageValidation: Bool = false
+    var nameValidation: Bool = false
+    var emailValidation: Bool = false
+    var messageValidation: Bool = false
 
     weak var delegate: ContactViewModelDelegate?
     var contactServive = ContactService()
@@ -90,6 +90,8 @@ class ContactViewModel {
         if decimalRange != nil{
             let message = "Plase don't used number un your name"
             self.delegate?.showAlertsTextFields(messages: message)
+        } else {
+            nameValidation = true
         }
     }
     
