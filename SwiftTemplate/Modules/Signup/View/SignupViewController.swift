@@ -122,12 +122,12 @@ class SignupViewController: UIViewController {
         return button
     }()
     
-    private let alreadyHaveAccountButton: UIButton = {
+    lazy var alreadyHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Ya tenes cuenta? Ingresa!", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-        button.addTarget(self, action: #selector(showLogin), for: .touchUpInside)
+        button.addTarget(self, action: #selector(SignupViewController.showLogin(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -178,7 +178,7 @@ class SignupViewController: UIViewController {
     
     }
     
-    @objc func showLogin(){
+    @objc func showLogin(_ sender:UIButton){
         DispatchQueue.main.async { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
