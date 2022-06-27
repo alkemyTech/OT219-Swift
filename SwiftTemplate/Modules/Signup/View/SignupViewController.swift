@@ -150,7 +150,7 @@ class SignupViewController: UIViewController {
         configurationButton()
 
         viewModel = SignUpViewModel()
-        viewModel?.delegate = self
+        viewModel.delegate = self
     }
 
     //MARK: - Helpers
@@ -218,11 +218,11 @@ class SignupViewController: UIViewController {
     }
     
     @objc func validateSamePassword(){
-        viewModel?.validateSamePassword(valueA: passwordTextField.text, valueB: confirmPasswordTextField.text)
+        viewModel.validateSamePassword(valueA: passwordTextField.text, valueB: confirmPasswordTextField.text)
     }
     
     @objc func registerUser(){
-        viewModel?.register(name: fullnameTextfield.text!, email: emailTextField.text!, pass: passwordTextField.text!)
+        viewModel.register(name: fullnameTextfield.text!, email: emailTextField.text!, pass: passwordTextField.text!)
         signupButton.endEditing(true)
     }
 }
