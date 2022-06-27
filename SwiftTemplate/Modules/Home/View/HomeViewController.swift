@@ -9,16 +9,18 @@ protocol HomeViewControllerDelegate: AnyObject {
     func handleMenuToggle(forMenuOption menuOption: MenuOption?)
 }
 
+
 class HomeViewController: UIViewController {
+
     
     //MARK: - Properties
     weak var delegate: HomeViewControllerDelegate?
-    
 
     lazy var viewModel: HomeViewModel = {
         let homeViewModel = HomeViewModel()
         homeViewModel.delegate = self
         homeViewModel.delegateTimer = self
+        homeViewModel.delegateSpinner = self
         return homeViewModel
     }()
     
@@ -48,15 +50,21 @@ class HomeViewController: UIViewController {
         return image
     }()
     
+    private  var spinnerLoading : UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.color = .systemRed
+        spinner.style = .large
+        return spinner
+    }()
     //MARK: - Welcome props
     
     private var welcomeImageView: CustomImage = {
-        let image = CustomImage(imageName: "", mode: .scaleToFill)
+        let image = CustomImage(imageName: HomeViewModelImagesNames.welcomeImageView, mode: .scaleToFill)
         return image
     }()
     
     private var welcomeTitle: CustomLabel = {
-        let label = CustomLabel(label: "", fontSize: 24, fontWeight: .bold)
+        let label = CustomLabel(label: HomeViewModelLabels.welcomeTitle, fontSize: 24, fontWeight: .bold)
         return label
     }()
     
@@ -69,7 +77,6 @@ class HomeViewController: UIViewController {
     private var contactButton: CustomButton = {
         let button = CustomButton(titleLabel: HomeViewModelButtonNames.contactButton, width: 200)
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
-        button.isHidden = true
         return button
     }()
     
@@ -95,7 +102,6 @@ class HomeViewController: UIViewController {
     
     private var newsHeader: CustomLabel = {
         let label = CustomLabel(label: HomeViewModelLabels.newsHeader, fontSize: 20, fontWeight: .bold)
-        label.isHidden = true
         return label
     }()
 
@@ -197,39 +203,19 @@ class HomeViewController: UIViewController {
         return label
     }()
     
-    //MARK: - Error handler
-    
-    private var errorImage: CustomImage = {
-        let image = CustomImage(imageName: HomeViewModelImagesNames.errorImage, mode: .scaleAspectFit)
-        image.isHidden = true
-        return image
-    }()
-    
-    private var errorMessage: CustomLabel = {
-        let label = CustomLabel(label: HomeViewModelLabels.errorMessage, fontSize: 16, fontWeight: .semibold, labelLines: 0)
-        label.lineBreakMode = .byWordWrapping
-        label.sizeToFit()
-        label.isHidden = true
-        label.frame = CGRect(x: 0, y: 0, width: 200, height: .max)
-        return label
-    }()
-    
-    lazy var retryButton: CustomButton = {
-        let button = CustomButton(titleLabel: HomeViewModelButtonNames.errorButton, width: 200)
-        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
-        button.addTarget(self, action: #selector(didTapRetryButton), for: .touchUpInside)
-        button.isHidden = true
-        return button
-    }()
-
     //MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
         setupView()
-
-        viewModel.getAllServices()
+        
+        didGetWelcomeData()
+        //ViewModel
+        viewModel.getTestimonialsData()
+        viewModel.getNewsData()
+        viewModel.startTimer()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -243,7 +229,12 @@ class HomeViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(containerView)
 
-
+        scrollView.addSubview(spinnerLoading)
+        
+        spinnerLoading.centerX(inView: scrollView)
+        spinnerLoading.centerY(inView: scrollView)
+        
+        
         containerView.addSubview(logoView)
         logoView.anchor(top: containerView.safeAreaLayoutGuide.topAnchor)
         logoView.setHeight(90)
@@ -253,7 +244,7 @@ class HomeViewController: UIViewController {
         [
             logoView, welcomeHeader, welcomeImageView, welcomeTitle, welcomeDescription, contactButton,
             newsHeader, newsCollectionView, serParteButtonNews,
-            testimonialsHeader, testimonialsTableView, verTestimoniosButton, nosotrosHeader, profileImageNosotros, nameLabelNosotros, rolLabelNosotros, captionLabelNosotros, collectionViewNosotros, pageControlNosotros, leftArrowImage, rightArrowImage, serParteNosotrosButton, errorImage, errorMessage, retryButton
+            testimonialsHeader, testimonialsTableView, verTestimoniosButton, nosotrosHeader, profileImageNosotros, nameLabelNosotros, rolLabelNosotros, captionLabelNosotros, collectionViewNosotros, pageControlNosotros, leftArrowImage, rightArrowImage, serParteNosotrosButton
         ].forEach {
             containerView.addSubview($0)
         }
@@ -325,17 +316,6 @@ class HomeViewController: UIViewController {
 
         testimonialsTableView.register(UINib(nibName: "TestimonialsCell", bundle: nil), forCellReuseIdentifier: TestimonialsCell.identifier)
         testimonialsTableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        //MARK: - Errors anchors
-          errorImage.anchor(top: welcomeHeader.bottomAnchor, paddingTop: 50)
-          errorImage.setHeight(100)
-          errorImage.centerX(inView: containerView)
-
-          errorMessage.anchor(top: errorImage.bottomAnchor, paddingTop: 20)
-          errorMessage.centerX(inView: containerView)
-
-          retryButton.anchor(top: errorMessage.bottomAnchor, paddingTop: 30)
-          retryButton.centerX(inView: containerView)
     }
     
     @objc func pageControlTapHandler(sender: UIPageControl){
@@ -345,10 +325,6 @@ class HomeViewController: UIViewController {
     @objc func handleMenuToggle() {
         delegate?.handleMenuToggle(forMenuOption: nil)
     }
-    
-    @objc func didTapRetryButton(){
-         viewModel.getAllServices()
-     }
     
     func configureNavigationBar() {
         navigationController?.navigationBar.barTintColor = .white
@@ -372,58 +348,16 @@ class HomeViewController: UIViewController {
         
         present(alert, animated: true)
     }
-    
-    func hideWelcomeSection(){
-        [welcomeImageView, welcomeTitle, welcomeDescription,contactButton].forEach { $0.isHidden = true
-        }
-    }
-    
-    func showWelcomeSection(){
-        [welcomeImageView, welcomeTitle, welcomeDescription,contactButton].forEach { $0.isHidden = false
-        }
-    }
-    
-    func hideNewsSection(){
-        [newsCollectionView, serParteButtonNews, newsHeader].forEach { $0.isHidden = true
-        }
-    }
-    
-    func showNewsSection(){
-        [newsCollectionView, serParteButtonNews, newsHeader].forEach { $0.isHidden = false
-        }
-        newsCollectionView.reloadData()
-    }
-    
-    func hideNosotrosSection(){
-        [nosotrosHeader, profileImageNosotros, nameLabelNosotros, rolLabelNosotros, captionLabelNosotros, pageControlNosotros, leftArrowImage, rightArrowImage, collectionViewNosotros, serParteNosotrosButton].forEach { $0.isHidden = true
-        }
-    }
-    
-    func showNosotrosSection(){
-        [nosotrosHeader, profileImageNosotros, nameLabelNosotros, rolLabelNosotros, captionLabelNosotros, pageControlNosotros, leftArrowImage, rightArrowImage,collectionViewNosotros, serParteNosotrosButton].forEach { $0.isHidden = false
-        }
-    }
-    
-    func hideTestimonialsSection(){
-        [testimonialsTableView,testimonialsHeader,verTestimoniosButton].forEach { $0.isHidden = true
-        }
-    }
-    
-    func showTestimonialsSection(){
-        [testimonialsTableView,testimonialsHeader,verTestimoniosButton].forEach { $0.isHidden = false
-        }
-        testimonialsTableView.reloadData()
-    }
-    
-    func showGeneralError(){
-        [errorImage, errorMessage, retryButton].forEach { $0.isHidden = false
-        }
-    }
-    
-    func hideGeneralError(){
-        [errorImage, errorMessage, retryButton].forEach { $0.isHidden = true
-        }
-    }
+    //MARK: - setup Spinner
+//    func showSpinner() {
+//        spinnerLoading.isHidden = false
+//        spinnerLoading.startAnimating()
+//    }
+//
+//    func hiddenSpinner() {
+//        spinnerLoading.stopAnimating()
+//        spinnerLoading.isHidden = true
+//    }
 }
 
 //MARK: - TableView Delegate, Datasource
@@ -492,13 +426,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case newsCollectionView:
-            return min(viewModel.getNewsCount(), 4)
+            return viewModel.getNewsCount()
         case collectionViewNosotros:
             return 10
         default:
             break
         }
-        return min(viewModel.getNewsCount(), 4)
+        return viewModel.getNewsCount()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -523,11 +457,23 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 //MARK: - Delegate
 
-extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
+extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate, SpinnerLoadingDelegate {
+    func showSpinner() {
+        spinnerLoading.isHidden = false
+        spinnerLoading.startAnimating()
+    }
+    
+    func hiddenSpinner() {
+        spinnerLoading.isHidden = true
+        spinnerLoading.stopAnimating()
+    }
+    
+    
     // Welcome
     func didGetWelcomeData() {
         self.welcomeDescription.text = viewModel.getDescriptionWelcome()
         self.welcomeImageView.image = UIImage(named: viewModel.getImageWelcome())
+        self.welcomeHeader.text = ""
     }
     
     func didFailGettingWelcomeData(error: String) {
@@ -539,24 +485,18 @@ extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
     //News
     func didGetNewsData() {
         DispatchQueue.main.async { [weak self] in
-            self?.showNewsSection()
-            self?.didGetWelcomeData()
-            self?.hideGeneralError()
-            self?.showWelcomeSection()
-            self?.showNosotrosSection()
-            self?.showTestimonialsSection()
-            self?.viewModel.startTimer()
+            self?.newsCollectionView.reloadData()
+            self?.serParteButtonNews.isHidden = false
+            self?.newsCollectionView.isHidden = false
         }
     }
     
     func didFailGettingNewsData(error: String) {
         DispatchQueue.main.async { [weak self] in
-            self?.hideNewsSection()
-            self?.showMessageError(message: error)
-            self?.showWelcomeSection()
-            self?.showNosotrosSection()
-            self?.showTestimonialsSection()
+            self?.newsCollectionView.isHidden = true
+            self?.serParteButtonNews.isHidden = true
             self?.viewModel.stopTimer()
+            self?.showMessageError(message: error)
         }
     }
     
@@ -571,28 +511,15 @@ extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
     //Testimonials
     func didGetTestimonialsData() {
         DispatchQueue.main.async { [weak self] in
-            self?.showTestimonialsSection()
-            self?.didGetWelcomeData()
-            self?.hideGeneralError()
-            self?.showWelcomeSection()
-            self?.showNosotrosSection()
+            self?.testimonialsTableView.reloadData()
+            self?.testimonialsTableView.isHidden = false
         }
     }
     
     func didFailGettingTestimonialsData(error: String) {
         DispatchQueue.main.async { [weak self] in
-            self?.hideTestimonialsSection()
             self?.showMessageError(message: error)
         }
     }
     
-    func didFailAllServices() {
-        DispatchQueue.main.async { [weak self] in
-            self?.hideWelcomeSection()
-            self?.hideNewsSection()
-            self?.hideNosotrosSection()
-            self?.hideTestimonialsSection()
-            self?.showGeneralError()
-        }
-    }
 }

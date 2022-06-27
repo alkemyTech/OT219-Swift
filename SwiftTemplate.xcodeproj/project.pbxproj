@@ -22,7 +22,7 @@
 		090369432860B8ED002D90E6 /* MockTestimonialsFail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090369422860B8ED002D90E6 /* MockTestimonialsFail.swift */; };
 		090369472860B941002D90E6 /* TestimonialsMock.json in Resources */ = {isa = PBXBuildFile; fileRef = 090369462860B941002D90E6 /* TestimonialsMock.json */; };
 		098D78AA2868C49F00F0B1FF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098D78A92868C49F00F0B1FF /* LoginViewController.swift */; };
-		09B59D402869FDBF007CB25B /* SpinnerLoadingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B59D3F2869FDBF007CB25B /* SpinnerLoadingDelegate.swift */; };
+		09B59D3E2869E16B007CB25B /* SpinnerLoadingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B59D3D2869E16B007CB25B /* SpinnerLoadingDelegate.swift */; };
 		40364FCC285FB72900180F15 /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40364FCB285FB72900180F15 /* ContactViewModel.swift */; };
 		403C21AF284AD29900026635 /* ContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403C21AE284AD29900026635 /* ContainerController.swift */; };
 		403C21B1284AD2A400026635 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403C21B0284AD2A400026635 /* MenuController.swift */; };
@@ -99,7 +99,7 @@
 		090369422860B8ED002D90E6 /* MockTestimonialsFail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockTestimonialsFail.swift; sourceTree = "<group>"; };
 		090369462860B941002D90E6 /* TestimonialsMock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestimonialsMock.json; sourceTree = "<group>"; };
 		098D78A92868C49F00F0B1FF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		09B59D3F2869FDBF007CB25B /* SpinnerLoadingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerLoadingDelegate.swift; sourceTree = "<group>"; };
+		09B59D3D2869E16B007CB25B /* SpinnerLoadingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerLoadingDelegate.swift; sourceTree = "<group>"; };
 		19DC9E1E40C36079E44F490A /* Pods_SwiftTemplate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftTemplate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40364FCB285FB72900180F15 /* ContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
 		403C21AE284AD29900026635 /* ContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerController.swift; sourceTree = "<group>"; };
@@ -229,7 +229,7 @@
 				F6EDEF412845238300BB49B9 /* ApiError.swift */,
 				03947946283ECCBE000E75C8 /* Extensions.swift */,
 				F6725D8D28621B2B00BA88B7 /* TrackerAnalytics.swift */,
-				09B59D3F2869FDBF007CB25B /* SpinnerLoadingDelegate.swift */,
+				09B59D3D2869E16B007CB25B /* SpinnerLoadingDelegate.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -609,7 +609,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1330;
-				LastUpgradeCheck = 1320;
+				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					03398C5B27DFDFCC001BC793 = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -743,6 +743,7 @@
 				40608FFA286289D700A36FCA /* ContactMessage.swift in Sources */,
 				03D392ED285760AC0004CB10 /* Constants.swift in Sources */,
 				F66A1739283DCF6A0064DD56 /* (null) in Sources */,
+				09B59D3E2869E16B007CB25B /* SpinnerLoadingDelegate.swift in Sources */,
 				F6725D8E28621B2B00BA88B7 /* TrackerAnalytics.swift in Sources */,
 				4054DF89283EE18F00E781B6 /* SignUpManager.swift in Sources */,
 				F678B93B285A6443007520AB /* CustomImage.swift in Sources */,
@@ -771,7 +772,6 @@
 				F66387F22846791000E078BF /* HomeViewModel.swift in Sources */,
 				F66387F92846AE8F00E078BF /* NewsCollectionViewCell.swift in Sources */,
 				F6EDEF342845236C00BB49B9 /* LoginUser.swift in Sources */,
-				09B59D402869FDBF007CB25B /* SpinnerLoadingDelegate.swift in Sources */,
 				F66A1738283DCF6A0064DD56 /* (null) in Sources */,
 				403C21C6284BD09F00026635 /* MenuOptionCell.swift in Sources */,
 				4054DF85283EDF0C00E781B6 /* SignUpViewModel.swift in Sources */,
