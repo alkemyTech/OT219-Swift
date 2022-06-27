@@ -21,19 +21,22 @@ protocol LoginViewModelDelegate: AnyObject{
 class LoginViewModel{
     	
     weak var delegate: LoginViewModelDelegate?
-    
+    weak var delegateSpinner: SpinnerLoadingDelegate?
     
     var emailValidation = false
     var passwordValidation = false
     //MARK: - Login
     func login(email: String, pass: String) {
+        self.delegateSpinner?.showSpinner()
         let user = LoginUser(email: email, password: pass)
         LoginService.shared.login(user: user) { [weak self] token in
             let userDefaults = UserDefaults.standard
             userDefaults.set(token, forKey: "token")
             self?.delegate?.didSuccessUserLogin()
+            self?.delegateSpinner?.hiddenSpinner()
         } onError: { [weak self] error in
             self?.delegate?.didFailUserLogin(error: error)
+            self?.delegateSpinner?.hiddenSpinner()
         }
     }
     

@@ -15,6 +15,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     private lazy var viewModel : LoginViewModel = {
         let viewModel = LoginViewModel()
         viewModel.delegate = self
+        viewModel.delegateSpinner = self
         return viewModel
     }()
     
@@ -105,6 +106,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         return button
     }()
     
+    private var spinnerLoading: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.style = .large
+        spinner.color = .systemRed
+        return spinner
+    }()
+    
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,6 +155,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         loginButton.anchor(left: viewWithProperties.leftAnchor, bottom: registerButton.topAnchor, right: viewWithProperties.rightAnchor, paddingLeft: 20, paddingBottom: 5, paddingRight: 20)
 
         registerButton.anchor(left: viewWithProperties.leftAnchor, bottom: viewWithProperties.bottomAnchor, right: viewWithProperties.rightAnchor, paddingLeft: 50, paddingBottom: 130, paddingRight: 50)
+        
+        viewWithProperties.addSubview(spinnerLoading)
+        spinnerLoading.centerX(inView: viewWithProperties)
+        spinnerLoading.centerY(inView: viewWithProperties)
 
     }
     //MARK: - Targeds
@@ -207,7 +219,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
 
 
 //MARK: - LoginViewModelDelegate
-extension LoginViewController: LoginViewModelDelegate{
+extension LoginViewController: LoginViewModelDelegate, SpinnerLoadingDelegate{
+    func showSpinner() {
+        spinnerLoading.isHidden = false
+        spinnerLoading.startAnimating()
+    }
+    
+    func hiddenSpinner() {
+        spinnerLoading.isHidden = true
+        spinnerLoading.stopAnimating()
+    }
+    
 
     func requiredEmailLabel() {
         requiredEmail.isHidden = false
