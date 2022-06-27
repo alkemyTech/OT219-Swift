@@ -10,7 +10,13 @@ import UIKit
 class SignupViewController: UIViewController {
 
     //MARK: - Properties
-    private var viewModel: SignUpViewModel?
+    
+    private lazy var viewModel: SignUpViewModel = {
+        let viewModel = SignUpViewModel()
+        viewModel.delegate = self
+        return viewModel
+    }()
+    
     private var isKeyboardExpanded = false
     
     lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
@@ -142,6 +148,7 @@ class SignupViewController: UIViewController {
         setupObserverKeyboard()
   
         configurationButton()
+
         viewModel = SignUpViewModel()
         viewModel?.delegate = self
     }
@@ -199,15 +206,15 @@ class SignupViewController: UIViewController {
     }
 
     @objc func validateEmail(){
-        viewModel?.validateEmail(value: emailTextField.text)
+        viewModel.validateEmail(value: emailTextField.text)
     }
     
     @objc func validateName(){
-        viewModel?.validateName(value: fullnameTextfield.text)
+        viewModel.validateName(value: fullnameTextfield.text)
     }
 
     @objc func validatePassword(){
-        viewModel?.validatePasswordA(value: passwordTextField.text)
+        viewModel.validatePasswordA(value: passwordTextField.text)
     }
     
     @objc func validateSamePassword(){
