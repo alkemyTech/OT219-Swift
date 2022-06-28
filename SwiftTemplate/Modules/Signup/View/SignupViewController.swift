@@ -20,78 +20,94 @@ class SignupViewController: UIViewController {
     
     private var isKeyboardExpanded = false
     
-    private let scrollView: UIScrollView = {
-        let view = UIScrollView()
+    lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
+    
+    lazy var scrollView: UIScrollView = {
+        let view = UIScrollView(frame: .zero)
+        view.backgroundColor = .white
+        view.frame = self.view.bounds
+        view.contentSize = contentViewSize
+        view.autoresizingMask = .flexibleHeight
+        view.showsHorizontalScrollIndicator = true
+        view.bounces = true
         return view
     }()
     
-    private let logoImage: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: "logo-Alkemy")
-        image.contentMode = .scaleAspectFill
-        return image
+    lazy var containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.frame.size = contentViewSize
+        return view
     }()
     
-    private let emailTextField: UITextField = {
+    private var logoImage: UIImageView = {
+         let imageView = UIImageView()
+         imageView.contentMode = .scaleAspectFit
+         imageView.clipsToBounds = true
+         imageView.image = UIImage(named: "LOGO-SOMOS MAS")
+         return imageView
+     }()
+    
+    private lazy var emailTextField: UITextField = {
         let spacer = UIView()
         spacer.setDimensions(height: 40, width: 12)
         
         let textField = UITextField()
         textField.leftView = spacer
         textField.leftViewMode = .always
-        textField.borderStyle = .none
-        textField.textColor = .white
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.textColor = .black
         textField.keyboardType = .emailAddress
-        textField.backgroundColor = UIColor(white: 1, alpha: 0.1)
+        textField.placeholder = "Email"
+        textField.delegate = self
         textField.setHeight(40)
-        textField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [.foregroundColor: UIColor(white: 1, alpha: 0.7)])
         return textField
     }()
     
-    private let fullnameTextfield: UITextField = {
+    private lazy var fullnameTextfield: UITextField = {
         let spacer = UIView()
         spacer.setDimensions(height: 40, width: 12)
         
         let textField = UITextField()
         textField.leftView = spacer
         textField.leftViewMode = .always
-        textField.borderStyle = .none
-        textField.textColor = .white
-        textField.backgroundColor = UIColor(white: 1, alpha: 0.1)
+        textField.borderStyle = .roundedRect
+        textField.textColor = .black
         textField.setHeight(40)
-        textField.attributedPlaceholder = NSAttributedString(string: "Fullname", attributes: [.foregroundColor: UIColor(white: 1, alpha: 0.7)])
+        textField.delegate = self
+        textField.placeholder = "Fullname"
         return textField
     }()
     
-    private let passwordTextField: UITextField = {
+    private lazy var passwordTextField: UITextField = {
         let spacer = UIView()
         spacer.setDimensions(height: 40, width: 12)
         
         let textField = UITextField()
         textField.leftView = spacer
         textField.leftViewMode = .always
-        textField.borderStyle = .none
-        textField.textColor = .white
+        textField.borderStyle = .roundedRect
+        textField.textColor = .black
         textField.isSecureTextEntry = true
-        textField.backgroundColor = UIColor(white: 1, alpha: 0.1)
         textField.setHeight(40)
-        textField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [.foregroundColor: UIColor(white: 1, alpha: 0.7)])
+        textField.placeholder = "Password"
+        textField.delegate = self
         return textField
     }()
     
-    private let reEnterPasswordTextField: UITextField = {
+    private lazy var confirmPasswordTextField: UITextField = {
         let spacer = UIView()
         spacer.setDimensions(height: 40, width: 12)
         
         let textField = UITextField()
         textField.leftView = spacer
         textField.leftViewMode = .always
-        textField.borderStyle = .none
-        textField.textColor = .white
+        textField.borderStyle = .roundedRect
+        textField.textColor = .black
         textField.isSecureTextEntry = true
-        textField.backgroundColor = UIColor(white: 1, alpha: 0.1)
+        textField.placeholder = "Confirm Password"
         textField.setHeight(40)
-        textField.attributedPlaceholder = NSAttributedString(string: "Re enter Password", attributes: [.foregroundColor: UIColor(white: 1, alpha: 0.7)])
+        textField.delegate = self
         return textField
     }()
     
@@ -104,20 +120,21 @@ class SignupViewController: UIViewController {
     
     private let signupButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Sign Up", for: .normal)
+        button.setTitle("Registrarme", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
+        button.backgroundColor = UIColor(named: "ButtonColor")
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.setHeight(40)
         return button
     }()
     
-    private let alreadyHaveAccountButton: UIButton = {
+    lazy var alreadyHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Already have an Account? Sign in", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitle("Ya tenes cuenta? Ingresa!", for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        button.addTarget(self, action: #selector(SignupViewController.showLogin(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -134,12 +151,15 @@ class SignupViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        setupGradientLayer()
+        navigationItem.setHidesBackButton(true, animated: true)
         setupView()
         setupObserverKeyboard()
   
         configurationButton()
-        
+
+        viewModel = SignUpViewModel()
+        viewModel.delegate = self
+        viewModel.delegateSpinner = self
     }
 
     //MARK: - Helpers
@@ -151,44 +171,39 @@ class SignupViewController: UIViewController {
     
     private func setupView(){
         view.addSubview(scrollView)
-        scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
         
-        scrollView.addSubview(logoImage)
+        scrollView.addSubview(containerView)
         
-        logoImage.centerX(inView: scrollView)
-        logoImage.setDimensions(height: 80, width: 120)
-        logoImage.anchor(top: scrollView.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
+        containerView.addSubview(logoImage)
+        logoImage.centerX(inView: containerView)
+        logoImage.setHeight(200)
+        logoImage.anchor(top: containerView.safeAreaLayoutGuide.topAnchor, paddingTop: 100)
         
         scrollView.addSubview(spinnerLoading)
         spinnerLoading.centerX(inView: scrollView)
         spinnerLoading.centerY(inView: scrollView)
         
-        let stack = UIStackView(arrangedSubviews: [emailTextField,fullnameTextfield, passwordTextField ,reEnterPasswordTextField, labelSamePassword,signupButton])
+        let stack = UIStackView(arrangedSubviews: [emailTextField,fullnameTextfield, passwordTextField ,confirmPasswordTextField, labelSamePassword,signupButton])
         stack.axis = .vertical
         stack.spacing = 20
-        scrollView.addSubview(stack)
-        stack.anchor(top: logoImage.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 42, paddingLeft: 32, paddingRight: 32)
+        containerView.addSubview(stack)
+        stack.anchor(top: logoImage.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
         
         
-        scrollView.addSubview(alreadyHaveAccountButton)
+        containerView.addSubview(alreadyHaveAccountButton)
         
-        alreadyHaveAccountButton.centerX(inView: scrollView)
-        alreadyHaveAccountButton.anchor(bottom: scrollView.safeAreaLayoutGuide.bottomAnchor)
+        alreadyHaveAccountButton.centerX(inView: containerView)
+        alreadyHaveAccountButton.anchor(top: stack.bottomAnchor, paddingTop: 10)
     
     }
     
-    private func setupGradientLayer(){
-        let gradient = CAGradientLayer()
-        gradient.colors = [UIColor.systemGray.cgColor, UIColor.systemBlue.cgColor]
-        gradient.locations = [0,1]
-        view.layer.addSublayer(gradient)
-        gradient.frame = view.frame
+    @objc func showLogin(_ sender:UIButton){
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
     }
     
     func setupObserverKeyboard(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         emailTextField.addTarget(self, action: #selector(self.validateEmail), for: UIControl.Event.editingDidEnd)
         
@@ -196,20 +211,12 @@ class SignupViewController: UIViewController {
         
         passwordTextField.addTarget(self, action: #selector(self.validatePassword), for: .editingDidEnd)
         
-        reEnterPasswordTextField.addTarget(self, action: #selector(self.validateSamePassword), for: .allEditingEvents)
+        confirmPasswordTextField.addTarget(self, action: #selector(self.validateSamePassword), for: .allEditingEvents)
         
         signupButton.addTarget(self, action: #selector(self.registerUser), for: .touchUpInside)
+        
     }
-    
-    @objc func keyboardAppear(notification: NSNotification){
-        guard let keyboardFrameValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
-        scrollView.contentInset.bottom = view.convert(keyboardFrameValue.cgRectValue, from: nil).size.height
-    }
-    
-    @objc func keyboardDisappear(){
-        scrollView.contentInset.bottom = 0
-    }
-    
+
     @objc func validateEmail(){
         viewModel.validateEmail(value: emailTextField.text)
     }
@@ -223,23 +230,42 @@ class SignupViewController: UIViewController {
     }
     
     @objc func validateSamePassword(){
-        viewModel.validateSamePassword(valueA: passwordTextField.text, valueB: reEnterPasswordTextField.text)
+        viewModel.validateSamePassword(valueA: passwordTextField.text, valueB: confirmPasswordTextField.text)
     }
     
     @objc func registerUser(){
-            self.viewModel.register(name: self.fullnameTextfield.text!, email: self.emailTextField.text!, pass: self.passwordTextField.text!)
+        viewModel.register(name: fullnameTextfield.text!, email: emailTextField.text!, pass: passwordTextField.text!)
+        signupButton.endEditing(true)
     }
     
 }
 
-//MARK: - SignUpViewModelDelegate
+//MARK: - TextField Delegate
+
+extension SignupViewController: UITextFieldDelegate{
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == passwordTextField || textField == confirmPasswordTextField {
+            self.scrollView.frame.origin.y -= 200
+        }
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == passwordTextField || textField == confirmPasswordTextField {
+            self.scrollView.frame.origin.y = 0
+        }
+    }
+}
+
+//MARK: - Signup Delegate
+
 extension SignupViewController: SignUpViewModelDelegate, SpinnerLoadingDelegate {
-    func showSpinner(){
+    func showSpinner() {
         spinnerLoading.isHidden = false
         spinnerLoading.startAnimating()
     }
     
-    func hiddenSpinner(){
+    func hiddenSpinner() {
         spinnerLoading.isHidden = true
         spinnerLoading.stopAnimating()
     }
@@ -258,7 +284,7 @@ extension SignupViewController: SignUpViewModelDelegate, SpinnerLoadingDelegate 
     }
     
     func activateButton() {
-        signupButton.backgroundColor = .systemBlue
+        signupButton.backgroundColor = UIColor(named: "ButtonColor")
         signupButton.isEnabled = true
     }
     
@@ -271,7 +297,8 @@ extension SignupViewController: SignUpViewModelDelegate, SpinnerLoadingDelegate 
     func userRegisterSuccess() {
         let alert = UIAlertController(title: "Usuario registrado de manera exitosa", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {(action: UIAlertAction!) in
-            _ = self.navigationController?.popViewController(animated: true)
+            let homeVC = HomeViewController()
+            self.navigationController?.pushViewController(homeVC, animated: true)
         }))
         self.present(alert, animated: true, completion: nil)
     }
