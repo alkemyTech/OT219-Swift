@@ -33,10 +33,10 @@ class LoginViewModel{
             let userDefaults = UserDefaults.standard
             userDefaults.set(token, forKey: "token")
             self?.delegate?.didSuccessUserLogin()
-            self?.delegateSpinner?.hiddenSpinner()
+            self?.delegateSpinner?.hideSpinner()
         } onError: { [weak self] error in
             self?.delegate?.didFailUserLogin(error: error)
-            self?.delegateSpinner?.hiddenSpinner()
+            self?.delegateSpinner?.hideSpinner()
         }
     }
     

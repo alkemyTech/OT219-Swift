@@ -35,10 +35,10 @@ class SignUpViewModel {
         let user = NewUser(name: name, email: email, password: pass)
         signUpManager.registerUser(user: user) { response in
             self.delegate?.userRegisterSuccess()
-            self.delegateSpinner?.hiddenSpinner()
+            self.delegateSpinner?.hideSpinner()
         } didFail: {_ in 
             self.delegate?.userRegisterError()
-            self.delegateSpinner?.hiddenSpinner()
+            self.delegateSpinner?.hideSpinner()
         }
     }
 }

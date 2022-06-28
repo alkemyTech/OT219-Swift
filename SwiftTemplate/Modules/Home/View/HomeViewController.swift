@@ -542,7 +542,7 @@ extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate, SpinnerLoa
         spinnerLoading.startAnimating()
     }
     
-    func hiddenSpinner() {
+    func hideSpinner() {
         spinnerLoading.isHidden = true
         spinnerLoading.stopAnimating()
     }

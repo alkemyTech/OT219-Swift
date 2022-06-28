@@ -64,7 +64,6 @@ class HomeViewModel {
     }
     
     func getNewsData(){
-        self.delegateSpinner?.showSpinner()
         DispatchQueue.global().async { [weak self] in
             self?.newsService.fetchNews { news in
                 self?.news = news
@@ -72,7 +71,6 @@ class HomeViewModel {
                 self?.delegate?.didGetNewsData()
             } onError: { error in
                 self?.delegate?.didFailGettingNewsData(error: error)
-                self?.delegateSpinner?.hiddenSpinner()
             }
         }
     }
@@ -112,7 +110,6 @@ class HomeViewModel {
 extension HomeViewModel {
     
     func getTestimonialsData() {
-        self.delegateSpinner?.showSpinner()
         DispatchQueue.global().async {
             self.testimonialService.fetchTestimonials { [weak self] testimonials in
                 self?.testimonials = testimonials
@@ -120,7 +117,6 @@ extension HomeViewModel {
                 self?.delegate?.didGetTestimonialsData()
             } onError: { [weak self] error in
                 self?.delegate?.didFailGettingTestimonialsData(error: error)
-                self?.delegateSpinner?.hiddenSpinner()
             }
         }
     }
@@ -147,11 +143,11 @@ extension HomeViewModel {
             self?.news = news
             self?.delegate?.didGetNewsData()
             self?.isServiceNewsAvailable = true
-            self?.delegateSpinner?.hiddenSpinner()
+            self?.delegateSpinner?.hideSpinner()
             dispatchGroup.leave()
         } onError: { [weak self] error in
             self?.isServiceNewsAvailable = false
-            self?.delegateSpinner?.hiddenSpinner()
+            self?.delegateSpinner?.hideSpinner()
             dispatchGroup.leave()
         }
         
@@ -160,11 +156,11 @@ extension HomeViewModel {
             self?.testimonials = testimonials
             self?.delegate?.didGetTestimonialsData()
             self?.isServiceTestimonialAvailable = true
-            self?.delegateSpinner?.hiddenSpinner()
+            self?.delegateSpinner?.hideSpinner()
             dispatchGroup.leave()
         } onError: { [weak self] error in
             self?.isServiceTestimonialAvailable = false
-            self?.delegateSpinner?.hiddenSpinner()
+            self?.delegateSpinner?.hideSpinner()
             dispatchGroup.leave()
         }
         
