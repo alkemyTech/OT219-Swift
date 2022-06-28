@@ -9,5 +9,5 @@ import Foundation
 
 protocol SpinnerLoadingDelegate: AnyObject{
     func showSpinner()
-    func hiddenSpinner()
+    func hideSpinner()
 }

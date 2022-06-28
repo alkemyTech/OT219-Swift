@@ -14,6 +14,7 @@ class SignupViewController: UIViewController {
     private lazy var viewModel: SignUpViewModel = {
         let viewModel = SignUpViewModel()
         viewModel.delegate = self
+        viewModel.delegateSpinner = self
         return viewModel
     }()
     
@@ -137,6 +138,13 @@ class SignupViewController: UIViewController {
         return button
     }()
     
+    private let spinnerLoading : UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.color = .systemRed
+        spinner.style = .large
+        return spinner
+    }()
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -151,6 +159,7 @@ class SignupViewController: UIViewController {
 
         viewModel = SignUpViewModel()
         viewModel.delegate = self
+        viewModel.delegateSpinner = self
     }
 
     //MARK: - Helpers
@@ -170,6 +179,9 @@ class SignupViewController: UIViewController {
         logoImage.setHeight(200)
         logoImage.anchor(top: containerView.safeAreaLayoutGuide.topAnchor, paddingTop: 100)
         
+        scrollView.addSubview(spinnerLoading)
+        spinnerLoading.centerX(inView: scrollView)
+        spinnerLoading.centerY(inView: scrollView)
         
         let stack = UIStackView(arrangedSubviews: [emailTextField,fullnameTextfield, passwordTextField ,confirmPasswordTextField, labelSamePassword,signupButton])
         stack.axis = .vertical
@@ -225,6 +237,7 @@ class SignupViewController: UIViewController {
         viewModel.register(name: fullnameTextfield.text!, email: emailTextField.text!, pass: passwordTextField.text!)
         signupButton.endEditing(true)
     }
+    
 }
 
 //MARK: - TextField Delegate
@@ -246,7 +259,17 @@ extension SignupViewController: UITextFieldDelegate{
 
 //MARK: - Signup Delegate
 
-extension SignupViewController: SignUpViewModelDelegate {
+extension SignupViewController: SignUpViewModelDelegate, SpinnerLoadingDelegate {
+    func showSpinner() {
+        spinnerLoading.isHidden = false
+        spinnerLoading.startAnimating()
+    }
+    
+    func hideSpinner() {
+        spinnerLoading.isHidden = true
+        spinnerLoading.stopAnimating()
+    }
+    
     func desactivateButton() {
         signupButton.isEnabled = false
         signupButton.backgroundColor = .gray

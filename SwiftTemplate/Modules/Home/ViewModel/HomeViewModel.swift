@@ -24,6 +24,7 @@ protocol TimerNewsUpdate: AnyObject {
 class HomeViewModel {
     weak var delegate: HomeViewModelDelegate?
     weak var delegateTimer: TimerNewsUpdate?
+    weak var delegateSpinner: SpinnerLoadingDelegate?
     private var sectionsTitles = ["News"]
     
     var news = [News]()
@@ -53,7 +54,7 @@ class HomeViewModel {
         WelcomeViewModel().getImage()
     }
     
-    // MARK: News methods
+    // MARK: - News methods
     var newsService: NewsFetching
     var testimonialService: TestimonialsFetching
     
@@ -134,6 +135,7 @@ extension HomeViewModel {
     
     
     func getAllServices() {
+        self.delegateSpinner?.showSpinner()
        let dispatchGroup = DispatchGroup()
        
         dispatchGroup.enter()
@@ -141,9 +143,11 @@ extension HomeViewModel {
             self?.news = news
             self?.delegate?.didGetNewsData()
             self?.isServiceNewsAvailable = true
+            self?.delegateSpinner?.hideSpinner()
             dispatchGroup.leave()
         } onError: { [weak self] error in
             self?.isServiceNewsAvailable = false
+            self?.delegateSpinner?.hideSpinner()
             dispatchGroup.leave()
         }
         
@@ -152,9 +156,11 @@ extension HomeViewModel {
             self?.testimonials = testimonials
             self?.delegate?.didGetTestimonialsData()
             self?.isServiceTestimonialAvailable = true
+            self?.delegateSpinner?.hideSpinner()
             dispatchGroup.leave()
         } onError: { [weak self] error in
             self?.isServiceTestimonialAvailable = false
+            self?.delegateSpinner?.hideSpinner()
             dispatchGroup.leave()
         }
         

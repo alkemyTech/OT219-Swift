@@ -743,6 +743,7 @@
 				40608FFA286289D700A36FCA /* ContactMessage.swift in Sources */,
 				03D392ED285760AC0004CB10 /* Constants.swift in Sources */,
 				F66A1739283DCF6A0064DD56 /* (null) in Sources */,
+				09B59D3E2869E16B007CB25B /* SpinnerLoadingDelegate.swift in Sources */,
 				F6725D8E28621B2B00BA88B7 /* TrackerAnalytics.swift in Sources */,
 				4054DF89283EE18F00E781B6 /* SignUpManager.swift in Sources */,
 				F678B93B285A6443007520AB /* CustomImage.swift in Sources */,

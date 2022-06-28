@@ -9,16 +9,18 @@ protocol HomeViewControllerDelegate: AnyObject {
     func handleMenuToggle(forMenuOption menuOption: MenuOption?)
 }
 
+
 class HomeViewController: UIViewController {
+
     
     //MARK: - Properties
     weak var delegate: HomeViewControllerDelegate?
-    
 
     lazy var viewModel: HomeViewModel = {
         let homeViewModel = HomeViewModel()
         homeViewModel.delegate = self
         homeViewModel.delegateTimer = self
+        homeViewModel.delegateSpinner = self
         return homeViewModel
     }()
     
@@ -48,6 +50,12 @@ class HomeViewController: UIViewController {
         return image
     }()
     
+    private  var spinnerLoading : UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.color = .systemRed
+        spinner.style = .large
+        return spinner
+    }()
     //MARK: - Welcome props
     
     private var welcomeImageView: CustomImage = {
@@ -243,7 +251,12 @@ class HomeViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(containerView)
 
-
+        scrollView.addSubview(spinnerLoading)
+        
+        spinnerLoading.centerX(inView: scrollView)
+        spinnerLoading.centerY(inView: scrollView)
+        
+        
         containerView.addSubview(logoView)
         logoView.anchor(top: containerView.safeAreaLayoutGuide.topAnchor)
         logoView.setHeight(90)
@@ -523,7 +536,18 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 //MARK: - Delegate
 
-extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate {
+extension HomeViewController: HomeViewModelDelegate, TimerNewsUpdate, SpinnerLoadingDelegate {
+    func showSpinner() {
+        spinnerLoading.isHidden = false
+        spinnerLoading.startAnimating()
+    }
+    
+    func hideSpinner() {
+        spinnerLoading.isHidden = true
+        spinnerLoading.stopAnimating()
+    }
+    
+    
     // Welcome
     func didGetWelcomeData() {
         self.welcomeDescription.text = viewModel.getDescriptionWelcome()
